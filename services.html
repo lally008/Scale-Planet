@@ -1,1480 +1,413 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services — Scale Planet</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Noto+Kufi+Arabic:wght@100..900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Scale Planet</title>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        :root {
-            --ink: #0a0a1a;
-            --blue-deep: #1e2a78;
-            --blue: #3e4095;
-            --blue-bright: #5a5de8;
-            --paper: #fafbff;
-            --paper-2: #f2f3fb;
-            --line: #e2e4f0;
-            --line-dark: #cfd2e6;
-            --violet: #6c5ce7;
-            /* main purple accent — matches logo */
-            --violet-deep: #4f46b8;
-            /* deeper purple for hover */
-            --violet-soft: #a29bfe;
-            /* light purple for text on dark */
-            --amber: #6c5ce7;
-            /* alias so existing rules keep working */
-            --amber-deep: #4f46b8;
-            --coral: #ff6b35;
-            --mint: #00d4aa;
-            --text: #1a1a2e;
-            --text-soft: #5a5d75;
-            --text-muted: #8a8da3;
-            --font-display: 'Space Grotesk', sans-serif;
-            --font-body: 'Inter', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-            --radius: 4px;
-            --radius-lg: 8px;
-            --ease: cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-body);
-            background: var(--paper);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-            -webkit-user-drag: none;
-            pointer-events: none;
-        }
-
-        button {
-            font-family: inherit;
-            cursor: pointer;
-            border: none;
-            background: none;
-        }
-
-        .wrap {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 32px;
-        }
-
-        .ticker {
-            background: var(--ink);
-            color: var(--paper);
-            padding: 10px 0;
-            overflow: hidden;
-            border-bottom: 1px solid var(--amber);
-        }
-
-        .ticker-track {
-            display: flex;
-            gap: 60px;
-            animation: ticker 40s linear infinite;
-            white-space: nowrap;
-            width: max-content;
-        }
-
-        .ticker-track:hover {
-            animation-play-state: paused;
-        }
-
-        .ticker-item {
-            font-family: 'Noto Kufi Arabic', serif;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--paper);
-            letter-spacing: 0.3px;
-            display: flex;
-            align-items: center;
-            gap: 60px;
-        }
-
-        .ticker-item .star { color: var(--violet-soft); font-size: 10px; }
-
-        @keyframes ticker {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .utility {
-            background: var(--paper-2);
-            border-bottom: 1px solid var(--line);
-            padding: 8px 0;
-            font-size: 12px;
-            font-family: var(--font-mono);
-        }
-
-        .utility-inner {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .utility-left,
-        .utility-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            color: var(--text-soft);
-        }
-
-        .utility-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .utility-item i {
-            color: var(--blue);
-        }
-
-        .utility-item a:hover {
-            color: var(--blue);
-        }
-
-        .masthead {
-            background: var(--paper);
-            padding: 24px 0 20px;
-            position: sticky;
-            top: 0;
-            z-index: 200;
-            border-bottom: 1px solid var(--line);
-        }
-
-        .masthead-inner {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 32px;
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            align-items: center;
-            gap: 32px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            flex-direction:column;
-        }
-
-        .brand img {
-            height: 52px;
-        }
-
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1;
-        }
-
-        .brand-name {
-            font-family: var(--font-display);
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            color: var(--ink);
-        }
-
-        .brand-tag {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            color: var(--blue);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 4px;
-        }
-
-        .searchbox {
-            position: relative;
-            max-width: 480px;
-            justify-self: center;
-            width: 100%;
-        }
-
-        .searchbox input {
-            width: 100%;
-            padding: 12px 48px 12px 0;
-            border: none;
-            border-bottom: 2px solid var(--line-dark);
-            background: transparent;
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.3s var(--ease);
-            color: var(--text);
-        }
-
-        .searchbox input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .searchbox input:focus {
-            border-bottom-color: var(--blue);
-        }
-
-        .searchbox button {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--blue);
-            font-size: 18px;
-            transition: transform 0.3s var(--ease);
-        }
-
-        .searchbox button:hover {
-            transform: translateY(-50%) scale(1.15);
-        }
-
-        .masthead-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .masthead-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
-            border-radius: var(--radius);
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--ink);
-            transition: all 0.3s var(--ease);
-        }
-
-        .masthead-btn i {
-            color: var(--blue);
-        }
-
-        .masthead-btn:hover {
-            background: var(--paper-2);
-        }
-
-        .navstrip {
-            background: var(--ink);
-        }
-
-        .navstrip-inner {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 32px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            overflow-x: auto;
-            scrollbar-width: none;
-        }
-
-        .navstrip-inner::-webkit-scrollbar {
-            display: none;
-        }
-
-        .navlink {
-            padding: 14px 18px;
-            font-size: 13px;
-            font-weight: 500;
-            color: rgba(250, 251, 255, 0.7);
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s var(--ease);
-            white-space: nowrap;
-        }
-
-        .navlink:hover {
-            color: var(--paper);
-        }
-
-        .navlink.active {
-            color: var(--paper);
-            border-bottom-color: var(--amber);
-        }
-
-       .navlink.highlight {
-    color: var(--paper);
-    background: var(--violet);
-    margin-left: auto;
-    font-weight: 600;
-    border-radius: 100px;
-    padding: 8px 18px;
-    margin-top: 8px;
-    margin-bottom: 8px;
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #3e4095; --primary-deep: #2d2e6b; --primary-mid: #4a4dae;
+  --primary-light: #5668c4; --primary-soft: #a4a7e0; --primary-pale: #eeeffa;
+  --paper: #ffffff; --paper-2: #fafbff; --paper-3: #f2f3fb;
+  --line: #e0e2ee; --line-dark: #c9cee3;
+  --text: #1a1d3f; --text-soft: #52557a; --text-muted: #8b8fab;
+  --font-display: 'Orbitron', sans-serif; --font-body: 'Orbitron', sans-serif; --font-mono: 'Orbitron', sans-serif;
+  --radius: 6px; --radius-lg: 12px;
 }
-.navlink.highlight:hover {
-    background: var(--violet-deep);
-    color: var(--paper);
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--paper); color: var(--text); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; font-weight: 500; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; -webkit-user-drag: none; pointer-events: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+.wrap { max-width: 1440px; margin: 0 auto; padding: 0 24px; }
+
+/* AYAH */
+.ayah { background: var(--primary); color: #fff; padding: 14px 20px; text-align: center; border-bottom: 2px solid var(--primary-deep); }
+.ayah-text { font-family: 'Noto Kufi Arabic', serif; font-size: 14px; font-weight: 700; color: #fff; line-height: 1.8; direction: rtl; gap: 40px; display: flex; justify-content: center; flex-wrap: wrap; align-items: center; }
+.ayah-text .urdu { font-family: 'Noto Kufi Arabic', serif; font-size: 13px; color: var(--primary-pale); direction: rtl; }
+.ayah-text .separator { color: var(--primary-soft); font-size: 10px; }
+
+/* UTILITY */
+.utility { background: var(--paper-2); border-bottom: 1px solid var(--line); padding: 8px 0; font-size: 12px; }
+.utility-inner { max-width: 1600px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.utility-left, .utility-right { display: flex; align-items: center; gap: 20px; color: var(--text-soft); }
+.utility-item { display: flex; align-items: center; gap: 6px; }
+.utility-item i { color: var(--primary); }
+.utility-item a:hover { color: var(--primary); }
+
+/* HEADER */
+.header { background: var(--paper); padding: 14px 0; position: sticky; top: 0; z-index: 200; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.header-inner { max-width: 1600px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 32px; }
+.logo-wrap { display: flex; align-items: center; flex-shrink: 0; }
+.logo-wrap img { height: 52px; width: auto; }
+.search-bar { max-width: 640px; width: 100%; position: relative; justify-self: center; }
+.search-bar input { width: 100%; padding: 11px 44px 11px 16px; border: 1px solid var(--line-dark); border-radius: 6px; background: #fff; font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--text); outline: none; }
+.search-bar input::placeholder { color: var(--text-muted); }
+.search-bar input:focus { border-color: var(--primary); }
+.search-bar button { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 14px; }
+.search-bar button:hover { background: var(--primary-pale); }
+.header-nav { display: flex; align-items: center; gap: 22px; flex-shrink: 0; }
+.header-nav a { font-family: var(--font-body); font-size: 12px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 1px; padding: 6px 0; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+.header-nav a:hover { color: var(--primary); border-bottom-color: var(--primary); }
+.header-nav a.active { color: var(--primary); border-bottom-color: var(--primary); }
+.header-nav a.highlight { background: var(--primary); color: #fff; padding: 9px 16px; border-radius: 100px; border-bottom: none; }
+.header-nav a.highlight:hover { background: var(--primary-deep); color: #fff; }
+.header-nav a.highlight i { margin-right: 6px; font-size: 11px; }
+
+/* CATEGORY NAV */
+.catnav { background: var(--paper-3); border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+.catnav::-webkit-scrollbar { display: none; }
+.catnav-inner { max-width: 1600px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.catnav-inner::-webkit-scrollbar { display: none; }
+.catnav-link { padding: 13px 16px; font-size: 12px; font-weight: 600; color: var(--text-soft); white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.5px; }
+.catnav-link:hover { color: var(--primary); border-bottom-color: var(--primary); }
+.catnav-link.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 800; }
+
+/* HERO */
+.hero-serv { background: var(--primary); color: #fff; padding: 70px 0; position: relative; overflow: hidden; }
+.hero-serv::before { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.06), transparent 60%); }
+.hero-serv-inner { max-width: 1440px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+.hero-serv .crumbs { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; color: rgba(255,255,255,0.7); margin-bottom: 22px; display: flex; gap: 10px; text-transform: uppercase; font-weight: 700; }
+.hero-serv .crumbs a { color: rgba(255,255,255,0.7); }
+.hero-serv .crumbs a:hover { color: #fff; }
+.hero-serv .crumbs .sep { color: rgba(255,255,255,0.3); }
+.hero-serv h1 { font-family: var(--font-display); font-size: clamp(26px, 6vw, 52px); font-weight: 800; letter-spacing: 1.5px; line-height: 1.1; margin-bottom: 22px; text-transform: uppercase; }
+.hero-serv h1 em { color: #fff; font-style: normal; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.4); text-underline-offset: 10px; }
+.hero-serv p { font-size: 14px; color: rgba(255,255,255,0.85); max-width: 640px; line-height: 1.7; }
+
+/* SECTIONS */
+.section-block { padding: 80px 0; }
+.section-block.alt { background: var(--paper-2); }
+.section-block-inner { max-width: 1440px; margin: 0 auto; padding: 0 24px; }
+.sec-kicker { font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; color: var(--primary); text-transform: uppercase; margin-bottom: 10px; font-weight: 800; }
+.sec-title { font-family: var(--font-display); font-size: clamp(20px, 4vw, 30px); font-weight: 800; letter-spacing: 1px; color: var(--text); margin-bottom: 28px; text-transform: uppercase; }
+.sec-title em { color: var(--primary); font-style: normal; }
+.section-block p { font-size: 14px; color: var(--text-soft); line-height: 1.8; margin-bottom: 20px; }
+.section-block p strong { color: var(--text); font-weight: 800; }
+.about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: start; }
+.about-label .num { font-family: var(--font-display); font-size: 100px; font-weight: 900; color: var(--primary-pale); line-height: 0.9; letter-spacing: -4px; }
+.about-label .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); margin-top: -8px; font-weight: 800; }
+
+.range-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+.range-tile { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 24px 20px; transition: all 0.4s; position: relative; overflow: hidden; }
+.range-tile::after { content: ''; position: absolute; top: 0; left: 0; width: 50px; height: 3px; background: var(--primary); transition: width 0.5s; }
+.range-tile:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 16px 40px -16px rgba(62, 64, 149, 0.2); }
+.range-tile:hover::after { width: 100%; }
+.range-tile i { font-size: 26px; color: var(--primary); margin-bottom: 14px; display: block; }
+.range-tile h3 { font-family: var(--font-display); font-size: 12px; font-weight: 800; color: var(--text); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.range-tile p { font-size: 11px; color: var(--text-muted); line-height: 1.6; margin-bottom: 0; }
+
+.timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; }
+.timeline::before { content: ''; position: absolute; top: 28px; left: 0; right: 0; height: 1px; background: var(--line); z-index: 0; }
+.step { position: relative; z-index: 1; }
+.step .dot { width: 58px; height: 58px; border-radius: 50%; background: var(--paper); border: 2px solid var(--line-dark); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 14px; font-weight: 800; color: var(--primary); margin-bottom: 20px; transition: all 0.3s; letter-spacing: 1px; }
+.step:hover .dot { border-color: var(--primary); background: var(--primary); color: #fff; transform: scale(1.08); }
+.step h4 { font-family: var(--font-display); font-size: 12px; font-weight: 800; color: var(--text); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.step p { font-size: 11px; color: var(--text-soft); line-height: 1.6; }
+
+.callout { margin: 60px auto; max-width: 1440px; padding: 0 24px; }
+.callout-inner { background: var(--primary); color: #fff; padding: 50px 40px; border-radius: var(--radius-lg); display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center; position: relative; overflow: hidden; }
+.callout-inner::before { content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%); }
+.callout h3 { font-family: var(--font-display); font-size: clamp(18px, 3vw, 26px); font-weight: 800; letter-spacing: 1px; line-height: 1.2; margin-bottom: 10px; position: relative; text-transform: uppercase; }
+.callout p { font-size: 13px; color: rgba(255,255,255,0.85); max-width: 560px; position: relative; margin: 0; }
+.callout-cta { position: relative; }
+.btn-white { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; background: #fff; color: var(--primary); border-radius: var(--radius); font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; transition: all 0.3s; }
+.btn-white:hover { background: var(--primary-pale); transform: translateY(-2px); box-shadow: 0 20px 40px -15px rgba(0,0,0,0.3); }
+
+.contact-strip { background: var(--paper-2); padding: 50px 0; border-top: 1px solid var(--line); }
+.contact-strip-inner { max-width: 1440px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; }
+.strip-item { display: flex; align-items: flex-start; gap: 14px; }
+.strip-item i { width: 42px; height: 42px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+.strip-item h5 { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; font-weight: 700; }
+.strip-item p, .strip-item a { font-size: 12px; color: var(--text); font-weight: 700; line-height: 1.5; }
+.strip-item a:hover { color: var(--primary); }
+
+/* FOOTER */
+.footer { background: var(--primary); color: #fff; padding: 70px 0 28px; }
+.footer-inner { max-width: 1440px; margin: 0 auto; padding: 0 24px; }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 50px; padding-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+.footer-brand img { height: 44px; margin-bottom: 18px; background: #fff; padding: 5px 9px; border-radius: 6px; }
+.footer-brand p { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.8; max-width: 340px; margin-bottom: 16px; }
+.footer-socials { display: flex; gap: 10px; margin-top: 12px; }
+.footer-socials a { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; transition: all 0.3s; }
+.footer-socials a:hover { background: #fff; color: var(--primary); border-color: #fff; }
+.footer-col h4 { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #fff; margin-bottom: 20px; font-weight: 800; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 11px; }
+.footer-col ul li a { font-size: 11px; color: rgba(255,255,255,0.75); transition: color 0.3s; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+.footer-col ul li a:hover { color: #fff; }
+.footer-contact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+.footer-contact-item i { color: #fff; font-size: 13px; margin-top: 4px; flex-shrink: 0; }
+.footer-contact-item a { color: rgba(255,255,255,0.75); }
+.footer-contact-item a:hover { color: #fff; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; font-family: var(--font-mono); font-size: 9px; color: rgba(255,255,255,0.6); flex-wrap: wrap; gap: 16px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+.footer-bottom .legal { display: flex; gap: 20px; flex-wrap: wrap; }
+.footer-bottom a { color: rgba(255,255,255,0.6); transition: color 0.3s; }
+.footer-bottom a:hover { color: #fff; }
+
+/* DOCK */
+.dock { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 900; background: var(--primary); border-radius: 100px; padding: 5px; display: flex; align-items: center; gap: 3px; box-shadow: 0 20px 50px -10px rgba(62, 64, 149, 0.5); transition: transform 0.3s; }
+.dock:hover { transform: translateX(-50%) translateY(-3px); }
+.dock-btn { display: flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 100px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #fff; transition: all 0.2s; white-space: nowrap; }
+.dock-btn i { font-size: 13px; }
+.dock-btn:hover { background: rgba(255,255,255,0.18); }
+.dock-btn.book { background: #fff; color: var(--primary); }
+.dock-btn.book:hover { background: var(--primary-pale); }
+.dock-divider { width: 1px; height: 22px; background: rgba(255,255,255,0.3); margin: 0 3px; }
+
+@media (max-width: 1200px) {
+  .header-inner { grid-template-columns: auto 1fr; row-gap: 12px; }
+  .header-nav { grid-column: 1 / -1; justify-content: center; flex-wrap: wrap; }
+  .search-bar { max-width: 100%; }
 }
-
-        /* ===== HERO ===== */
-        .hero-serv {
-            background: var(--ink);
-            color: var(--paper);
-            padding: 80px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-serv::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
-            height: 100%;
-            background: radial-gradient(circle at 80% 20%, rgba(90, 93, 232, 0.2), transparent 60%);
-        }
-
-        .hero-serv-inner {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 32px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-serv .crumbs {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            letter-spacing: 1.5px;
-            color: rgba(250, 251, 255, 0.5);
-            margin-bottom: 24px;
-            display: flex;
-            gap: 10px;
-            text-transform: uppercase;
-        }
-
-        .hero-serv .crumbs a {
-            color: rgba(250, 251, 255, 0.5);
-            transition: color 0.3s var(--ease);
-        }
-
-        .hero-serv .crumbs a:hover {
-            color: var(--amber);
-        }
-
-        .hero-serv .crumbs .sep {
-            color: rgba(250, 251, 255, 0.2);
-        }
-
-        .hero-serv h1 {
-            font-family: var(--font-display);
-            font-size: clamp(44px, 7vw, 88px);
-            font-weight: 700;
-            letter-spacing: -3px;
-            line-height: 0.98;
-            margin-bottom: 24px;
-        }
-
-        .hero-serv h1 em {
-            color: var(--amber);
-            font-style: italic;
-        }
-
-        .hero-serv p {
-            font-size: 18px;
-            color: rgba(250, 251, 255, 0.7);
-            max-width: 640px;
-            line-height: 1.6;
-        }
-
-        /* ===== ABOUT BLOCK ===== */
-        .about-block {
-            padding: 100px 0;
-            background: var(--paper);
-        }
-
-        .about-inner {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 32px;
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 80px;
-            align-items: start;
-        }
-
-        .about-label {
-            position: sticky;
-            top: 160px;
-        }
-
-        .about-label .num {
-            font-family: var(--font-display);
-            font-size: 140px;
-            font-weight: 700;
-            color: var(--line);
-            line-height: 0.9;
-            letter-spacing: -6px;
-        }
-
-        .about-label .lbl {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--blue);
-            margin-top: -20px;
-        }
-
-        .about-content h2 {
-            font-family: var(--font-display);
-            font-size: clamp(28px, 4vw, 44px);
-            font-weight: 700;
-            letter-spacing: -1.5px;
-            line-height: 1.1;
-            color: var(--ink);
-            margin-bottom: 32px;
-        }
-
-        .about-content h2 em {
-            color: var(--blue);
-            font-style: italic;
-        }
-
-        .about-content p {
-            font-size: 17px;
-            color: var(--text-soft);
-            line-height: 1.8;
-            margin-bottom: 24px;
-        }
-
-        .about-content p strong {
-            color: var(--ink);
-            font-weight: 600;
-        }
-
-        /* ===== RANGE GRID ===== */
-        .range-block {
-            padding: 80px 0;
-            background: var(--paper-2);
-        }
-
-        .range-inner {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 32px;
-        }
-
-        .range-head {
-            margin-bottom: 48px;
-        }
-
-        .range-head .kicker {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            letter-spacing: 3px;
-            color: var(--blue);
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-
-        .range-head h2 {
-            font-family: var(--font-display);
-            font-size: clamp(28px, 4vw, 40px);
-            font-weight: 700;
-            letter-spacing: -1.5px;
-            color: var(--ink);
-        }
-
-        .range-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px;
-        }
-
-        .range-tile {
-            background: var(--paper);
-            border: 1px solid var(--line);
-            border-radius: var(--radius-lg);
-            padding: 28px 24px;
-            transition: all 0.4s var(--ease);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .range-tile::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--amber);
-            transition: width 0.5s var(--ease);
-        }
-
-        .range-tile:hover {
-            border-color: var(--blue);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -20px rgba(62, 64, 149, 0.2);
-        }
-
-        .range-tile:hover::after {
-            width: 100%;
-        }
-
-        .range-tile i {
-            font-size: 28px;
-            color: var(--blue);
-            margin-bottom: 16px;
-            display: block;
-        }
-
-        .range-tile h3 {
-            font-family: var(--font-display);
-            font-size: 17px;
-            font-weight: 600;
-            color: var(--ink);
-            margin-bottom: 8px;
-        }
-
-        .range-tile p {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* ===== PROCESS TIMELINE ===== */
-        .process-block {
-            padding: 100px 0;
-            background: var(--paper);
-        }
-
-        .process-inner {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 32px;
-        }
-
-        .process-head {
-            margin-bottom: 60px;
-        }
-
-        .process-head .kicker {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            letter-spacing: 3px;
-            color: var(--blue);
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-
-        .process-head h2 {
-            font-family: var(--font-display);
-            font-size: clamp(28px, 4vw, 44px);
-            font-weight: 700;
-            letter-spacing: -1.5px;
-            color: var(--ink);
-            line-height: 1.1;
-        }
-
-        .process-head h2 em {
-            color: var(--blue);
-            font-style: italic;
-        }
-
-        .timeline {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            position: relative;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            top: 32px;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: var(--line);
-            z-index: 0;
-        }
-
-        .step {
-            position: relative;
-            z-index: 1;
-        }
-
-        .step .dot {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: var(--paper);
-            border: 2px solid var(--line-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-display);
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--ink);
-            margin-bottom: 24px;
-            transition: all 0.3s var(--ease);
-        }
-
-        .step:hover .dot {
-            border-color: var(--amber);
-            background: var(--ink);
-            color: var(--amber);
-            transform: scale(1.08);
-        }
-
-        .step h4 {
-            font-family: var(--font-display);
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--ink);
-            margin-bottom: 10px;
-        }
-
-        .step p {
-            font-size: 14px;
-            color: var(--text-soft);
-            line-height: 1.6;
-        }
-
-        /* ===== CALLOUT BANNER ===== */
-        .callout {
-            margin: 80px auto;
-            max-width: 1440px;
-            padding: 0 32px;
-        }
-
-        .callout-inner {
-            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%);
-            color: var(--paper);
-            padding: 60px 48px;
-            border-radius: var(--radius-lg);
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 40px;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .callout-inner::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 184, 0, 0.15), transparent 70%);
-        }
-
-        .callout h3 {
-            font-family: var(--font-display);
-            font-size: clamp(24px, 3vw, 36px);
-            font-weight: 700;
-            letter-spacing: -1px;
-            line-height: 1.1;
-            margin-bottom: 12px;
-            position: relative;
-        }
-
-        .callout p {
-            font-size: 16px;
-            color: rgba(250, 251, 255, 0.85);
-            max-width: 560px;
-            position: relative;
-        }
-
-        .callout-cta {
-            position: relative;
-        }
-
-        .btn-white {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 28px;
-            background: var(--amber);
-            color: var(--ink);
-            border-radius: var(--radius);
-            font-weight: 700;
-            font-size: 14px;
-            transition: all 0.3s var(--ease);
-        }
-
-        .btn-white:hover {
-            background: var(--paper);
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
-        }
-
-        /* ===== CONTACT INFO STRIP ===== */
-        .contact-strip {
-            background: var(--paper-2);
-            padding: 60px 0;
-            border-top: 1px solid var(--line);
-        }
-
-        .contact-strip-inner {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 32px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 40px;
-        }
-
-        .strip-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-        }
-
-        .strip-item i {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--ink);
-            color: var(--amber);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            flex-shrink: 0;
-        }
-
-        .strip-item h5 {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-
-        .strip-item p,
-        .strip-item a {
-            font-size: 14px;
-            color: var(--ink);
-            font-weight: 500;
-            line-height: 1.5;
-            transition: color 0.3s var(--ease);
-        }
-
-        .strip-item a:hover {
-            color: var(--blue);
-        }
-
-        /* FOOTER */
-        .footer {
-            background: var(--ink);
-            color: var(--paper);
-            padding: 80px 0 30px;
-        }
-
-        .footer-inner {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 32px;
-        }
-
-        .footer-top {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
-            gap: 60px;
-            padding-bottom: 60px;
-            border-bottom: 1px solid rgba(250, 251, 255, 0.1);
-        }
-
-        .footer-brand img {
-            height: 44px;
-            margin-bottom: 20px;
-        }
-
-        .footer-brand p {
-            font-size: 13px;
-            color: rgba(250, 251, 255, 0.55);
-            line-height: 1.7;
-            max-width: 340px;
-            margin-bottom: 20px;
-        }
-
-        .footer-socials {
-            display: flex;
-            gap: 10px;
-        }
-
-        .footer-socials a {
-            width: 38px;
-            height: 38px;
-            border: 1px solid rgba(250, 251, 255, 0.15);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--paper);
-            font-size: 14px;
-            transition: all 0.3s var(--ease);
-        }
-
-       .footer-socials a:hover {
-    background: var(--violet-soft);
-    color: var(--ink);
-    border-color: var(--violet-soft);
+@media (max-width: 1100px) {
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-label .num { font-size: 70px; }
+  .timeline { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .timeline::before { display: none; }
+  .callout-inner { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
 }
-
-        .footer-col h4 {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-          color: var(--violet-soft);
-            margin-bottom: 24px;
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-col ul li a {
-            font-size: 14px;
-            color: rgba(250, 251, 255, 0.6);
-            transition: color 0.3s var(--ease);
-        }
-
-        .footer-col ul li a:hover {
-            color: var(--paper);
-        }
-
-        .footer-contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 16px;
-            font-size: 14px;
-            color: rgba(250, 251, 255, 0.6);
-            line-height: 1.5;
-        }
-
-        .footer-contact-item i {
-           color: var(--violet-soft);
-            font-size: 14px;
-            margin-top: 4px;
-            flex-shrink: 0;
-        }
-
-        .footer-contact-item a {
-            color: rgba(250, 251, 255, 0.6);
-            transition: color 0.3s var(--ease);
-        }
-
-        .footer-contact-item a:hover {
-            color: var(--paper);
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 30px;
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: rgba(250, 251, 255, 0.4);
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-
-        .footer-bottom .legal {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .footer-bottom a {
-            color: rgba(250, 251, 255, 0.4);
-        }
-
-        .footer-bottom a:hover {
-            color: var(--violet-soft);
-        }
-
-        .dock {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 900;
-            background: var(--ink);
-            border-radius: 100px;
-            padding: 6px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            box-shadow: 0 20px 50px -10px rgba(10, 10, 26, 0.5);
-            transition: transform 0.4s var(--ease);
-        }
-
-        .dock:hover {
-            transform: translateX(-50%) translateY(-4px);
-        }
-
-        .dock-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 20px;
-            border-radius: 100px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--paper);
-            transition: all 0.3s var(--ease);
-            white-space: nowrap;
-        }
-
-        .dock-btn i {
-            font-size: 15px;
-        }
-
-        .dock-btn:hover {
-            background: rgba(250, 251, 255, 0.1);
-        }
-
-        .dock-btn.wa {
-            color: #25D366;
-        }
-
-        .dock-btn.rev {
-            color: #4ea8f0;
-        }
-
-       .dock-btn.book {
-    background: var(--violet);
-    color: var(--paper);
+@media (max-width: 768px) {
+  .utility-left { display: none; }
+  .section-block { padding: 55px 0; }
+  .timeline { grid-template-columns: 1fr; }
+  .callout-inner { padding: 36px 24px; }
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .dock { left: 12px; right: 12px; transform: none; justify-content: space-between; padding: 4px; }
+  .dock:hover { transform: translateY(-3px); }
+  .dock-btn { padding: 9px 12px; font-size: 9px; }
+  .dock-btn span { display: none; }
+  .dock-btn.book span { display: inline; }
+  .header-nav a { font-size: 10px; padding: 5px 0; }
+  .header-nav a.highlight { padding: 7px 12px; font-size: 10px; }
+  .ayah-text { font-size: 12px; gap: 16px; }
+  .ayah-text .urdu { font-size: 11px; }
+  .about-label .num { font-size: 55px; }
 }
-.dock-btn.book:hover {
-    background: var(--violet-soft);
-    color: var(--ink);
-}
-
-        .dock-btn.book:hover {
-            background: var(--paper);
-        }
-
-        .dock-divider {
-            width: 1px;
-            height: 24px;
-            background: rgba(250, 251, 255, 0.15);
-            margin: 0 4px;
-        }
-
-
-
-        @media (max-width: 1024px) {
-            .about-inner {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .about-label {
-                position: static;
-            }
-
-            .about-label .num {
-                font-size: 80px;
-            }
-
-            .timeline {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 40px;
-            }
-
-            .timeline::before {
-                display: none;
-            }
-
-            .callout-inner {
-                grid-template-columns: 1fr;
-            }
-
-            .masthead-inner {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-
-            .brand {
-                justify-self: center;
-            }
-
-            .searchbox {
-                max-width: 100%;
-            }
-
-            .footer-top {
-                grid-template-columns: 1fr 1fr;
-                gap: 40px;
-            }
-
-        }
-
-        @media (max-width: 768px) {
-
-            .wrap,
-            .utility-inner,
-            .masthead-inner,
-            .navstrip-inner,
-            .about-inner,
-            .range-inner,
-            .process-inner,
-            .callout,
-            .contact-strip-inner,
-            .footer-inner {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            .utility-left {
-                display: none;
-            }
-
-            .hero-serv {
-                padding: 60px 0;
-            }
-
-            .about-block,
-            .range-block,
-            .process-block {
-                padding: 60px 0;
-            }
-
-            .about-label .num {
-                font-size: 60px;
-            }
-
-            .timeline {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-
-            .callout-inner {
-                padding: 40px 28px;
-            }
-
-            .footer-top {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .dock {
-                left: 12px;
-                right: 12px;
-                transform: none;
-                justify-content: space-between;
-                padding: 5px;
-            }
-
-            .dock:hover {
-                transform: translateY(-4px);
-            }
-
-            .dock-btn {
-                padding: 10px 14px;
-                font-size: 12px;
-            }
-
-            .dock-btn span {
-                display: none;
-            }
-
-            .dock-btn.book span {
-                display: inline;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .brand img {
-                height: 40px;
-            }
-
-            .brand-name {
-                font-size: 18px;
-            }
-
-            .hero-serv h1 {
-                font-size: 40px;
-                letter-spacing: -1.5px;
-            }
-        }
-    </style>
+</style>
 </head>
-
 <body>
 
- <!-- ===== TICKER (Ayah) ===== -->
-    <div class="ticker">
-        <div class="ticker-track">
-            <div class="ticker-item">
+<div class="ayah">
+  <div class="ayah-text">
+    <span>وَأَقِيمُوا الْوَزْنَ بِالْقِسْطِ وَلَا تُخْسِرُوا الْمِيزَانَ</span>
+    <span class="separator">◆</span>
+    <span class="urdu">"انصاف کے ساتھ وزن قائم کرو اور تول میں کمی نہ کرو۔"</span>
+  </div>
+</div>
 
-                وَلَا تُخْسِرُوا الْمِيزَانَ <span style="color: var(--amber)">الْوَزْنَ بِالْقِسْطِ</span> وَأَقِيمُوا
-                <span class="star">◆</span>
-                " اور تول میں کمی نہ کرو ۔<span style="color: var(--amber)"> انصاف کے ساتھ وزن قائم کرو </span>"
-                <span class="star">◆</span>
-            </div>
-            <div class="ticker-item">
-
-                وَلَا تُخْسِرُوا الْمِيزَانَ <span style="color: var(--amber)">الْوَزْنَ بِالْقِسْطِ</span> وَأَقِيمُوا
-                <span class="star">◆</span>
-                " اور تول میں کمی نہ کرو ۔<span style="color: var(--amber)"> انصاف کے ساتھ وزن قائم کرو </span>"
-                <span class="star">◆</span>
-            </div>
-        </div>
+<div class="utility">
+  <div class="utility-inner">
+    <div class="utility-left">
+      <span class="utility-item"><i class="fas fa-phone"></i> 0323 4005335</span>
+      <span class="utility-item"><i class="fas fa-clock"></i> Mon–Sat · 11:00 AM – 7:00 PM</span>
     </div>
-
-    <!-- UTILITY -->
-    <div class="utility">
-        <div class="utility-inner">
-            <div class="utility-left">
-                <span class="utility-item"><i class="fas fa-phone"></i> 0323-4005335</span>
-                <span class="utility-item"><i class="fas fa-clock"></i> Mon–Sat · 11:00 AM – 7:00 PM</span>
-            </div>
-            <div class="utility-right">
-                <span class="utility-item"><a href="privacy.html"><i class="fas fa-shield-alt"></i> Privacy</a></span>
-            </div>
-        </div>
+    <div class="utility-right">
+      <span class="utility-item"><i class="fas fa-map-marker-alt"></i> Samanabad, Lahore</span>
+      <span class="utility-item"><a href="privacy.html"><i class="fas fa-shield-alt"></i> Privacy</a></span>
     </div>
+  </div>
+</div>
 
-    <!-- MASTHEAD -->
-    <header class="masthead">
-        <div class="masthead-inner">
-            <a href="index.html" class="brand">
-                <img src="images/logo.png" alt="Scale Planet">
-                <div class="brand-text">
-                    <span class="brand-tag">EST. 2005 · LAHORE</span>
-                </div>
-            </a>
-            <div class="searchbox">
-                <input type="text" id="searchInput" placeholder="Search scales, load cells, indicators...">
-                <button onclick="searchProducts()" aria-label="Search"><i class="fas fa-arrow-right"></i></button>
-            </div>
-            <div class="masthead-actions">
-                <a href="contact.html" class="masthead-btn"><i class="fas fa-headset"></i> Support</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- NAV -->
-    <nav class="navstrip">
-        <div class="navstrip-inner">
-            <a href="index.html" class="navlink">Home</a>
-            <a href="products.html" class="navlink">Products</a>
-            <a href="services.html" class="navlink active">Services</a>
-            <a href="contact.html" class="navlink">Contact</a>
-            <a href="home-service.html" class="navlink highlight"><i class="fas fa-screwdriver-wrench"></i> Book a Home
-                Service</a>
-        </div>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap"><img src="images/logo.png" alt="Scale Planet"></a>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="What can we help you find?">
+      <button onclick="searchProducts()" aria-label="Search"><i class="fas fa-arrow-right"></i></button>
+    </div>
+    <nav class="header-nav">
+      <a href="products.html">Products</a>
+      <a href="services.html" class="active">Services</a>
+      <a href="contact.html">Contact</a>
+      <a href="home-service.html" class="highlight"><i class="fas fa-screwdriver-wrench"></i>Book a Home Service</a>
     </nav>
+  </div>
+</header>
 
-    <!-- HERO -->
-    <section class="hero-serv">
-        <div class="hero-serv-inner">
-            <div class="crumbs">
-                <a href="index.html">Home</a>
-                <span class="sep">/</span>
-                <span>Services</span>
-            </div>
-            <h1><em>Weighing, redefined</em> for industry.</h1>
-            <p>Twenty years of engineering, servicing, and standing behind every scale we sell. From custom fabrication
-                to annual maintenance contracts — we're in it for the long haul.</p>
-        </div>
-    </section>
+<nav class="catnav">
+  <div class="catnav-inner" id="catnavInner">
+    <a href="products.html" class="catnav-link">Shop All</a>
+  </div>
+</nav>
 
-    <!-- ABOUT -->
-    <section class="about-block">
-        <div class="about-inner">
-            <div class="about-label">
-                <div class="num">20</div>
-                <div class="lbl">Years in the field</div>
-            </div>
-            <div class="about-content">
-                <h2>We've been solving <em>measurement</em> problems since 2005.</h2>
-                <p>We, <strong>M/S Scale Planet</strong>, have been working in the field of digital weighing scales for
-                    over two decades — providing the best services and quality products to ensure the efficiency of your
-                    weighing needs.</p>
-                <p>We provide all types of <strong>platform scales</strong> of any size and capacity. Because we have
-                    our own in-house fabrication workshop, we can build your platform scale exactly to your demand,
-                    design, and capacity — not just pick from a catalogue.</p>
-                <p>Our philosophy is simple: <strong>if it needs to be measured, it needs to be measured right.</strong>
-                    Every product we sell, every service we offer, is built around that one idea.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- RANGE -->
-    <section class="range-block">
-        <div class="range-inner">
-            <div class="range-head">
-                <div class="kicker">WHAT WE MAKE &amp; SELL</div>
-                <h2>Our complete range</h2>
-            </div>
-            <div class="range-grid">
-                <div class="range-tile">
-                    <i class="fas fa-flask"></i>
-                    <h3>Lab Scales</h3>
-                    <p>All types and capacities for laboratory-grade precision.</p>
-                </div>
-                <div class="range-tile">
-                    <i class="fas fa-microchip"></i>
-                    <h3>Weighing Indicators</h3>
-                    <p>Different models and brands for industrial use.</p>
-                </div>
-                <div class="range-tile">
-                    <i class="fas fa-weight-hanging"></i>
-                    <h3>Load Cells</h3>
-                    <p>Digital &amp; analogue — all shapes, sizes, and capacities.</p>
-                </div>
-                <div class="range-tile">
-                    <i class="fas fa-sliders-h"></i>
-                    <h3>Weighing Controllers</h3>
-                    <p>Multifunctional + set-point controllers for automation.</p>
-                </div>
-                <div class="range-tile">
-                    <i class="fas fa-cut"></i>
-                    <h3>GSM Cutters</h3>
-                    <p>Precision cutting for paper, textile, and packaging.</p>
-                </div>
-                <div class="range-tile">
-                    <i class="fas fa-box"></i>
-                    <h3>Sealers</h3>
-                    <p>Reliable sealing solutions for industrial packaging.</p>
-                </div>
-                <div class="range-tile">
-                    <i class="fas fa-heart-pulse"></i>
-                    <h3>Health Scales</h3>
-                    <p>Medical-grade scales for hospitals and clinics.</p>
-                </div>
-                <div class="range-tile">
-                    <i class="fas fa-truck"></i>
-                    <h3>Truck Weighbridges</h3>
-                    <p>Complete weighbridge systems for logistics.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROCESS -->
-    <section class="process-block">
-        <div class="process-inner">
-            <div class="process-head">
-                <div class="kicker">HOW IT WORKS</div>
-                <h2>From inquiry to <em>installation.</em></h2>
-            </div>
-            <div class="timeline">
-                <div class="step">
-                    <div class="dot">01</div>
-                    <h4>Reach Out</h4>
-                    <p>Tell us what you need to weigh. Message us on WhatsApp or book a home service visit.</p>
-                </div>
-                <div class="step">
-                    <div class="dot">02</div>
-                    <h4>Consult &amp; Quote</h4>
-                    <p>Our engineers advise the right solution — including custom fabrication if required — and send you
-                        a tailored quote.</p>
-                </div>
-                <div class="step">
-                    <div class="dot">03</div>
-                    <h4>Build &amp; Deliver</h4>
-                    <p>We fabricate, calibrate, and deliver your equipment. Installation on-site if needed.</p>
-                </div>
-                <div class="step">
-                    <div class="dot">04</div>
-                    <h4>Support Forever</h4>
-                    <p>In-house repair lab, on-site servicing, and annual maintenance contracts keep you running for
-                        years.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CALLOUT -->
-    <div class="callout">
-        <div class="callout-inner">
-            <div>
-                <h3>Need a technician at your door?</h3>
-                <p>Book a home or business visit — our team will inspect, diagnose, and fix on the spot. Fill in your
-                    details and we'll open WhatsApp with your request.</p>
-            </div>
-            <div class="callout-cta">
-                <a href="home-service.html" class="btn-white">
-                    <i class="fas fa-screwdriver-wrench"></i>
-                    Book a Home Service
-                </a>
-            </div>
-        </div>
+<section class="hero-serv">
+  <div class="hero-serv-inner">
+    <div class="crumbs">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span>Services</span>
     </div>
+    <h1>Weighing, <em>Redefined</em> for Industry.</h1>
+    <p>Ten years of engineering, servicing, and standing behind every scale we sell. From custom fabrication to annual maintenance contracts — we're in it for the long haul.</p>
+  </div>
+</section>
 
-    <!-- CONTACT STRIP -->
-    <section class="contact-strip">
-        <div class="contact-strip-inner">
-            <div class="strip-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <div>
-                    <h5>Visit</h5>
-                    <a href="https://maps.app.goo.gl/gRXEVtVEj3MvMvVB9?g_st=ac" target="_blank">Samanabad Town, Lahore</a>
-                </div>
-            </div>
-            <div class="strip-item">
-                <i class="fab fa-whatsapp"></i>
-                <div>
-                    <h5>Call</h5>
-                    <a href="https://wa.me/923234005335" target="_blank">0323-4005335</a>
-                </div>
-            </div>
-            <div class="strip-item">
-                <i class="fas fa-envelope"></i>
-                <div>
-                    <h5>Email</h5>
-                    <a href="mailto:scale.planet786@gmail.com">scale.planet786@gmail.com</a>
-                </div>
-            </div>
-            <div class="strip-item">
-                <i class="fas fa-clock"></i>
-                <div>
-                    <h5>Hours</h5>
-                    <p>Mon–Sat · 11am–7pm</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer-inner">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <h4>About Us</h4> <br>
-                    <p>Scale Planet is a specialised provider of precision weighing solutions with over 20 years of
-                        industry experience. From custom platform scales to lab balances, load cells, indicators, health
-                        scales, and truck weighbridges — engineered and serviced in Lahore.</p>
-                    <div class="footer-socials">
-                        <a href="https://www.facebook.com/scaleplanet786" target="_blank"><i
-                                class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/scale.planet?stkn=MXM4Ym5kbzVlNWxmZA==" target="_blank"><i
-                                class="fab fa-instagram"></i></a>
-                        <a href="https://youtube.com/@scaleplanet786?si=Olh7_k4Ayipf8AL4" target="_blank"><i
-                                class="fab fa-youtube"></i></a>
-                        <a href="https://wa.me/923234005335" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                        <a href="https://www.tiktok.com/@scale.planet" target="_blank"><i
-                                class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="services.html">About Us</a></li>
-                        <li><a href="products.html">Products</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="home-service.html">Book a Home Service</a></li>
-                        <li><a href="contact.html">Customer Service</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Visit Us</h4>
-                    <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span><a
-                                href="https://maps.app.goo.gl/gRXEVtVEj3MvMvVB9?g_st=ac" target="_blank">Shop #2, Prem Gali #4,
-                                Opp Islamia College Gate #2, Railway Road, Lahore</a></span></div>
-                    <div class="footer-contact-item"><i class="fab fa-whatsapp"></i><a href="https://wa.me/923234005335"
-                            target="_blank">0323-4005335</a></div>
-                    <div class="footer-contact-item"><i class="fas fa-envelope"></i><a
-                            href="mailto:scale.planet786@gmail.com">scale.planet786@gmail.com</a></div>
-                    <div class="footer-contact-item"><i class="fas fa-clock"></i><span>Mon–Sat · 11:00 AM – 7:00
-                            PM</span></div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div>© 2015–2026 Scale Planet Corp. All rights reserved.</div>
-                <div class="legal">
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="privacy.html">Terms</a>
-                    <a href="privacy.html">Cookies</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- DOCK -->
-    <div class="dock">
-        <a href="https://wa.me/923234005335" target="_blank" class="dock-btn wa"><i
-                class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
-        <div class="dock-divider"></div>
-        <a href="https://g.page/r/CZSRkhaMgEGFEBE/review" target="_blank" class="dock-btn rev"><i
-                class="fas fa-star"></i><span>Review</span></a>
-        <div class="dock-divider"></div>
-        <a href="home-service.html" class="dock-btn book"><i class="fas fa-screwdriver-wrench"></i><span>Book Home
-                Service</span></a>
+<section class="section-block">
+  <div class="section-block-inner">
+    <div class="about-grid">
+      <div class="about-label">
+        <div class="num">10</div>
+        <div class="lbl">Years in the field</div>
+      </div>
+      <div>
+        <div class="sec-kicker">About Scale Planet</div>
+        <h2 class="sec-title">We've Been Solving <em>Measurement</em> Problems Since 2015.</h2>
+        <p>Scale Planet is a trusted name in the field of <strong>Digital &amp; Industrial Weighing Solutions</strong>, with 10 years of experience in the weighing industry. We provide reliable weighing scales and equipment designed to meet the needs of businesses across Pakistan.</p>
+        <p>We offer a wide range of products including Digital Weighing Scales, Platform Scales, Load Cells, Weighing Indicators, Controllers, Laboratory Balances, Animal Scales, Weighbridges and other weighing equipment in different sizes and capacities.</p>
+        <p>We also provide installation, calibration, repair and maintenance services, with customized weighing solutions according to your required size, capacity and application.</p>
+        <p>Our goal is to provide <strong>accurate measurements, quality products, and dependable technical support</strong> to our customers.</p>
+      </div>
     </div>
+  </div>
+</section>
 
+<section class="section-block alt">
+  <div class="section-block-inner">
+    <div class="sec-kicker">What We Make &amp; Sell</div>
+    <h2 class="sec-title">Our Complete <em>Range</em></h2>
+    <div class="range-grid">
+      <div class="range-tile"><i class="fas fa-flask"></i><h3>Lab Scales</h3><p>All types and capacities for laboratory-grade precision.</p></div>
+      <div class="range-tile"><i class="fas fa-microchip"></i><h3>Weighing Indicators</h3><p>Different models and brands for industrial use.</p></div>
+      <div class="range-tile"><i class="fas fa-weight-hanging"></i><h3>Load Cells</h3><p>Digital &amp; analogue — all shapes, sizes, capacities.</p></div>
+      <div class="range-tile"><i class="fas fa-sliders-h"></i><h3>Weighing Controllers</h3><p>Multifunctional + set-point controllers for automation.</p></div>
+      <div class="range-tile"><i class="fas fa-cut"></i><h3>GSM Cutters</h3><p>Precision cutting for paper, textile, and packaging.</p></div>
+      <div class="range-tile"><i class="fas fa-box"></i><h3>Sealers</h3><p>Reliable sealing solutions for industrial packaging.</p></div>
+      <div class="range-tile"><i class="fas fa-heart-pulse"></i><h3>Health Scales</h3><p>Medical-grade scales for hospitals and clinics.</p></div>
+      <div class="range-tile"><i class="fas fa-truck"></i><h3>Truck Weighbridges</h3><p>Complete weighbridge systems for logistics.</p></div>
+    </div>
+  </div>
+</section>
 
+<section class="section-block">
+  <div class="section-block-inner">
+    <div class="sec-kicker">How It Works</div>
+    <h2 class="sec-title">From Inquiry To <em>Installation.</em></h2>
+    <div class="timeline">
+      <div class="step"><div class="dot">01</div><h4>Reach Out</h4><p>Tell us what you need to weigh. Message us on WhatsApp or book a home service visit.</p></div>
+      <div class="step"><div class="dot">02</div><h4>Consult &amp; Quote</h4><p>Our engineers advise the right solution — including custom fabrication if required — and send you a tailored quote.</p></div>
+      <div class="step"><div class="dot">03</div><h4>Build &amp; Deliver</h4><p>We fabricate, calibrate, and deliver your equipment. Installation on-site if needed.</p></div>
+      <div class="step"><div class="dot">04</div><h4>Support Forever</h4><p>In-house repair lab, on-site servicing, and annual maintenance contracts keep you running for years.</p></div>
+    </div>
+  </div>
+</section>
 
+<div class="callout">
+  <div class="callout-inner">
+    <div>
+      <h3>Need a technician at your door?</h3>
+      <p>Book a home or business visit — our team will inspect, diagnose, and fix on the spot.</p>
+    </div>
+    <div class="callout-cta">
+      <a href="home-service.html" class="btn-white"><i class="fas fa-screwdriver-wrench"></i> Book a Home Service</a>
+    </div>
+  </div>
+</div>
 
-    <script>
-        function searchProducts() {
-            const q = document.getElementById('searchInput').value.trim();
-            if (q) window.location.href = `products.html?search=${encodeURIComponent(q)}`;
-        }
-        document.getElementById('searchInput').addEventListener('keypress', e => { if (e.key === 'Enter') searchProducts(); });
-        document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
-        document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
-    </script>
+<section class="contact-strip">
+  <div class="contact-strip-inner">
+    <div class="strip-item"><i class="fas fa-map-marker-alt"></i><div><h5>Visit</h5><a href="https://maps.app.goo.gl/gRXEVtVEj3MvMvVB9?g_st=ac" target="_blank">Samanabad, Lahore</a></div></div>
+    <div class="strip-item"><i class="fab fa-whatsapp"></i><div><h5>Call</h5><a href="https://wa.me/923234005335" target="_blank">0323 4005335</a></div></div>
+    <div class="strip-item"><i class="fas fa-envelope"></i><div><h5>Email</h5><a href="mailto:Scale.planet786@gmail.com">Scale.planet786@gmail.com</a></div></div>
+    <div class="strip-item"><i class="fas fa-clock"></i><div><h5>Hours</h5><p>Mon–Sat · 11am–7pm</p></div></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Scale Planet">
+        <p>Scale Planet is a trusted name in Digital &amp; Industrial Weighing Solutions with 10 years of experience.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/share/1EoPxNpaMi/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/scale.planet?stkn=MXM4Ym5kbzVlNWxmZA==" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://youtube.com/@scaleplanet786?si=Olh7_k4Ayipf8AL4" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="https://wa.me/923234005335" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="http://tiktok.com/@scale.planet" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="services.html">About Us</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="home-service.html">Book a Home Service</a></li>
+          <li><a href="contact.html">Customer Service</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span><a href="https://maps.app.goo.gl/gRXEVtVEj3MvMvVB9?g_st=ac" target="_blank">Samanabad, Lahore, Pakistan</a></span></div>
+        <div class="footer-contact-item"><i class="fab fa-whatsapp"></i><a href="https://wa.me/923234005335" target="_blank">0323 4005335</a></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:Scale.planet786@gmail.com">Scale.planet786@gmail.com</a></div>
+        <div class="footer-contact-item"><i class="fas fa-clock"></i><span>Mon–Sat · 11:00 AM – 7:00 PM</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2015–2026 Scale Planet. All rights reserved.</div>
+      <div class="legal"><a href="privacy.html">Privacy Policy</a><a href="privacy.html">Terms</a><a href="privacy.html">Cookies</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="dock">
+  <a href="https://wa.me/923234005335" target="_blank" class="dock-btn wa"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
+  <div class="dock-divider"></div>
+  <a href="https://maps.app.goo.gl/gRXEVtVEj3MvMvVB9?g_st=ac" target="_blank" class="dock-btn rev"><i class="fas fa-star"></i><span>Review</span></a>
+  <div class="dock-divider"></div>
+  <a href="home-service.html" class="dock-btn book"><i class="fas fa-screwdriver-wrench"></i><span>Book Service</span></a>
+</div>
+
+<script>
+function searchProducts() {
+  const q = document.getElementById('searchInput').value.trim();
+  if (q) window.location.href = `products.html?search=${encodeURIComponent(q)}`;
+}
+document.getElementById('searchInput').addEventListener('keypress', e => { if (e.key === 'Enter') searchProducts(); });
+
+const supabaseClient = window.supabase ? window.supabase.createClient(
+  'https://ukemuqyzflbqridefzox.supabase.co',
+  'sb_publishable_a6vdgDr-K2G5Mq3kQ96CWQ_M41zMEMq'
+) : null;
+if (supabaseClient) {
+  (async function() {
+    try {
+      const { data } = await supabaseClient.from('categories').select('*').eq('is_main', true).order('name');
+      const catnav = document.getElementById('catnavInner');
+      if (catnav && data && data.length) {
+        catnav.innerHTML = `<a href="products.html" class="catnav-link">Shop All</a>`;
+        data.forEach(c => {
+          const a = document.createElement('a');
+          a.href = `products.html?category=${encodeURIComponent(c.name)}`;
+          a.className = 'catnav-link';
+          a.textContent = c.name;
+          catnav.appendChild(a);
+        });
+      }
+    } catch(e) { console.error(e); }
+  })();
+}
+document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </body>
-
 </html>
