@@ -7,9 +7,8 @@
 <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@100..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,374 +18,234 @@
   --paper: #ffffff; --paper-2: #fafbff; --paper-3: #f2f3fb;
   --line: #e0e2ee; --line-dark: #c9cee3;
   --text: #1a1d3f; --text-soft: #52557a; --text-muted: #8b8fab;
-  --font-display: 'Orbitron', sans-serif; --font-body: 'Orbitron', sans-serif; --font-mono: 'Orbitron', sans-serif;
-  --radius: 6px; --radius-lg: 12px;
+  --green: #18a957;
+  --font-display: 'Orbitron', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --radius: 6px; --radius-lg: 10px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); background: var(--paper); color: var(--text); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; font-weight: 500; }
+body { font-family: var(--font-body); background: var(--paper-2); color: var(--text); line-height: 1.5; overflow-x: hidden; -webkit-font-smoothing: antialiased; font-size: 13px; }
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; display: block; -webkit-user-drag: none; pointer-events: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-/* ===== AYAH ===== */
-.ayah { background: var(--primary); color: #fff; padding: 14px 20px; text-align: center; border-bottom: 2px solid var(--primary-deep); }
-.ayah-text {
-  font-family: 'Noto Kufi Arabic', serif; font-size: 14px; font-weight: 700;
-  color: #fff; line-height: 1.8; direction: rtl;
-  gap: 40px; display: flex; justify-content: center;
-  flex-wrap: wrap; align-items: center;
-}
-.ayah-text .urdu { font-family: 'Noto Kufi Arabic', serif; font-size: 13px; color: var(--primary-pale); direction: rtl; }
-.ayah-text .separator { color: var(--primary-soft); font-size: 10px; }
+/* AYAH */
+.ayah { background: var(--primary); color: #fff; padding: 10px 16px; text-align: center; border-bottom: 2px solid var(--primary-deep); }
+.ayah-text { font-family: 'Noto Kufi Arabic', serif; font-size: 12px; font-weight: 700; color: #fff; line-height: 1.7; direction: rtl; gap: 30px; display: flex; justify-content: center; flex-wrap: wrap; align-items: center; }
+.ayah-text .urdu { font-family: 'Noto Kufi Arabic', serif; font-size: 11px; color: var(--primary-pale); direction: rtl; }
+.ayah-text .separator { color: var(--primary-soft); font-size: 9px; }
 
-/* ===== UTILITY ===== */
-.utility { background: var(--paper-2); border-bottom: 1px solid var(--line); padding: 8px 0; font-size: 12px; }
-.utility-inner { max-width: 1600px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
-.utility-left, .utility-right { display: flex; align-items: center; gap: 20px; color: var(--text-soft); }
-.utility-item { display: flex; align-items: center; gap: 6px; }
-.utility-item i { color: var(--primary); }
+/* UTILITY */
+.utility { background: var(--paper-2); border-bottom: 1px solid var(--line); padding: 6px 0; font-size: 12px; }
+.utility-inner { max-width: 1600px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; }
+.utility-item { display: flex; align-items: center; gap: 5px; color: var(--text-soft); }
+.utility-item i { color: var(--primary); font-size: 11px; }
 .utility-item a:hover { color: var(--primary); }
 
-/* ===== HEADER ===== */
-.header { background: var(--paper); padding: 14px 0; position: sticky; top: 0; z-index: 200; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
-.header-inner { max-width: 1600px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 32px; }
+/* HEADER */
+.header { background: var(--paper); padding: 10px 0; position: sticky; top: 0; z-index: 200; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.header-inner { max-width: 1600px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; }
 .logo-wrap { display: flex; align-items: center; flex-shrink: 0; }
-.logo-wrap img { height: 52px; width: auto; }
-.search-bar { max-width: 640px; width: 100%; position: relative; justify-self: center; }
-.search-bar input { width: 100%; padding: 11px 44px 11px 16px; border: 1px solid var(--line-dark); border-radius: 6px; background: #fff; font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--text); outline: none; transition: border-color 0.2s; }
+.logo-wrap img { height: 40px; width: auto; }
+.search-bar { max-width: 500px; width: 100%; position: relative; justify-self: center; }
+.search-bar input { width: 100%; padding: 8px 36px 8px 12px; border: 1px solid var(--line-dark); border-radius: 5px; background: #fff; font-family: var(--font-body); font-size: 12px; color: var(--text); outline: none; }
 .search-bar input::placeholder { color: var(--text-muted); }
 .search-bar input:focus { border-color: var(--primary); }
-.search-bar button { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 14px; }
+.search-bar button { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 12px; }
 .search-bar button:hover { background: var(--primary-pale); }
-.header-nav { display: flex; align-items: center; gap: 22px; flex-shrink: 0; }
-.header-nav a { font-family: var(--font-body); font-size: 12px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 1px; padding: 6px 0; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+.header-nav { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+.header-nav a { font-family: var(--font-body); font-size: 12px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.3px; padding: 4px 0; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
 .header-nav a:hover { color: var(--primary); border-bottom-color: var(--primary); }
 .header-nav a.active { color: var(--primary); border-bottom-color: var(--primary); }
-.header-nav a.highlight { background: var(--primary); color: #fff; padding: 9px 16px; border-radius: 100px; border-bottom: none; }
+.header-nav a.highlight { background: var(--primary); color: #fff; padding: 7px 14px; border-radius: 100px; border-bottom: none; font-size: 11px; }
 .header-nav a.highlight:hover { background: var(--primary-deep); color: #fff; }
-.header-nav a.highlight i { margin-right: 6px; font-size: 11px; }
+.header-nav a.highlight i { margin-right: 5px; font-size: 11px; }
 
-/* ===== CATEGORY NAV ===== */
+/* CATEGORY NAV */
 .catnav { background: var(--paper-3); border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
 .catnav::-webkit-scrollbar { display: none; }
-.catnav-inner { max-width: 1600px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.catnav-inner { max-width: 1600px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none; }
 .catnav-inner::-webkit-scrollbar { display: none; }
-.catnav-link { padding: 13px 16px; font-size: 12px; font-weight: 600; color: var(--text-soft); white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.5px; }
+.catnav-link { padding: 10px 13px; font-size: 11px; font-weight: 600; color: var(--text-soft); white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.3px; }
 .catnav-link:hover { color: var(--primary); border-bottom-color: var(--primary); }
 
-/* ===== BREADCRUMB ===== */
-.breadcrumb { max-width: 1600px; margin: 0 auto; padding: 20px 24px 0; font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; color: var(--text-muted); display: flex; align-items: center; gap: 10px; text-transform: uppercase; font-weight: 700; flex-wrap: wrap; }
+/* BREADCRUMB */
+.breadcrumb { max-width: 1600px; margin: 0 auto; padding: 14px 20px 0; font-size: 11px; letter-spacing: 0.3px; color: var(--text-muted); display: flex; align-items: center; gap: 8px; font-weight: 600; flex-wrap: wrap; }
 .breadcrumb a { color: var(--text-muted); transition: color 0.2s; }
 .breadcrumb a:hover { color: var(--primary); }
 .breadcrumb .sep { color: var(--line-dark); }
 .breadcrumb .current { color: var(--primary); }
 
-/* ===== PRODUCT LAYOUT ===== */
-.product-page { max-width: 1600px; margin: 0 auto; padding: 30px 24px 60px; }
-.product-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 50px; align-items: start; }
+/* PRODUCT LAYOUT */
+.product-page { max-width: 1600px; margin: 0 auto; padding: 20px 20px 40px; }
+.product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
 
-/* ===== GALLERY ===== */
-.gallery { position: sticky; top: 100px; }
-.gallery-main {
-  background: var(--paper-3); border: 1px solid var(--line);
-  border-radius: var(--radius-lg); overflow: hidden;
-  aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center;
-  position: relative; cursor: zoom-in;
-}
-.gallery-main img { width: 100%; height: 100%; object-fit: contain; padding: 30px; transition: transform 0.5s var(--ease); }
-.gallery-main:hover img { transform: scale(1.05); }
-.gallery-main .badge {
-  position: absolute; top: 18px; left: 18px;
-  font-family: var(--font-mono); font-size: 10px; font-weight: 800;
-  letter-spacing: 1.5px; text-transform: uppercase;
-  padding: 5px 14px; background: var(--primary); color: #fff;
-  border-radius: 100px; z-index: 2;
-}
-.gallery-main .zoom-hint {
-  position: absolute; bottom: 18px; right: 18px;
-  font-family: var(--font-mono); font-size: 9px; font-weight: 700;
-  letter-spacing: 1px; text-transform: uppercase;
-  color: var(--text-muted); background: rgba(255,255,255,0.95);
-  padding: 6px 12px; border-radius: 100px;
-  display: flex; align-items: center; gap: 6px;
-}
-.gallery-thumbs {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-  gap: 10px; margin-top: 14px;
-}
-.gallery-thumb {
-  aspect-ratio: 1/1; background: var(--paper-3);
-  border: 2px solid var(--line); border-radius: var(--radius);
-  cursor: pointer; transition: all 0.3s var(--ease);
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden; padding: 6px;
-}
+/* GALLERY */
+.gallery { position: sticky; top: 80px; }
+.gallery-main { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; position: relative; cursor: zoom-in; max-height: 520px; }
+.gallery-main img { width: 100%; height: 100%; object-fit: contain; padding: 20px; transition: transform 0.4s var(--ease); }
+.gallery-main:hover img { transform: scale(1.04); }
+.gallery-main .badge { position: absolute; top: 14px; left: 14px; font-size: 10px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; padding: 5px 12px; background: var(--primary); color: #fff; border-radius: 100px; z-index: 2; }
+.gallery-main .badge.green { background: var(--green); }
+.gallery-main .zoom-hint { position: absolute; bottom: 14px; right: 14px; font-size: 10px; font-weight: 600; color: var(--text-muted); background: rgba(255,255,255,0.95); padding: 5px 10px; border-radius: 100px; display: flex; align-items: center; gap: 5px; }
+.gallery-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
+.gallery-thumb { aspect-ratio: 1/1; background: var(--paper-3); border: 2px solid var(--line); border-radius: var(--radius); cursor: pointer; transition: all 0.25s; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 4px; max-height: 80px; }
 .gallery-thumb img { width: 100%; height: 100%; object-fit: contain; }
 .gallery-thumb:hover { border-color: var(--primary); }
-.gallery-thumb.active { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-pale); }
+.gallery-thumb.active { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary-pale); }
 
-/* ===== PRODUCT INFO ===== */
-.product-info { display: flex; flex-direction: column; }
-.product-cat {
-  font-family: var(--font-mono); font-size: 11px;
-  letter-spacing: 2px; text-transform: uppercase;
-  color: var(--primary); font-weight: 700; margin-bottom: 12px;
-}
-.product-title {
-  font-family: var(--font-display);
-  font-size: clamp(22px, 3vw, 32px);
-  font-weight: 800; letter-spacing: 0.5px;
-  line-height: 1.2; color: var(--text);
-  margin-bottom: 18px;
-  text-transform: uppercase;
-}
-.product-meta {
-  display: flex; flex-wrap: wrap; gap: 12px;
-  margin-bottom: 20px; padding-bottom: 20px;
-  border-bottom: 1px solid var(--line);
-}
-.product-meta-tag {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 5px 12px; background: var(--primary-pale);
-  color: var(--primary); border-radius: 100px;
-  font-family: var(--font-mono); font-size: 10px;
-  letter-spacing: 1px; text-transform: uppercase;
-  font-weight: 700;
-}
-.product-meta-tag i { font-size: 10px; }
+/* PRODUCT INFO */
+.product-info { display: flex; flex-direction: column; padding-top: 4px; }
+.product-cat { font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--primary); font-weight: 700; margin-bottom: 8px; }
+/* Product title now simple Inter font */
+.product-title { font-family: var(--font-body); font-size: clamp(18px, 2vw, 22px); font-weight: 800; letter-spacing: 0; line-height: 1.25; color: var(--text); margin-bottom: 12px; }
 
-/* ===== RATING ===== */
-.rating-block {
-  display: flex; align-items: center; gap: 14px;
-  padding: 14px 16px; background: var(--paper-3);
-  border-radius: var(--radius-lg); margin-bottom: 22px;
-  flex-wrap: wrap;
-}
-.rating-stars { display: flex; gap: 3px; color: #f1c40f; font-size: 15px; }
-.rating-info { display: flex; flex-direction: column; line-height: 1.2; }
-.rating-info .avg { font-family: var(--font-display); font-size: 15px; font-weight: 800; color: var(--text); }
-.rating-info .count { font-size: 10px; color: var(--text-muted); font-weight: 600; }
-.rating-interactive { display: flex; align-items: center; gap: 10px; margin-left: auto; }
-.rating-interactive .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
-.star-input { display: flex; flex-direction: row-reverse; gap: 2px; }
-.star-input input { display: none; }
-.star-input label { font-size: 18px; color: #ddd; cursor: pointer; transition: all 0.15s; }
-.star-input label:hover, .star-input label:hover ~ label, .star-input input:checked ~ label { color: #f1c40f; transform: scale(1.15); }
-.rating-msg { font-size: 11px; font-weight: 700; padding: 4px 0; }
+/* CAPACITY */
+.capacity-box { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; background: #fff; border: 1.5px solid var(--primary); border-radius: var(--radius-lg); font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 20px; align-self: flex-start; }
+.capacity-box i { font-size: 14px; }
 
-/* ===== PRICE ===== */
-.price-block { padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 22px; }
-.price-current { font-family: var(--font-display); font-size: 32px; font-weight: 900; color: var(--primary); letter-spacing: -0.5px; }
-.price-current .unit { font-size: 14px; color: var(--text-muted); font-weight: 500; margin-left: 4px; }
-.price-original { font-size: 15px; color: var(--text-muted); text-decoration: line-through; margin-left: 12px; font-weight: 500; }
-.price-discount { display: inline-block; background: #ef4444; color: #fff; padding: 4px 12px; border-radius: 100px; font-family: var(--font-mono); font-size: 11px; font-weight: 800; letter-spacing: 1px; margin-left: 10px; }
-.price-ask { font-family: var(--font-display); font-size: 26px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; }
-.price-ask-sub { font-size: 12px; color: var(--text-soft); margin-top: 4px; }
-
-/* ===== DESCRIPTION ===== */
-.description-block { margin-bottom: 22px; }
-.description-block h3 {
-  font-family: var(--font-display); font-size: 12px; font-weight: 800;
-  letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--text); margin-bottom: 12px;
-  padding-bottom: 8px; border-bottom: 1px solid var(--line);
-}
-.description-content { font-size: 13px; color: var(--text-soft); line-height: 1.8; }
-.description-content strong { color: var(--text); font-weight: 800; }
-.description-content em { font-style: italic; }
-.description-content u { text-decoration: underline; }
-.description-content a { color: var(--primary); font-weight: 700; border-bottom: 1px solid transparent; }
-.description-content a:hover { border-bottom-color: var(--primary); }
-.description-content ul { list-style: none; margin: 12px 0; padding: 0; }
-.description-content ul li { padding: 6px 0 6px 22px; position: relative; }
-.description-content ul li::before { content: '—'; position: absolute; left: 0; color: var(--primary); font-weight: 800; }
-
-/* ===== VIDEO ===== */
-.video-block {
-  margin-bottom: 22px; background: var(--paper-3);
-  border-radius: var(--radius-lg); overflow: hidden;
-  border: 1px solid var(--line);
-}
-.video-label {
-  display: flex; align-items: center; gap: 8px;
-  padding: 10px 16px; background: var(--primary-pale);
-  color: var(--primary); font-family: var(--font-mono);
-  font-size: 10px; font-weight: 800;
-  letter-spacing: 1.5px; text-transform: uppercase;
-}
-.video-embed { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000; }
-.video-embed iframe, .video-embed video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: block; }
-.video-link-fallback { padding: 20px; text-align: center; }
-.video-link-fallback a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; background: var(--primary); color: #fff; border-radius: 100px; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
-
-/* ===== ACTION BUTTONS ===== */
-.product-actions { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
-.btn-main {
-  display: flex; align-items: center; justify-content: center;
-  gap: 12px; padding: 18px 28px;
-  border-radius: 100px; font-family: var(--font-display);
-  font-size: 13px; font-weight: 800;
-  text-transform: uppercase; letter-spacing: 1.5px;
-  transition: all 0.3s var(--ease);
-  text-decoration: none;
-  width: 100%;
-}
-.btn-wa { background: #25D366; color: #fff; }
-.btn-wa:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 12px 28px -8px rgba(37, 211, 102, 0.5); }
-.btn-call { background: var(--primary); color: #fff; }
-.btn-call:hover { background: var(--primary-deep); transform: translateY(-2px); box-shadow: 0 12px 28px -8px rgba(62, 64, 149, 0.5); }
-.btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--line-dark); }
+/* ACTIONS — WhatsApp full width, Back below smaller */
+.product-actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; align-items: flex-start; }
+.btn-main { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 100px; font-family: var(--font-body); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; transition: all 0.25s var(--ease); text-decoration: none; }
+.btn-wa { background: #25D366; color: #fff; width: 100%; max-width: 320px; }
+.btn-wa:hover { background: #1da851; transform: translateY(-1px); box-shadow: 0 8px 20px -6px rgba(37, 211, 102, 0.5); }
+.btn-outline { background: var(--paper-3); color: var(--text); border: 1.5px solid var(--line-dark); padding: 10px 20px; font-size: 11px; }
 .btn-outline:hover { background: var(--primary-pale); border-color: var(--primary); color: var(--primary); }
-.btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-/* ===== TRUST BADGES ===== */
-.trust-badges {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 10px; padding: 18px; background: var(--paper-3);
-  border-radius: var(--radius-lg); margin-bottom: 22px;
-}
-.trust-badge { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; }
-.trust-badge i { font-size: 18px; color: var(--primary); }
-.trust-badge span { font-family: var(--font-mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-soft); font-weight: 700; line-height: 1.3; }
+/* TRUST BADGES */
+.trust-badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 12px; background: var(--paper-3); border-radius: var(--radius-lg); margin-bottom: 14px; }
+.trust-badge { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 5px; }
+.trust-badge i { font-size: 15px; color: var(--primary); }
+.trust-badge span { font-size: 10px; color: var(--text-soft); font-weight: 600; line-height: 1.25; }
 
-/* ===== RELATED ===== */
-.related-section { max-width: 1600px; margin: 0 auto; padding: 40px 24px 80px; border-top: 1px solid var(--line); }
-.related-head {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 20px; margin-bottom: 24px; flex-wrap: wrap;
-}
-.related-head h2 {
-  font-family: var(--font-display); font-size: clamp(18px, 2.5vw, 24px);
-  font-weight: 800; letter-spacing: 1px; color: var(--text);
-  text-transform: uppercase;
-}
+/* FEATURES BLOCK */
+.features-block { background: var(--paper-3); border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 14px; border: 1px solid var(--line); }
+.features-block h3 { font-size: 12px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line-dark); }
+.features-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.feature-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-soft); font-weight: 500; }
+.feature-item i { color: var(--primary); font-size: 12px; flex-shrink: 0; }
+
+/* DESCRIPTION */
+.description-block { margin-bottom: 14px; }
+.description-block h3 { font-size: 12px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.description-content { font-size: 12px; color: var(--text-soft); line-height: 1.65; }
+
+/* RELATED */
+.related-section { max-width: 1600px; margin: 0 auto; padding: 30px 20px 60px; border-top: 1px solid var(--line); }
+.related-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 18px; flex-wrap: wrap; }
+.related-head h2 { font-family: var(--font-body); font-size: clamp(16px, 2vw, 20px); font-weight: 800; letter-spacing: 0.3px; color: var(--text); text-transform: uppercase; }
 .related-head h2 em { color: var(--primary); font-style: normal; }
-.related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-.p-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; transition: all 0.3s var(--ease); cursor: pointer; display: flex; flex-direction: column; text-decoration: none; }
-.p-card:hover { border-color: var(--primary); box-shadow: 0 16px 40px -16px rgba(62, 64, 149, 0.25); transform: translateY(-4px); }
-.p-card .p-media { height: 200px; background: var(--paper-3); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-.p-card .p-media img { width: 100%; height: 100%; object-fit: contain; padding: 16px; transition: transform 0.5s var(--ease); }
-.p-card:hover .p-media img { transform: scale(1.06); }
-.p-body { padding: 14px 16px 16px; display: flex; flex-direction: column; flex: 1; }
-.p-cat { font-family: var(--font-mono); font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--primary); margin-bottom: 6px; font-weight: 700; }
-.p-name { font-family: var(--font-display); font-size: 11px; font-weight: 700; line-height: 1.4; color: var(--text); margin-bottom: 12px; min-height: 32px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-transform: uppercase; letter-spacing: 0.3px; }
-.p-price-row { display: flex; align-items: center; justify-content: center; padding: 9px 16px; background: var(--primary-pale); color: var(--primary); border: 1px solid var(--primary); border-radius: 100px; font-family: var(--font-display); font-size: 11px; font-weight: 800; margin-top: auto; }
+.related-head .head-link { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--primary); border-bottom: 1.5px solid var(--primary); padding-bottom: 3px; font-weight: 700; }
+.related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+.related-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 10px; display: flex; flex-direction: column; transition: all 0.25s; cursor: pointer; text-decoration: none; }
+.related-card:hover { border-color: var(--primary); box-shadow: 0 10px 24px -10px rgba(62, 64, 149, 0.25); transform: translateY(-2px); }
+.related-card .rc-img { height: 140px; background: var(--paper-3); border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 8px; }
+.related-card .rc-img img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
+.related-card .rc-cat { font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--primary); margin-bottom: 4px; font-weight: 700; }
+.related-card .rc-name { font-size: 12px; font-weight: 700; line-height: 1.35; color: var(--text); margin-bottom: 8px; min-height: 32px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.related-card .rc-cap { font-size: 10px; color: var(--text-muted); font-weight: 600; }
 
-/* ===== LOADING / ERROR ===== */
-.loading-wrap { grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px; gap: 20px; }
-.loading-spinner { width: 40px; height: 40px; border: 3px solid var(--line); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; }
+/* LOADING / ERROR */
+.loading-wrap { grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; gap: 16px; }
+.loading-spinner { width: 32px; height: 32px; border: 3px solid var(--line); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.loading-text { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
-.error-box {
-  grid-column: 1 / -1; text-align: center;
-  padding: 80px 20px; background: var(--paper-3);
-  border-radius: var(--radius-lg);
-}
-.error-box i { font-size: 56px; color: var(--primary-soft); margin-bottom: 20px; }
-.error-box h2 { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--text); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-.error-box p { font-size: 13px; color: var(--text-soft); margin-bottom: 24px; max-width: 400px; margin-left: auto; margin-right: auto; line-height: 1.7; }
-.error-box .btn-main { display: inline-flex; width: auto; padding: 14px 28px; }
+.loading-text { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+.error-box { grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: var(--paper-3); border-radius: var(--radius-lg); }
+.error-box i { font-size: 44px; color: var(--primary-soft); margin-bottom: 16px; }
+.error-box h2 { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.error-box p { font-size: 13px; color: var(--text-soft); margin-bottom: 20px; max-width: 380px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+.error-box .btn-main { display: inline-flex; width: auto; padding: 11px 24px; }
 
-/* ===== LIGHTBOX ===== */
-.lightbox {
-  position: fixed; inset: 0; background: rgba(10, 10, 26, 0.95);
-  backdrop-filter: blur(8px); z-index: 10000;
-  display: none; align-items: center; justify-content: center;
-  padding: 40px; cursor: zoom-out;
-  opacity: 0; transition: opacity 0.3s ease;
-}
+/* LIGHTBOX */
+.lightbox { position: fixed; inset: 0; background: rgba(10, 10, 26, 0.95); backdrop-filter: blur(8px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 40px; cursor: zoom-out; opacity: 0; transition: opacity 0.3s ease; }
 .lightbox.show { display: flex; opacity: 1; }
-.lightbox img {
-  max-width: 95vw; max-height: 90vh;
-  object-fit: contain;
-  border-radius: var(--radius-lg);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-  background: #fff; padding: 20px;
-  animation: lbZoom 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  pointer-events: auto;
-}
-@keyframes lbZoom { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-.lightbox-close {
-  position: absolute; top: 24px; right: 24px;
-  width: 48px; height: 48px; border-radius: 50%;
-  background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.3);
-  color: #fff; font-size: 20px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; transition: all 0.3s;
-}
+.lightbox img { max-width: 95vw; max-height: 90vh; object-fit: contain; border-radius: var(--radius-lg); box-shadow: 0 30px 80px rgba(0,0,0,0.6); background: #fff; padding: 16px; pointer-events: auto; }
+.lightbox-close { position: absolute; top: 20px; right: 20px; width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.3); color: #fff; font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; }
 .lightbox-close:hover { background: #e74c3c; border-color: #e74c3c; transform: rotate(90deg) scale(1.1); }
 
-/* ===== FOOTER ===== */
-.footer { background: var(--primary); color: #fff; padding: 70px 0 28px; }
-.footer-inner { max-width: 1440px; margin: 0 auto; padding: 0 24px; }
-.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 50px; padding-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.15); }
-.footer-brand img { height: 44px; margin-bottom: 18px; background: #fff; padding: 5px 9px; border-radius: 6px; }
-.footer-brand p { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.8; max-width: 340px; margin-bottom: 16px; }
-.footer-socials { display: flex; gap: 10px; margin-top: 12px; }
-.footer-socials a { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; transition: all 0.3s; }
+/* FOOTER */
+.footer { background: var(--primary); color: #fff; padding: 50px 0 22px; }
+.footer-inner { max-width: 1440px; margin: 0 auto; padding: 0 20px; }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 40px; padding-bottom: 36px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+.footer-brand img { height: 36px; margin-bottom: 14px; background: #fff; padding: 4px 8px; border-radius: 6px; }
+.footer-brand p { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.7; max-width: 320px; margin-bottom: 12px; }
+.footer-socials { display: flex; gap: 8px; margin-top: 10px; }
+.footer-socials a { width: 32px; height: 32px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; transition: all 0.3s; }
 .footer-socials a:hover { background: #fff; color: var(--primary); border-color: #fff; }
-.footer-col h4 { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #fff; margin-bottom: 20px; font-weight: 800; }
+.footer-col h4 { font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: #fff; margin-bottom: 14px; font-weight: 800; }
 .footer-col ul { list-style: none; }
-.footer-col ul li { margin-bottom: 11px; }
-.footer-col ul li a { font-size: 11px; color: rgba(255,255,255,0.75); transition: color 0.3s; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+.footer-col ul li { margin-bottom: 8px; }
+.footer-col ul li a { font-size: 12px; color: rgba(255,255,255,0.75); transition: color 0.3s; font-weight: 500; }
 .footer-col ul li a:hover { color: #fff; }
-.footer-contact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.6; }
-.footer-contact-item i { color: #fff; font-size: 13px; margin-top: 4px; flex-shrink: 0; }
+.footer-contact-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+.footer-contact-item i { color: #fff; font-size: 12px; margin-top: 3px; flex-shrink: 0; }
 .footer-contact-item a { color: rgba(255,255,255,0.75); }
 .footer-contact-item a:hover { color: #fff; }
-.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; font-family: var(--font-mono); font-size: 9px; color: rgba(255,255,255,0.6); flex-wrap: wrap; gap: 16px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
-.footer-bottom .legal { display: flex; gap: 20px; flex-wrap: wrap; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 18px; font-size: 11px; color: rgba(255,255,255,0.6); flex-wrap: wrap; gap: 12px; font-weight: 500; }
+.footer-bottom .legal { display: flex; gap: 16px; flex-wrap: wrap; }
 .footer-bottom a { color: rgba(255,255,255,0.6); transition: color 0.3s; }
 .footer-bottom a:hover { color: #fff; }
 
-/* ===== DOCK ===== */
-.dock { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 900; background: var(--primary); border-radius: 100px; padding: 5px; display: flex; align-items: center; gap: 3px; box-shadow: 0 20px 50px -10px rgba(62, 64, 149, 0.5); transition: transform 0.3s; }
-.dock:hover { transform: translateX(-50%) translateY(-3px); }
-.dock-btn { display: flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 100px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #fff; transition: all 0.2s; white-space: nowrap; }
+/* DOCK — WhatsApp white bg */
+.dock { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 900; background: var(--primary); border-radius: 100px; padding: 4px; display: flex; align-items: center; gap: 3px; box-shadow: 0 16px 40px -8px rgba(62, 64, 149, 0.5); transition: transform 0.3s; }
+.dock:hover { transform: translateX(-50%) translateY(-2px); }
+.dock-btn { display: flex; align-items: center; gap: 7px; padding: 9px 16px; border-radius: 100px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: #fff; transition: all 0.2s; white-space: nowrap; }
 .dock-btn i { font-size: 13px; }
 .dock-btn:hover { background: rgba(255,255,255,0.18); }
-.dock-btn.book { background: #fff; color: var(--primary); }
-.dock-btn.book:hover { background: var(--primary-pale); }
-.dock-divider { width: 1px; height: 22px; background: rgba(255,255,255,0.3); margin: 0 3px; }
+.dock-btn.wa { background: #fff; color: var(--primary); }
+.dock-btn.wa:hover { background: var(--primary-pale); }
+.dock-btn.book { color: #fff; }
+.dock-btn.book:hover { background: rgba(255,255,255,0.18); }
+.dock-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.3); margin: 0 3px; }
 
-/* ===== RESPONSIVE ===== */
+/* RESPONSIVE */
 @media (max-width: 1200px) {
-  .header-inner { grid-template-columns: auto 1fr; row-gap: 12px; }
+  .header-inner { grid-template-columns: auto 1fr; row-gap: 10px; }
   .header-nav { grid-column: 1 / -1; justify-content: center; flex-wrap: wrap; }
   .search-bar { max-width: 100%; }
 }
 @media (max-width: 1024px) {
-  .product-grid { grid-template-columns: 1fr; gap: 30px; }
+  .product-grid { grid-template-columns: 1fr; gap: 24px; }
   .gallery { position: static; }
-  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .gallery-main { max-height: 420px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 30px; }
 }
 @media (max-width: 768px) {
-  .utility-left { display: none; }
-  .product-page { padding: 20px 16px 40px; }
-  .breadcrumb { padding: 14px 16px 0; font-size: 9px; }
-  .btn-row { grid-template-columns: 1fr; }
-  .trust-badges { grid-template-columns: 1fr; }
-  .related-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .p-card .p-media { height: 150px; }
-  .footer-top { grid-template-columns: 1fr; }
+  .utility-inner { gap: 12px; font-size: 11px; }
+  .utility-item { font-size: 11px; }
+  .product-page { padding: 14px 14px 30px; }
+  .breadcrumb { padding: 10px 14px 0; font-size: 10px; }
+  .gallery-main { max-height: 320px; aspect-ratio: 4/3; }
+  .gallery-main img { padding: 14px; }
+  .gallery-thumb { max-height: 60px; }
+  .product-title { font-size: 16px; }
+  .btn-wa { max-width: 100%; font-size: 11px; padding: 11px 16px; }
+  .btn-outline { font-size: 10px; padding: 9px 16px; }
+  .trust-badges { grid-template-columns: 1fr; gap: 6px; padding: 10px; }
+  .trust-badge { flex-direction: row; justify-content: flex-start; gap: 8px; }
+  .trust-badge span { font-size: 11px; }
+  .features-list { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .footer-top { grid-template-columns: 1fr; gap: 24px; }
   .footer-bottom { flex-direction: column; text-align: center; }
-  .dock { left: 12px; right: 12px; transform: none; justify-content: space-between; padding: 4px; }
-  .dock:hover { transform: translateY(-3px); }
-  .dock-btn { padding: 9px 12px; font-size: 9px; }
-  .dock-btn span { display: none; }
-  .dock-btn.book span { display: inline; }
-  .header-nav a { font-size: 10px; padding: 5px 0; }
-  .header-nav a.highlight { padding: 7px 12px; font-size: 10px; }
-  .ayah-text { font-size: 12px; gap: 16px; }
-  .ayah-text .urdu { font-size: 11px; }
-  .rating-interactive { margin-left: 0; }
-  .lightbox { padding: 16px; }
-  .lightbox-close { top: 12px; right: 12px; width: 40px; height: 40px; font-size: 17px; }
+  .dock { left: 10px; right: 10px; transform: none; justify-content: space-between; padding: 3px; }
+  .dock:hover { transform: translateY(-2px); }
+  .dock-btn { padding: 8px 11px; font-size: 10px; }
+  .dock-btn span { display: inline; font-size: 9px; }
+  .header-nav a { font-size: 10px; padding: 4px 0; }
+  .header-nav a.highlight { padding: 6px 11px; font-size: 10px; }
+  .ayah-text { font-size: 11px; gap: 12px; }
+  .ayah-text .urdu { font-size: 10px; }
+  .lightbox { padding: 14px; }
+  .lightbox-close { top: 10px; right: 10px; width: 36px; height: 36px; font-size: 15px; }
 }
 @media (max-width: 480px) {
-  .logo-wrap img { height: 40px; }
+  .logo-wrap img { height: 34px; }
   .related-grid { grid-template-columns: 1fr; }
+  .dock-btn { padding: 7px 9px; }
+  .dock-btn i { font-size: 12px; }
+  .dock-btn span { font-size: 8px; }
 }
 </style>
 </head>
@@ -404,14 +263,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 <!-- UTILITY -->
 <div class="utility">
   <div class="utility-inner">
-    <div class="utility-left">
-      <span class="utility-item"><i class="fas fa-phone"></i> 0323 4005335</span>
-      <span class="utility-item"><i class="fas fa-clock"></i> Mon–Sat · 11:00 AM – 7:00 PM</span>
-    </div>
-    <div class="utility-right">
-      <span class="utility-item"><i class="fas fa-map-marker-alt"></i> Samanabad, Lahore</span>
-      <span class="utility-item"><a href="privacy.html"><i class="fas fa-shield-alt"></i> Privacy</a></span>
-    </div>
+    <span class="utility-item"><i class="fas fa-phone"></i> 0323 4005335</span>
+    <span class="utility-item"><i class="fas fa-clock"></i> Mon–Sat · 11:00 AM – 7:00 PM</span>
   </div>
 </div>
 
@@ -420,13 +273,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   <div class="header-inner">
     <a href="index.html" class="logo-wrap"><img src="images/logo.png" alt="Scale Planet"></a>
     <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="What can we help you find?">
+      <input type="text" id="searchInput" placeholder="Search products...">
       <button onclick="searchProducts()" aria-label="Search"><i class="fas fa-arrow-right"></i></button>
     </div>
     <nav class="header-nav">
       <a href="products.html" class="active">Products</a>
       <a href="services.html">Services</a>
       <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
       <a href="home-service.html" class="highlight"><i class="fas fa-screwdriver-wrench"></i>Book a Home Service</a>
     </nav>
   </div>
@@ -434,8 +288,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 <!-- CATEGORY NAV -->
 <nav class="catnav">
-  <div class="catnav-inner" id="catnavInner">
+  <div class="catnav-inner">
     <a href="products.html" class="catnav-link">Shop All</a>
+    <a href="products.html?category=Platform+Scales" class="catnav-link">Platform Scales</a>
+    <a href="products.html?category=Counter+Scales" class="catnav-link">Counter Scales</a>
+    <a href="products.html?category=Animal+Scales" class="catnav-link">Animal Scales</a>
+    <a href="products.html?category=Load+Cells" class="catnav-link">Load Cells</a>
+    <a href="products.html?category=Indicators" class="catnav-link">Indicators</a>
+    <a href="products.html?category=Lab+Scales" class="catnav-link">Lab Scales</a>
+    <a href="products.html?category=Hanging+Scales" class="catnav-link">Hanging Scales</a>
   </div>
 </nav>
 
@@ -462,7 +323,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 <section class="related-section" id="relatedSection" style="display:none;">
   <div class="related-head">
     <h2>You May Also <em>Like</em></h2>
-    <a href="products.html" style="display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--primary); border-bottom:1.5px solid var(--primary); padding-bottom:4px; font-weight:800;">View All <i class="fas fa-arrow-right"></i></a>
+    <a href="products.html" class="head-link">View All <i class="fas fa-arrow-right"></i></a>
   </div>
   <div class="related-grid" id="relatedGrid"></div>
 </section>
@@ -473,7 +334,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <div class="footer-top">
       <div class="footer-brand">
         <img src="images/logo.png" alt="Scale Planet">
-        <p>Scale Planet is a trusted name in Digital &amp; Industrial Weighing Solutions with 10 years of experience. We provide reliable weighing scales and equipment designed to meet the needs of businesses across Pakistan.</p>
+        <p>Scale Planet is a trusted name in Digital &amp; Industrial Weighing Solutions with 10 years of experience.</p>
         <div class="footer-socials">
           <a href="https://www.facebook.com/share/1EoPxNpaMi/" target="_blank"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/scale.planet?stkn=MXM4Ym5kbzVlNWxmZA==" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -514,44 +375,47 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   </div>
 </footer>
 
-<!-- DOCK -->
+<!-- DOCK — WhatsApp white bg -->
 <div class="dock">
-  <a href="https://wa.me/923234005335" target="_blank" class="dock-btn wa"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
   <div class="dock-divider"></div>
   <a href="https://maps.app.goo.gl/gRXEVtVEj3MvMvVB9?g_st=ac" target="_blank" class="dock-btn rev"><i class="fas fa-star"></i><span>Review</span></a>
   <div class="dock-divider"></div>
   <a href="home-service.html" class="dock-btn book"><i class="fas fa-screwdriver-wrench"></i><span>Book Service</span></a>
+  <a href="https://wa.me/923234005335" target="_blank" class="dock-btn wa"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
 </div>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close"><i class="fas fa-times"></i></button>
   <img id="lightboxImage" src="" alt="Product full view">
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const supabaseClient = window.supabase.createClient(
-  'https://ukemuqyzflbqridefzox.supabase.co',
-  'sb_publishable_a6vdgDr-K2G5Mq3kQ96CWQ_M41zMEMq'
+/* ============ DEMO PRODUCTS ============ */
+const PRODUCTS = [
+  { id: 1, name: "Digital Platform Weighing Scale", cat: "Platform Scales", badge: "Best Seller", capacity: "50KG – 200KG", features: ["1g readability", "Tare function", "LCD display", "Rechargeable battery"], desc: "Industrial and commercial platform scale with stainless-steel pan, automatic zero reset/tracing and rechargeable battery. Suitable for industry, agriculture, business and research.", images: ["https://image.made-in-china.com/202f0j00iAEtTJcPVRpf/50kg-100kg-150kg-200kg-Digital-Platform-Electronic-Weighing-Scale-with-RS232.webp","https://commons.wikimedia.org/wiki/Special:Redirect/file/Electronic%20Weighing%20Scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Weighing_scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Stabilized-platform%20weighing%20scale%20of%20novel%20design.%20%281918%29%20%2814783395945%29.jpg"] },
+  { id: 2, name: "Price Computing Scale", cat: "Counter Scales", badge: "Popular", capacity: "3KG – 40KG", features: ["Price calculation", "LCD/LED display", "Tare", "kg / g / lb"], desc: "Commercial price-computing scale with stainless-steel platform and keypad. Available in several capacity/readability combinations.", images: ["https://image.made-in-china.com/202f0j00GTQkUSCFajcE/Multiple-Specifications-Available-Good-Quality-Electronic-Price-Computing-Scale.webp","https://commons.wikimedia.org/wiki/Special:Redirect/file/Soehnle%20weighing%20scale%20up%20to%2010%20kg%20with%20a%20detachable%20tray%202.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Escali%20digital%20kitchen%20scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/K%C3%BCchenwaage%20digital.jpg"] },
+  { id: 3, name: "Livestock / Animal Weighing Scale", cat: "Animal Scales", badge: "Heavy Duty", capacity: "1,000KG – 10,000KG", features: ["Guard rails", "LED indicator", "RS-232", "OIML Class III"], desc: "Heavy-duty livestock scale with diamond plate, dedicated load cells and guard rails. Available in multiple capacities and sizes.", images: ["https://image.made-in-china.com/318f0j00etnfHzamHPpJ/livestockanimalsweighingscales-mp4.webp","https://image.made-in-china.com/318f0j00etnfHzamHPpJ/livestockanimalsweighingscales-mp4.webp","https://commons.wikimedia.org/wiki/Special:Redirect/file/Weighing%20Scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Electronic%20Weighing%20Scale.jpg"] },
+  { id: 4, name: "Digital Crane Scale", cat: "Crane Scales", badge: "Industrial", capacity: "Up to 10 Ton", features: ["Hook mounted", "Digital display", "Heavy-duty", "Portable"], desc: "Digital crane weighing equipment for suspended loads. Calibrated crane scale with up to 10-ton maximum load.", images: ["https://commons.wikimedia.org/wiki/Special:Redirect/file/EHP%20Kranwaage%20Typ%20LDN%20LD.png","https://commons.wikimedia.org/wiki/Special:Redirect/file/Crane%20weighting%20device.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Spring%20weighing%20scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Weighing_scale.jpg"] },
+  { id: 5, name: "Shear Beam Load Cell", cat: "Load Cells", badge: "2 Ton", capacity: "Example: 2 Ton", features: ["Shear beam", "Strain-gauge sensor", "Industrial", "Platform applications"], desc: "Shear-beam load cell used as a force sensor in weighing systems. Commonly used in platform scales.", images: ["https://commons.wikimedia.org/wiki/Special:Redirect/file/Load%20Cell%20Sensor%20Module%20from%20a%20Digital%20Weighing%20Scale%2002.jpg","https://image.made-in-china.com/202f0j00pEQkRsCgqSca/Multiple-Specifications-Available-Good-Quality-Electronic-Price-Computing-Scale.webp","https://commons.wikimedia.org/wiki/Special:Redirect/file/Elements%20of%20Weighing%20scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Electronic%20Weighing%20Scale.jpg"] },
+  { id: 6, name: "Digital Weighing Indicator", cat: "Indicators", badge: "New", capacity: "100KG – 800KG", features: ["Bright LCD", "Tare", "Print", "RS-232 / USB options"], desc: "Digital weighing indicator for platform-scale systems. Supports multiple functions including tare, hold, printing and limit indication.", images: ["https://www.jadever.com/js/htmledit/kindeditor/attached/20221012/20221012134030_34681.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Electronic%20Weighing%20Scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Load%20Cell%20Sensor%20Module%20from%20a%20Digital%20Weighing%20Scale%2001.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Elements%20of%20Weighing%20scale.jpg"] },
+  { id: 7, name: "Analytical Laboratory Balance", cat: "Lab Scales", badge: "Precision", capacity: "200g – 320g class", features: ["Draft shield", "High precision", "Digital display", "Tare / calibration"], desc: "Laboratory analytical balance with a glass draft shield and digital control panel. Used where high-resolution measurement is required.", images: ["https://5.imimg.com/data5/SELLER/Default/2024/9/451385583/ZM/KC/AI/5832544/digital-weighing-machine-500x500.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Laboratory%20balance01.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Electronic%20Weighing%20Scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Elements%20of%20Weighing%20scale.jpg"] },
+  { id: 8, name: "Industrial Counting Scale", cat: "Counting Scales", badge: "Warehouse", capacity: "1.5KG – 30KG", features: ["Piece counting", "Multiple displays", "Keypad", "Rechargeable battery"], desc: "Counting scale designed for inventory and production counting. Provides weight, piece-weight and count information.", images: ["https://cdn1.npcdn.net/images/20210601_971a5e.webp?from=jpg&md5id=d9236c0a634ecbcb339a2646250c420c&new_height=1000&new_width=1000&size=max&type=1&w=-62170008925","https://commons.wikimedia.org/wiki/Special:Redirect/file/Electronic%20Weighing%20Scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Load%20Cell%20Sensor%20Module%20from%20a%20Digital%20Weighing%20Scale%2001.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Weighing_scale.jpg"] },
+  { id: 9, name: "Digital Kitchen Scale", cat: "Kitchen Scales", badge: "Compact", capacity: "Up to 10KG", features: ["LCD display", "Tare", "Compact", "Food weighing"], desc: "Compact digital kitchen scale for food and ingredient weighing. Ideal for household use.", images: ["https://commons.wikimedia.org/wiki/Special:Redirect/file/Escali%20digital%20kitchen%20scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Digital%20kitchen%20scale%20KE%20901%20-%20board-0333.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/K%C3%BCchenwaage%20digital.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Kitchenscale.jpg"] },
+  { id: 10, name: "Digital Body Weight Scale", cat: "Health Scales", badge: "Home", capacity: "Up to 180KG", features: ["Digital display", "Tempered glass", "Auto on/off", "Low battery indicator"], desc: "Digital body-weight scale for personal weighing. 180kg capacity and 100g graduation.", images: ["https://commons.wikimedia.org/wiki/Special:Redirect/file/Digital%20Body%20Scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Dretec%20digital%20bathroom%20scale%20BS-164.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Bathroom%20Scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Bathroomscales.jpg"] },
+  { id: 11, name: "Portable Hanging / Hook Scale", cat: "Hanging Scales", badge: "Portable", capacity: "50KG example", features: ["Backlit LCD", "Stainless hook", "Tare", "Battery operated"], desc: "Portable hanging scale for luggage, parcels and general weighing. 0–50kg range with 5g/10g increments.", images: ["https://commons.wikimedia.org/wiki/Special:Redirect/file/Crane%20weighting%20device.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Spring%20weighing%20scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/EHP%20Kranwaage%20Typ%20LDN%20LD.png","https://commons.wikimedia.org/wiki/Special:Redirect/file/Weighing_scale.jpg"] },
+  { id: 12, name: "Digital Electronic Weighing Scale", cat: "Electronic Scales", badge: "Everyday", capacity: "Model dependent", features: ["Digital display", "Load-cell sensing", "Tare", "Commercial / lab use"], desc: "General-purpose digital electronic weighing scale. Uses load-sensing elements and digital electronics to display measured mass.", images: ["https://commons.wikimedia.org/wiki/Special:Redirect/file/Electronic%20Weighing%20Scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Weighing%20scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Elements%20of%20Weighing%20scale.jpg","https://commons.wikimedia.org/wiki/Special:Redirect/file/Load%20Cell%20Sensor%20Module%20from%20a%20Digital%20Weighing%20Scale%2001.jpg"] }
+];
+
+const PLACEHOLDER = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500"><rect width="100%" height="100%" fill="#f3f7fb"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#8b8fab" font-family="Arial" font-size="24">Scale Planet Product</text></svg>'
 );
 
-/* ===== Helpers ===== */
 function esc(v) {
   return String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;')
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
 }
 
-function slugify(str) {
-  return String(str || '')
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-');
-}
-
-/* ===== Lightbox ===== */
+/* Lightbox */
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImage');
 function openLightbox(src) {
@@ -565,14 +429,12 @@ function closeLightbox() {
   document.body.style.overflow = '';
   setTimeout(() => { lightboxImg.src = ''; }, 300);
 }
-lightbox.addEventListener('click', function(e) {
-  if (e.target === lightbox) closeLightbox();
-});
-document.addEventListener('keydown', function(e) {
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && lightbox.classList.contains('show')) closeLightbox();
 });
 
-/* ===== Search ===== */
+/* Search */
 function searchProducts() {
   const q = document.getElementById('searchInput').value.trim();
   if (q) window.location.href = `products.html?search=${encodeURIComponent(q)}`;
@@ -581,282 +443,50 @@ document.getElementById('searchInput').addEventListener('keypress', e => {
   if (e.key === 'Enter') searchProducts();
 });
 
-/* ===== Load categories into nav ===== */
-async function loadCatNav() {
-  try {
-    const { data } = await supabaseClient.from('categories').select('*').eq('is_main', true).order('name');
-    const catnav = document.getElementById('catnavInner');
-    if (catnav && data && data.length) {
-      catnav.innerHTML = `<a href="products.html" class="catnav-link">Shop All</a>`;
-      data.forEach(c => {
-        const a = document.createElement('a');
-        a.href = `products.html?category=${encodeURIComponent(c.name)}`;
-        a.className = 'catnav-link';
-        a.textContent = c.name;
-        catnav.appendChild(a);
-      });
-    }
-  } catch(e) { console.error('Categories:', e); }
-}
-
-/* ===== Fetch product by slug or id ===== */
-async function getProductBySlug(slug) {
-  const { data, error } = await supabaseClient
-    .from('products').select('*').eq('slug', slug).maybeSingle();
-  if (error) { console.warn('slug lookup error', error); return null; }
-  return data;
-}
-async function getProductById(id) {
-  const { data, error } = await supabaseClient
-    .from('products').select('*').eq('id', id).maybeSingle();
-  if (error) { console.warn('id lookup error', error); return null; }
-  return data;
-}
-
-/* ===== Build image list ===== */
-function buildImageList(p) {
-  const list = [];
-  if (Array.isArray(p.images)) {
-    p.images.forEach(u => { if (u && typeof u === 'string' && u.trim()) list.push(u.trim()); });
-  }
-  if (p.image && typeof p.image === 'string' && p.image.trim() && !list.includes(p.image.trim())) {
-    list.push(p.image.trim());
-  }
-  if (!list.length) list.push('images/placeholder.png');
-  return list;
-}
-
-/* ===== Video embed resolver ===== */
-function getVideoEmbed(url) {
-  url = String(url || '').trim();
-  if (!url) return null;
-
-  const yt = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-  if (yt) return { type: 'iframe', src: `https://www.youtube.com/embed/${yt[1]}`, platform: 'YouTube', icon: 'fab fa-youtube' };
-
-  const ig = url.match(/instagram\.com\/(p|reel|tv)\/([A-Za-z0-9_-]+)/i);
-  if (ig) return { type: 'instagram', permalink: url, platform: 'Instagram', icon: 'fab fa-instagram', shortcode: ig[2] };
-
-  const tt = url.match(/tiktok\.com\/@[^/]+\/video\/([0-9]+)/i);
-  if (tt) return { type: 'tiktok', videoId: tt[1], platform: 'TikTok', icon: 'fab fa-tiktok', permalink: url };
-
-  if (/\.(mp4|webm|ogg)(\?|$)/i.test(url)) return { type: 'video', src: url, platform: 'Video', icon: 'fas fa-video' };
-
-  return { type: 'link', src: url, platform: 'Watch Video', icon: 'fas fa-external-link-alt' };
-}
-
-/* ===== Simple markdown → HTML ===== */
-function parseMarkdown(text) {
-  if (!text) return '';
-  let html = String(text)
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-  html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
-  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  html = html.replace(/(^|[^\*])\*([^\*\n]+?)\*([^\*]|$)/g, '$1<em>$2</em>$3');
-  html = html.replace(/__(.+?)__/g, '<u>$1</u>');
-  html = html.replace(/~~(.+?)~~/g, '<s>$1</s>');
-  html = html.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-  html = html.replace(/^\s*[-•]\s+(.+)$/gm, '<li>$1</li>');
-  html = html.replace(/(<li>.*<\/li>)(?![\s\S]*<li>)/s, '<ul>$1</ul>');
-  html = html.replace(/(<\/li>)\s*(?!<li>)/g, '$1</ul>');
-  html = html.replace(/(?<!<\/li>)\s*(<li>)/g, '<ul>$1');
-  html = html.replace(/\n/g, '<br>');
-  html = html.replace(/<\/ul><br>/g, '</ul>').replace(/<br><ul>/g, '<ul>');
-  return html;
-}
-
-/* ===== Render stars ===== */
-function renderStars(avg) {
-  const rounded = Math.round((avg || 0) * 2) / 2;
-  let html = '';
-  for (let i = 1; i <= 5; i++) {
-    if (rounded >= i) html += '<i class="fas fa-star"></i>';
-    else if (rounded >= i - 0.5) html += '<i class="fas fa-star-half-alt"></i>';
-    else html += '<i class="far fa-star"></i>';
-  }
-  return html;
-}
-
-/* ===== Rating helpers ===== */
-function hasUserRated(productId) {
-  try { return localStorage.getItem('sp_rated_' + productId) === 'true'; } catch(e) { return false; }
-}
-function markUserRated(productId) {
-  try { localStorage.setItem('sp_rated_' + productId, 'true'); } catch(e) {}
-}
-
-async function submitRating(product, newRating) {
-  try {
-    const curAvg = Number(product.rating) || 0;
-    const curCount = Number(product.rating_count) || 0;
-    const newCount = curCount + 1;
-    const newAvg = ((curAvg * curCount) + newRating) / newCount;
-    const { error } = await supabaseClient.from('products')
-      .update({ rating: Math.round(newAvg * 100) / 100, rating_count: newCount })
-      .eq('id', product.id);
-    if (error) throw error;
-    markUserRated(product.id);
-    return { success: true, newAverage: newAvg, newCount };
-  } catch (err) {
-    console.error('Rating error:', err);
-    return { success: false, error: err.message };
-  }
-}
-
-/* ===== Render product ===== */
+/* Render product */
 function renderProduct(p) {
   const grid = document.getElementById('productGrid');
   const crumb = document.getElementById('breadcrumbProduct');
-  crumb.textContent = p.name || 'Product';
-  document.title = `${p.name || 'Product'} — Scale Planet`;
+  crumb.textContent = p.name;
+  document.title = `${p.name} — Scale Planet`;
 
-  const images = buildImageList(p);
+  const images = [...p.images];
+  while (images.length < 4) images.push(images[0]);
   const mainImg = images[0];
-  const badge = p.badge && String(p.badge).trim() ? `<span class="badge">${esc(p.badge)}</span>` : '';
+  const badgeClass = p.badge.toLowerCase().includes('new') ? 'badge green' : 'badge';
 
-  const hasPrice = p.price != null && Number(p.price) > 0 && p.stock_status !== 'ask-price';
+  const waMsg = `Hello Scale Planet Team!\n\nI'm interested in this product:\n\n*${p.name}*\nCategory: ${p.cat}\nCapacity: ${p.capacity}\n\nPlease share pricing and availability.`;
 
-  /* Price block */
-  let priceBlock;
-  if (hasPrice) {
-    const orig = p.original_price ? `<span class="price-original">PKR ${Number(p.original_price).toLocaleString()}</span>` : '';
-    const disc = p.discount ? `<span class="price-discount">-${p.discount}%</span>` : '';
-    priceBlock = `
-      <div class="price-current">PKR ${Number(p.price).toLocaleString()}<span class="unit">/ea</span></div>
-      <div style="margin-top:6px;">${orig}${disc}</div>
-    `;
-  } else {
-    priceBlock = `
-      <div class="price-ask">Ask For Price</div>
-      <div class="price-ask-sub">Contact us on WhatsApp for current pricing and availability.</div>
-    `;
-  }
-
-  /* Rating block */
-  const avg = Number(p.rating) || 0;
-  const count = Number(p.rating_count) || 0;
-  const rated = hasUserRated(p.id);
-  const ratingBlock = `
-    <div class="rating-block" data-product-id="${esc(p.id)}">
-      <div class="rating-stars" id="avgStars">${renderStars(avg)}</div>
-      <div class="rating-info">
-        <span class="avg" id="avgNumber">${count > 0 ? avg.toFixed(1) : '—'}</span>
-        <span class="count" id="countText">${count > 0 ? `(${count} review${count>1?'s':''})` : '(No reviews yet)'}</span>
-      </div>
-      <div class="rating-interactive">
-        <span class="lbl" id="rateLbl">${rated ? 'You rated this' : 'Rate:'}</span>
-        <div class="star-input ${rated ? 'disabled' : ''}" id="starInput">
-          <input type="radio" id="s5" name="rating" value="5" ${rated?'disabled':''}><label for="s5"><i class="fas fa-star"></i></label>
-          <input type="radio" id="s4" name="rating" value="4" ${rated?'disabled':''}><label for="s4"><i class="fas fa-star"></i></label>
-          <input type="radio" id="s3" name="rating" value="3" ${rated?'disabled':''}><label for="s3"><i class="fas fa-star"></i></label>
-          <input type="radio" id="s2" name="rating" value="2" ${rated?'disabled':''}><label for="s2"><i class="fas fa-star"></i></label>
-          <input type="radio" id="s1" name="rating" value="1" ${rated?'disabled':''}><label for="s1"><i class="fas fa-star"></i></label>
-        </div>
-      </div>
-      <div class="rating-msg" id="ratingMsg" style="width:100%;">${rated ? 'Thank you for your feedback!' : ''}</div>
-    </div>
-  `;
-
-  /* Description */
-  const descHtml = p.description && String(p.description).trim() !== ''
-    ? parseMarkdown(p.description)
-    : 'No description available. Contact us on WhatsApp for full specifications.';
-
-  /* Video */
-  const video = getVideoEmbed(p.video_url);
-  let videoHtml = '';
-  if (video) {
-    if (video.type === 'iframe') {
-      videoHtml = `
-        <div class="video-block">
-          <div class="video-label"><i class="${video.icon}"></i> Watch on ${video.platform}</div>
-          <div class="video-embed">
-            <iframe src="${esc(video.src)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
-          </div>
-        </div>`;
-    } else if (video.type === 'video') {
-      videoHtml = `
-        <div class="video-block">
-          <div class="video-label"><i class="${video.icon}"></i> Product Video</div>
-          <div class="video-embed">
-            <video controls playsinline preload="metadata"><source src="${esc(video.src)}" type="video/mp4"></video>
-          </div>
-        </div>`;
-    } else if (video.type === 'tiktok') {
-      videoHtml = `
-        <div class="video-block">
-          <div class="video-label"><i class="${video.icon}"></i> Watch on TikTok</div>
-          <div class="video-embed" style="padding-bottom:177.78%;">
-            <iframe src="https://www.tiktok.com/embed/v2/${esc(video.videoId)}?lang=en-US" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
-          </div>
-        </div>`;
-    } else if (video.type === 'instagram') {
-      videoHtml = `
-        <div class="video-block">
-          <div class="video-label"><i class="${video.icon}"></i> Watch on Instagram</div>
-          <div class="video-link-fallback">
-            <a href="${esc(video.permalink)}" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> Open on Instagram</a>
-          </div>
-        </div>`;
-    } else {
-      videoHtml = `
-        <div class="video-block">
-          <div class="video-label"><i class="${video.icon}"></i> Product Video</div>
-          <div class="video-link-fallback">
-            <a href="${esc(video.src)}" target="_blank" rel="noopener"><i class="${video.icon}"></i> Watch Video</a>
-          </div>
-        </div>`;
-    }
-  }
-
-  /* WhatsApp message */
-  const waMsg = hasPrice
-    ? `Hello Scale Planet Team! I'm interested in this product:\n\n*${p.name}*\nCategory: ${p.category || 'N/A'}\nPrice: PKR ${Number(p.price).toLocaleString()}\n\nPlease guide me for purchase.`
-    : `Hello Scale Planet Team! I'm interested in this product:\n\n*${p.name}*\nCategory: ${p.category || 'N/A'}\n\nPlease share pricing and availability.`;
-
-  /* Build main HTML */
   grid.innerHTML = `
     <div class="gallery">
       <div class="gallery-main" id="galleryMain">
-        <img id="mainImage" src="${esc(mainImg)}" alt="${esc(p.name)}" onerror="this.src='images/placeholder.png'">
-        ${badge}
+        <img id="mainImage" src="${esc(mainImg)}" alt="${esc(p.name)}" onerror="this.onerror=null; this.src='${PLACEHOLDER}'">
+        <span class="${badgeClass}">${esc(p.badge)}</span>
         <div class="zoom-hint"><i class="fas fa-search-plus"></i> Click to zoom</div>
       </div>
-      ${images.length > 1 ? `
-        <div class="gallery-thumbs">
-          ${images.map((url, i) => `
-            <div class="gallery-thumb ${i===0?'active':''}" data-img="${esc(url)}">
-              <img src="${esc(url)}" alt="View ${i+1}" onerror="this.src='images/placeholder.png'">
-            </div>
-          `).join('')}
-        </div>
-      ` : ''}
+      <div class="gallery-thumbs">
+        ${images.map((url, i) => `
+          <div class="gallery-thumb ${i===0?'active':''}" data-img="${esc(url)}">
+            <img src="${esc(url)}" alt="View ${i+1}" onerror="this.onerror=null; this.src='${PLACEHOLDER}'">
+          </div>
+        `).join('')}
+      </div>
     </div>
 
     <div class="product-info">
-      <div class="product-cat"><i class="fas fa-tag"></i> ${esc(p.category || 'Uncategorised')}</div>
-      <h1 class="product-title">${esc(p.name || 'Product')}</h1>
+      <div class="product-cat"><i class="fas fa-tag"></i> ${esc(p.cat)}</div>
+      <h1 class="product-title">${esc(p.name)}</h1>
 
-      ${p.model_number && String(p.model_number).trim() ? `
-        <div class="product-meta">
-          <span class="product-meta-tag"><i class="fas fa-barcode"></i> Model: ${esc(p.model_number)}</span>
-          ${p.capacity ? `<span class="product-meta-tag"><i class="fas fa-weight-hanging"></i> ${esc(p.capacity)}</span>` : ''}
-        </div>` : (p.capacity ? `<div class="product-meta"><span class="product-meta-tag"><i class="fas fa-weight-hanging"></i> ${esc(p.capacity)}</span></div>` : '')
-      }
-
-      ${ratingBlock}
-
-      <div class="price-block">${priceBlock}</div>
+      <div class="capacity-box">
+        <i class="fas fa-weight-hanging"></i>
+        <span>${esc(p.capacity)}</span>
+      </div>
 
       <div class="product-actions">
         <a href="https://wa.me/923234005335?text=${encodeURIComponent(waMsg)}" target="_blank" class="btn-main btn-wa">
-          <i class="fab fa-whatsapp"></i> ${hasPrice ? 'Buy on WhatsApp' : 'Ask For Price on WhatsApp'}
+          <i class="fab fa-whatsapp"></i> Ask For Price on WhatsApp
         </a>
-        <div class="btn-row">
-          <a href="tel:+923234005335" class="btn-main btn-call"><i class="fas fa-phone"></i> Call Now</a>
-          <a href="products.html" class="btn-main btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
-        </div>
+        <a href="products.html" class="btn-main btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
       </div>
 
       <div class="trust-badges">
@@ -865,16 +495,25 @@ function renderProduct(p) {
         <div class="trust-badge"><i class="fas fa-headset"></i><span>Free consultation</span></div>
       </div>
 
-      ${videoHtml}
+      <div class="features-block">
+        <h3>Key Features</h3>
+        <div class="features-list">
+          ${p.features.map(f => `
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>${esc(f)}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
 
       <div class="description-block">
         <h3>Product Description</h3>
-        <div class="description-content">${descHtml}</div>
+        <div class="description-content">${esc(p.desc)}</div>
       </div>
     </div>
   `;
 
-  /* Gallery interactions */
   const mainImgEl = document.getElementById('mainImage');
   if (mainImgEl) {
     mainImgEl.style.pointerEvents = 'auto';
@@ -885,135 +524,56 @@ function renderProduct(p) {
     thumb.addEventListener('click', function() {
       const url = this.dataset.img;
       if (mainImgEl) {
-        mainImgEl.style.opacity = '0';
-        setTimeout(() => { mainImgEl.src = url; mainImgEl.style.opacity = '1'; }, 150);
+        mainImgEl.style.opacity = '0.5';
+        setTimeout(() => { mainImgEl.src = url; mainImgEl.style.opacity = '1'; }, 120);
       }
       document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
       this.classList.add('active');
     });
   });
-
-  /* Rating inputs */
-  document.querySelectorAll('#starInput input').forEach(input => {
-    input.addEventListener('change', async function() {
-      const val = Number(this.value);
-      if (!val || hasUserRated(p.id)) return;
-      const msgEl = document.getElementById('ratingMsg');
-      msgEl.textContent = 'Submitting…';
-      msgEl.style.color = 'var(--text-muted)';
-      const res = await submitRating(p, val);
-      if (res.success) {
-        document.querySelectorAll('#starInput input').forEach(i => i.disabled = true);
-        document.getElementById('starInput').classList.add('disabled');
-        document.getElementById('rateLbl').textContent = 'You rated this';
-        msgEl.style.color = 'var(--primary)';
-        msgEl.textContent = `Thank you! You rated ${val} star${val>1?'s':''}.`;
-        document.getElementById('avgNumber').textContent = res.newAverage.toFixed(1);
-        document.getElementById('countText').textContent = `(${res.newCount} review${res.newCount>1?'s':''})`;
-        document.getElementById('avgStars').innerHTML = renderStars(res.newAverage);
-      } else {
-        msgEl.style.color = '#e74c3c';
-        msgEl.textContent = res.error || 'Rating failed. Try again.';
-      }
-    });
-  });
 }
 
-/* ===== Render related products ===== */
-async function loadRelated(category, excludeId) {
-  try {
-    const { data } = await supabaseClient.from('products').select('*').eq('category', category).neq('id', excludeId).limit(4);
-    const related = data || [];
-    if (!related.length) return;
-    document.getElementById('relatedSection').style.display = 'block';
-    document.getElementById('relatedGrid').innerHTML = related.map(r => {
-      const rSlug = r.slug ? `product-detail.html?slug=${encodeURIComponent(r.slug)}` : `product-detail.html?id=${r.id}`;
-      let img = r.image || 'images/placeholder.png';
-      if (Array.isArray(r.images) && r.images.length && r.images[0]) img = r.images[0];
-      const hasP = r.price != null && Number(r.price) > 0 && r.stock_status !== 'ask-price';
-      const priceRow = hasP
-        ? `<div class="p-price-row">PKR ${Number(r.price).toLocaleString()}</div>`
-        : `<div class="p-price-row">Ask For Price</div>`;
-      return `
-        <a href="${rSlug}" class="p-card">
-          <div class="p-media">
-            <img src="${esc(img)}" alt="${esc(r.name)}" loading="lazy" onerror="this.src='images/placeholder.png'">
-          </div>
-          <div class="p-body">
-            <div class="p-cat">${esc(r.category || '')}</div>
-            <div class="p-name">${esc(r.name || 'Product')}</div>
-            ${priceRow}
-          </div>
-        </a>
-      `;
-    }).join('');
-  } catch (e) { console.error('Related:', e); }
+function showRelated(currentId, cat) {
+  const related = PRODUCTS.filter(p => p.id !== currentId && p.cat === cat).slice(0, 4);
+  if (!related.length) return;
+  document.getElementById('relatedSection').style.display = 'block';
+  document.getElementById('relatedGrid').innerHTML = related.map(r => `
+    <a href="product-detail.html?id=${r.id}" class="related-card">
+      <div class="rc-img"><img src="${esc(r.images[0])}" alt="${esc(r.name)}" loading="lazy" onerror="this.onerror=null; this.src='${PLACEHOLDER}'"></div>
+      <div class="rc-cat">${esc(r.cat)}</div>
+      <div class="rc-name">${esc(r.name)}</div>
+      <div class="rc-cap"><i class="fas fa-weight-hanging"></i> ${esc(r.capacity)}</div>
+    </a>
+  `).join('');
 }
 
-/* ===== Show error ===== */
 function showError(title, msg) {
   document.getElementById('productGrid').innerHTML = `
     <div class="error-box">
       <i class="fas fa-box-open"></i>
       <h2>${esc(title)}</h2>
       <p>${esc(msg)}</p>
-      <a href="products.html" class="btn-main btn-call"><i class="fas fa-arrow-left"></i> Back to Products</a>
+      <a href="products.html" class="btn-main btn-outline"><i class="fas fa-arrow-left"></i> Back to Products</a>
     </div>
   `;
 }
 
-/* ===== Init ===== */
-(async function init() {
-  console.log('🚀 Product detail init');
-  await loadCatNav();
-
+(function init() {
   const params = new URLSearchParams(window.location.search);
-  const slug = params.get('slug');
-  const id = params.get('id');
-
-  /* Try path-based slug as fallback (/product/some-slug) */
-  let productSlug = slug;
-  if (!productSlug) {
-    const pathMatch = window.location.pathname.match(/\/product\/([a-z0-9-]+)/i);
-    if (pathMatch) productSlug = pathMatch[1];
-  }
-
-  if (!productSlug && !id) {
-    showError('No product selected', 'Please pick a product from the catalogue to view its details.');
-    return;
-  }
-
+  const id = parseInt(params.get('id'));
   let product = null;
-
-  if (productSlug) {
-    console.log('🔍 Fetching by slug:', productSlug);
-    product = await getProductBySlug(productSlug);
-    /* If slug looks like a UUID, try by id as well */
-    if (!product && /^[0-9a-f-]{20,}$/i.test(productSlug)) {
-      console.log('⚠️ Trying slug as ID…');
-      product = await getProductById(productSlug);
-    }
-  } else if (id) {
-    console.log('🔍 Fetching by id:', id);
-    product = await getProductById(id);
-  }
-
+  if (id) product = PRODUCTS.find(p => p.id === id);
   if (!product) {
-    showError('Product not found', 'The product you are looking for does not exist or may have been removed. Browse our catalogue to find similar items.');
+    showError('Product not found', 'The product you are looking for does not exist or may have been removed.');
     return;
   }
-
-  console.log('✅ Product loaded:', product.name);
   renderProduct(product);
-
-  if (product.category) {
-    await loadRelated(product.category, product.id);
-  }
+  showRelated(product.id, product.cat);
 })();
 
-/* ===== Prevent image context menu / drag ===== */
 document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
 document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+console.log('✅ Product detail page ready');
 </script>
 </body>
 </html>

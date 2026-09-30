@@ -7,7 +7,7 @@
 <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@100..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -18,11 +18,12 @@
   --paper: #ffffff; --paper-2: #fafbff; --paper-3: #f2f3fb;
   --line: #e0e2ee; --line-dark: #c9cee3;
   --text: #1a1d3f; --text-soft: #52557a; --text-muted: #8b8fab;
-  --font-display: 'Orbitron', sans-serif; --font-body: 'Orbitron', sans-serif; --font-mono: 'Orbitron', sans-serif;
+  --font-display: 'Orbitron', sans-serif;
+  --font-body: 'Inter', sans-serif;
   --radius: 6px; --radius-lg: 12px;
 }
 html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); background: var(--paper); color: var(--text); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; font-weight: 500; }
+body { font-family: var(--font-body); background: var(--paper); color: var(--text); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; display: block; -webkit-user-drag: none; pointer-events: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; }
@@ -32,10 +33,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .ayah-text .urdu { font-family: 'Noto Kufi Arabic', serif; font-size: 13px; color: var(--primary-pale); direction: rtl; }
 .ayah-text .separator { color: var(--primary-soft); font-size: 10px; }
 
-.utility { background: var(--paper-2); border-bottom: 1px solid var(--line); padding: 8px 0; font-size: 12px; }
-.utility-inner { max-width: 1600px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
-.utility-left, .utility-right { display: flex; align-items: center; gap: 20px; color: var(--text-soft); }
-.utility-item { display: flex; align-items: center; gap: 6px; }
+.utility { background: var(--paper-2); border-bottom: 1px solid var(--line); padding: 8px 0; font-size: 13px; }
+.utility-inner { max-width: 1600px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: center; align-items: center; gap: 24px; flex-wrap: wrap; }
+.utility-item { display: flex; align-items: center; gap: 6px; color: var(--text-soft); }
 .utility-item i { color: var(--primary); }
 .utility-item a:hover { color: var(--primary); }
 
@@ -44,91 +44,97 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .logo-wrap { display: flex; align-items: center; flex-shrink: 0; }
 .logo-wrap img { height: 52px; width: auto; }
 .search-bar { max-width: 640px; width: 100%; position: relative; justify-self: center; }
-.search-bar input { width: 100%; padding: 11px 44px 11px 16px; border: 1px solid var(--line-dark); border-radius: 6px; background: #fff; font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--text); outline: none; }
+.search-bar input { width: 100%; padding: 11px 44px 11px 16px; border: 1px solid var(--line-dark); border-radius: 6px; background: #fff; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text); outline: none; }
 .search-bar input::placeholder { color: var(--text-muted); }
 .search-bar input:focus { border-color: var(--primary); }
 .search-bar button { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 14px; }
-.header-nav { display: flex; align-items: center; gap: 22px; flex-shrink: 0; }
-.header-nav a { font-family: var(--font-body); font-size: 12px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 1px; padding: 6px 0; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+.search-bar button:hover { background: var(--primary-pale); }
+.header-nav { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+.header-nav a { font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 0; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
 .header-nav a:hover { color: var(--primary); border-bottom-color: var(--primary); }
+.header-nav a.active { color: var(--primary); border-bottom-color: var(--primary); }
 .header-nav a.highlight { background: var(--primary); color: #fff; padding: 9px 16px; border-radius: 100px; border-bottom: none; }
 .header-nav a.highlight:hover { background: var(--primary-deep); color: #fff; }
-.header-nav a.highlight i { margin-right: 6px; font-size: 11px; }
+.header-nav a.highlight i { margin-right: 6px; font-size: 12px; }
 
 .catnav { background: var(--paper-3); border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
 .catnav::-webkit-scrollbar { display: none; }
 .catnav-inner { max-width: 1600px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none; }
 .catnav-inner::-webkit-scrollbar { display: none; }
-.catnav-link { padding: 13px 16px; font-size: 12px; font-weight: 600; color: var(--text-soft); white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.5px; }
+.catnav-link { padding: 13px 16px; font-size: 13px; font-weight: 600; color: var(--text-soft); white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.3px; }
 .catnav-link:hover { color: var(--primary); border-bottom-color: var(--primary); }
 
 .booking-page { padding: 50px 24px 90px; max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: 50px; align-items: start; }
+
 .ticket { position: sticky; top: 140px; background: var(--primary); color: #fff; border-radius: var(--radius-lg); padding: 36px 28px; position: relative; overflow: hidden; }
 .ticket::before, .ticket::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 40px; height: 20px; background: var(--paper); border-radius: 20px; }
 .ticket::before { top: -10px; }
 .ticket::after { bottom: -10px; }
 .ticket-stub { border-bottom: 1px dashed rgba(255,255,255,0.3); padding-bottom: 22px; margin-bottom: 22px; }
-.ticket-stub .kicker { font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; color: #fff; text-transform: uppercase; margin-bottom: 10px; font-weight: 800; }
+.ticket-stub .kicker { font-family: var(--font-body); font-size: 11px; letter-spacing: 2px; color: #fff; text-transform: uppercase; margin-bottom: 10px; font-weight: 800; }
 .ticket-stub h2 { font-family: var(--font-display); font-size: 20px; font-weight: 800; letter-spacing: 1px; line-height: 1.15; margin-bottom: 8px; text-transform: uppercase; }
-.ticket-stub .subtitle { font-size: 11px; color: rgba(255,255,255,0.85); line-height: 1.6; }
+.ticket-stub .subtitle { font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.85); line-height: 1.6; }
 .ticket-details { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
 .ticket-row { display: flex; align-items: flex-start; gap: 12px; }
 .ticket-row i { color: #fff; font-size: 14px; margin-top: 4px; width: 18px; text-align: center; flex-shrink: 0; }
-.ticket-row .lbl { font-family: var(--font-mono); font-size: 9px; letter-spacing: 1.5px; color: rgba(255,255,255,0.7); text-transform: uppercase; margin-bottom: 2px; font-weight: 700; }
-.ticket-row .val { font-size: 11px; color: #fff; font-weight: 700; line-height: 1.5; text-transform: uppercase; letter-spacing: 0.3px; }
+.ticket-row .lbl { font-family: var(--font-body); font-size: 10px; letter-spacing: 1px; color: rgba(255,255,255,0.7); text-transform: uppercase; margin-bottom: 2px; font-weight: 700; }
+.ticket-row .val { font-family: var(--font-body); font-size: 12px; color: #fff; font-weight: 700; line-height: 1.5; }
 .ticket-footer { padding-top: 22px; border-top: 1px dashed rgba(255,255,255,0.3); display: flex; align-items: center; gap: 10px; }
 .ticket-footer i { color: #fff; font-size: 18px; }
-.ticket-footer span { font-size: 10px; color: rgba(255,255,255,0.85); }
+.ticket-footer span { font-family: var(--font-body); font-size: 11px; color: rgba(255,255,255,0.85); }
 
 .form-panel { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 40px 36px; }
 .form-panel h3 { font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: 1px; color: var(--text); margin-bottom: 8px; text-transform: uppercase; }
-.form-panel .form-intro { font-size: 12px; color: var(--text-soft); margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+.form-panel .form-intro { font-family: var(--font-body); font-size: 13px; color: var(--text-soft); margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
 .form-panel .form-intro span { color: var(--primary); font-weight: 800; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
 .form-field { display: flex; flex-direction: column; }
 .form-field.full { grid-column: 1 / -1; }
-.form-field label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; display: flex; justify-content: space-between; font-weight: 700; }
+.form-field label { font-family: var(--font-body); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; display: flex; justify-content: space-between; font-weight: 700; }
 .form-field label .req { color: var(--primary); }
-.form-field input, .form-field textarea { width: 100%; padding: 13px 0; border: none; border-bottom: 1.5px solid var(--line-dark); background: transparent; font-family: var(--font-body); font-size: 12px; color: var(--text); outline: none; transition: border-color 0.3s; }
+.form-field input, .form-field textarea { width: 100%; padding: 13px 0; border: none; border-bottom: 1.5px solid var(--line-dark); background: transparent; font-family: var(--font-body); font-size: 14px; color: var(--text); outline: none; transition: border-color 0.3s; }
 .form-field input::placeholder, .form-field textarea::placeholder { color: var(--text-muted); }
 .form-field input:focus, .form-field textarea:focus { border-bottom-color: var(--primary); }
 .form-field textarea { resize: vertical; min-height: 90px; padding: 13px 0; }
 .submit-row { margin-top: 32px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-.submit-btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; background: var(--primary); color: #fff; border-radius: var(--radius); font-family: var(--font-display); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; transition: all 0.3s; }
+.submit-btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; background: var(--primary); color: #fff; border-radius: var(--radius); font-family: var(--font-body); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; }
 .submit-btn:hover { background: var(--primary-deep); transform: translateY(-2px); box-shadow: 0 12px 28px -10px rgba(62, 64, 149, 0.5); }
 .submit-btn i { font-size: 16px; }
-.form-note { font-size: 10px; color: var(--text-muted); line-height: 1.5; flex: 1; min-width: 200px; }
+.form-note { font-family: var(--font-body); font-size: 12px; color: var(--text-muted); line-height: 1.5; flex: 1; min-width: 200px; }
 .form-note i { color: var(--primary); margin-right: 4px; }
 
 .footer { background: var(--primary); color: #fff; padding: 70px 0 28px; }
 .footer-inner { max-width: 1440px; margin: 0 auto; padding: 0 24px; }
 .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 50px; padding-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.15); }
 .footer-brand img { height: 44px; margin-bottom: 18px; background: #fff; padding: 5px 9px; border-radius: 6px; }
-.footer-brand p { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.8; max-width: 340px; margin-bottom: 16px; }
+.footer-brand p { font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.8; max-width: 340px; margin-bottom: 16px; }
 .footer-socials { display: flex; gap: 10px; margin-top: 12px; }
 .footer-socials a { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; transition: all 0.3s; }
 .footer-socials a:hover { background: #fff; color: var(--primary); border-color: #fff; }
-.footer-col h4 { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #fff; margin-bottom: 20px; font-weight: 800; }
+.footer-col h4 { font-family: var(--font-body); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #fff; margin-bottom: 20px; font-weight: 800; }
 .footer-col ul { list-style: none; }
 .footer-col ul li { margin-bottom: 11px; }
-.footer-col ul li a { font-size: 11px; color: rgba(255,255,255,0.75); transition: color 0.3s; text-transform: uppercase; letter-spacing: 0.5px; }
+.footer-col ul li a { font-family: var(--font-body); font-size: 13px; color: rgba(255,255,255,0.75); transition: color 0.3s; font-weight: 500; }
 .footer-col ul li a:hover { color: #fff; }
-.footer-contact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+.footer-contact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; font-family: var(--font-body); }
 .footer-contact-item i { color: #fff; font-size: 13px; margin-top: 4px; flex-shrink: 0; }
 .footer-contact-item a { color: rgba(255,255,255,0.75); }
 .footer-contact-item a:hover { color: #fff; }
-.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; font-family: var(--font-mono); font-size: 9px; color: rgba(255,255,255,0.6); flex-wrap: wrap; gap: 16px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.6); flex-wrap: wrap; gap: 16px; font-weight: 500; }
 .footer-bottom .legal { display: flex; gap: 20px; flex-wrap: wrap; }
 .footer-bottom a { color: rgba(255,255,255,0.6); transition: color 0.3s; }
 .footer-bottom a:hover { color: #fff; }
 
+/* DOCK */
 .dock { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 900; background: var(--primary); border-radius: 100px; padding: 5px; display: flex; align-items: center; gap: 3px; box-shadow: 0 20px 50px -10px rgba(62, 64, 149, 0.5); transition: transform 0.3s; }
 .dock:hover { transform: translateX(-50%) translateY(-3px); }
-.dock-btn { display: flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 100px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #fff; transition: all 0.2s; white-space: nowrap; }
-.dock-btn i { font-size: 13px; }
+.dock-btn { display: flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 100px; font-family: var(--font-body); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #fff; transition: all 0.2s; white-space: nowrap; }
+.dock-btn i { font-size: 14px; }
 .dock-btn:hover { background: rgba(255,255,255,0.18); }
-.dock-btn.book { background: #fff; color: var(--primary); }
-.dock-btn.book:hover { background: var(--primary-pale); }
+.dock-btn.wa { background: #fff; color: var(--primary); }
+.dock-btn.wa:hover { background: var(--primary-pale); }
+.dock-btn.book { color: #fff; }
+.dock-btn.book:hover { background: rgba(255,255,255,0.18); }
 .dock-divider { width: 1px; height: 22px; background: rgba(255,255,255,0.3); margin: 0 3px; }
 
 @media (max-width: 1200px) {
@@ -142,7 +148,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
 }
 @media (max-width: 768px) {
-  .utility-left { display: none; }
+  .utility-inner { gap: 14px; font-size: 12px; }
   .form-row { grid-template-columns: 1fr; }
   .form-panel { padding: 28px 22px; }
   .ticket { padding: 28px 22px; }
@@ -150,15 +156,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .footer-bottom { flex-direction: column; text-align: center; }
   .dock { left: 12px; right: 12px; transform: none; justify-content: space-between; padding: 4px; }
   .dock:hover { transform: translateY(-3px); }
-  .dock-btn { padding: 9px 12px; font-size: 9px; }
-  .dock-btn span { display: none; }
-  .dock-btn.book span { display: inline; }
-  .header-nav a { font-size: 10px; padding: 5px 0; }
-  .header-nav a.highlight { padding: 7px 12px; font-size: 10px; }
+  .dock-btn { padding: 9px 12px; font-size: 10px; }
+  .dock-btn span { display: inline; font-size: 9px; }
+  .header-nav a { font-size: 11px; padding: 5px 0; }
+  .header-nav a.highlight { padding: 7px 12px; font-size: 11px; }
   .ayah-text { font-size: 12px; gap: 16px; }
   .ayah-text .urdu { font-size: 11px; }
 }
-@media (max-width: 480px) { .logo-wrap img { height: 40px; } }
 </style>
 </head>
 <body>
@@ -173,14 +177,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 <div class="utility">
   <div class="utility-inner">
-    <div class="utility-left">
-      <span class="utility-item"><i class="fas fa-phone"></i> 0323 4005335</span>
-      <span class="utility-item"><i class="fas fa-clock"></i> Mon–Sat · 11:00 AM – 7:00 PM</span>
-    </div>
-    <div class="utility-right">
-      <span class="utility-item"><i class="fas fa-map-marker-alt"></i> Samanabad, Lahore</span>
-      <span class="utility-item"><a href="privacy.html"><i class="fas fa-shield-alt"></i> Privacy</a></span>
-    </div>
+    <span class="utility-item"><i class="fas fa-phone"></i> 0323 4005335</span>
+    <span class="utility-item"><i class="fas fa-clock"></i> Mon–Sat · 11:00 AM – 7:00 PM</span>
   </div>
 </div>
 
@@ -188,21 +186,29 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   <div class="header-inner">
     <a href="index.html" class="logo-wrap"><img src="images/logo.png" alt="Scale Planet"></a>
     <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="What can we help you find?">
+      <input type="text" id="searchInput" placeholder="Search products...">
       <button onclick="searchProducts()" aria-label="Search"><i class="fas fa-arrow-right"></i></button>
     </div>
     <nav class="header-nav">
       <a href="products.html">Products</a>
       <a href="services.html">Services</a>
       <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
       <a href="home-service.html" class="highlight"><i class="fas fa-screwdriver-wrench"></i>Book a Home Service</a>
     </nav>
   </div>
 </header>
 
 <nav class="catnav">
-  <div class="catnav-inner" id="catnavInner">
+  <div class="catnav-inner">
     <a href="products.html" class="catnav-link">Shop All</a>
+    <a href="products.html?category=Platform+Scales" class="catnav-link">Platform Scales</a>
+    <a href="products.html?category=Counter+Scales" class="catnav-link">Counter Scales</a>
+    <a href="products.html?category=Animal+Scales" class="catnav-link">Animal Scales</a>
+    <a href="products.html?category=Load+Cells" class="catnav-link">Load Cells</a>
+    <a href="products.html?category=Indicators" class="catnav-link">Indicators</a>
+    <a href="products.html?category=Lab+Scales" class="catnav-link">Lab Scales</a>
+    <a href="products.html?category=Hanging+Scales" class="catnav-link">Hanging Scales</a>
   </div>
 </nav>
 
@@ -292,14 +298,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 </footer>
 
 <div class="dock">
-  <a href="https://wa.me/923234005335" target="_blank" class="dock-btn wa"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
+  <a href="home-service.html" class="dock-btn book"><i class="fas fa-screwdriver-wrench"></i><span>Book Service</span></a>
   <div class="dock-divider"></div>
   <a href="https://maps.app.goo.gl/gRXEVtVEj3MvMvVB9?g_st=ac" target="_blank" class="dock-btn rev"><i class="fas fa-star"></i><span>Review</span></a>
   <div class="dock-divider"></div>
-  <a href="home-service.html" class="dock-btn book"><i class="fas fa-screwdriver-wrench"></i><span>Book Service</span></a>
+  <a href="https://wa.me/923234005335" target="_blank" class="dock-btn wa"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 function searchProducts() {
   const q = document.getElementById('searchInput').value.trim();
@@ -319,28 +324,6 @@ document.getElementById('homeServiceForm').addEventListener('submit', function(e
   window.open(`https://wa.me/923234005335?text=${encodeURIComponent(message)}`, '_blank');
 });
 
-const supabaseClient = window.supabase ? window.supabase.createClient(
-  'https://ukemuqyzflbqridefzox.supabase.co',
-  'sb_publishable_a6vdgDr-K2G5Mq3kQ96CWQ_M41zMEMq'
-) : null;
-if (supabaseClient) {
-  (async function() {
-    try {
-      const { data } = await supabaseClient.from('categories').select('*').eq('is_main', true).order('name');
-      const catnav = document.getElementById('catnavInner');
-      if (catnav && data && data.length) {
-        catnav.innerHTML = `<a href="products.html" class="catnav-link">Shop All</a>`;
-        data.forEach(c => {
-          const a = document.createElement('a');
-          a.href = `products.html?category=${encodeURIComponent(c.name)}`;
-          a.className = 'catnav-link';
-          a.textContent = c.name;
-          catnav.appendChild(a);
-        });
-      }
-    } catch(e) { console.error(e); }
-  })();
-}
 document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
 document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
 </script>
