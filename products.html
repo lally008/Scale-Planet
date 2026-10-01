@@ -219,6 +219,21 @@
       background: var(--primary-pale);
     }
 
+/* SEARCH SUGGESTIONS */
+.search-suggest { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: #fff; border: 1px solid var(--line-dark); border-radius: 8px; box-shadow: 0 12px 32px -10px rgba(62, 64, 149, 0.25); z-index: 300; display: none; overflow: hidden; }
+.search-suggest.show { display: block; }
+.search-suggest a { display: flex; align-items: center; gap: 10px; padding: 10px 14px; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text); border-bottom: 1px solid var(--line); text-transform: none; letter-spacing: 0; }
+.search-suggest a:last-child { border-bottom: none; }
+.search-suggest a:hover { background: var(--primary-pale); color: var(--primary); }
+.search-suggest a i { color: var(--primary); font-size: 12px; }
+.search-suggest a span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.search-suggest a small { color: var(--text-muted); font-size: 11px; font-weight: 600; white-space: nowrap; }
+@media (max-width: 768px) {
+  .search-suggest { left: auto; right: 0; width: min(320px, calc(100vw - 24px)); }
+  .search-suggest a small { display: none; }
+  .search-suggest a span { white-space: normal; }
+}
+
     .header-nav {
       display: flex;
       align-items: center;
@@ -266,6 +281,9 @@
       margin-right: 6px;
       font-size: 12px;
     }
+
+.header-nav .delivery-label { display: inline-flex; align-items: center; background: var(--primary); color: #fff; padding: 9px 16px; border-radius: 100px; font-family: var(--font-body); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; cursor: default; user-select: none; }
+    .header-nav .delivery-label i { margin-right: 6px; font-size: 12px; }
 
     /* CATEGORY NAV */
     .catnav {
@@ -630,15 +648,16 @@
     }
 
     .detail-btn {
-      border: 1px solid var(--line-dark);
-      background: var(--paper-3);
-      color: var(--text);
+      border: 1px solid #b4b8c2;
+      background: #b4b8c2;
+      color: #fff;
     }
 
     .detail-btn:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      background: var(--primary-pale);
+      border-color: #a2a7b3;
+      background: #a2a7b3;
+      color: #fff;
+      transform: translateY(-1px);
     }
 
     .empty-state {
@@ -1011,6 +1030,11 @@
         font-size: 11px;
       }
 
+      .header-nav .delivery-label {
+        padding: 7px 12px;
+        font-size: 11px;
+      }
+
       .ayah-text {
         font-size: 12px;
         gap: 16px;
@@ -1121,13 +1145,14 @@
       <div class="search-bar">
         <input type="text" id="searchInput" placeholder="Search products...">
         <button onclick="searchProducts()" aria-label="Search"><i class="fas fa-arrow-right"></i></button>
+        <div class="search-suggest" id="searchSuggest"></div>
       </div>
       <nav class="header-nav">
         <a href="products.html" class="active">Products</a>
         <a href="services.html">Services</a>
         <a href="contact.html">Contact</a>
         <a href="privacy.html">Privacy</a>
-        <a href="home-service.html" class="highlight"><i class="fas fa-screwdriver-wrench"></i>Book a Home Service</a>
+        <span class="delivery-label"><i class="fas fa-truck-fast"></i>Same day Delivery in Lahore</span>
       </nav>
     </div>
   </header>
@@ -1564,6 +1589,33 @@
 
     searchInput.addEventListener('keypress', e => { if (e.key === 'Enter') searchProducts(); });
 
+    /* Search suggestions — product names matching the typed keyword */
+    (function () {
+      const input = document.getElementById('searchInput');
+      const box = document.getElementById('searchSuggest');
+      if (!input || !box || typeof PRODUCTS === 'undefined') return;
+      function hide() { box.classList.remove('show'); }
+      function render() {
+        const tokens = input.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+        if (!tokens.length) { hide(); return; }
+        const matches = PRODUCTS.filter(p => {
+          const hay = [p.name, p.cat, p.capacity].concat(p.features).join(' ').toLowerCase();
+          return tokens.every(t => hay.includes(t));
+        }).slice(0, 6);
+        if (!matches.length) { hide(); return; }
+        box.innerHTML = matches.map(p =>
+          `<a href="product-detail.html?id=${p.id}"><i class="fas fa-magnifying-glass"></i><span>${esc(p.name)}</span><small>${esc(p.cat)}</small></a>`
+        ).join('');
+        box.classList.add('show');
+      }
+      input.addEventListener('input', render);
+      input.addEventListener('focus', render);
+      input.addEventListener('keydown', e => { if (e.key === 'Escape' || e.key === 'Enter') hide(); });
+      const btn = input.parentElement.querySelector('button');
+      if (btn) btn.addEventListener('click', hide);
+      document.addEventListener('click', e => { if (!e.target.closest('.search-bar')) hide(); });
+    })();
+    
     /* Activate correct chip on load */
     if (currentCat !== 'all') {
       catChips.querySelectorAll('button').forEach(b => {
