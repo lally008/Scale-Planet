@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +11,6 @@
     href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@100..900&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
   <style>
     * {
       margin: 0;
@@ -864,9 +862,9 @@
     }
 
     .dock-btn.wa { background: #fff; color: var(--primary); }
-.dock-btn.wa:hover { background: var(--primary-pale); }
-.dock-btn.book { color: #fff; }
-.dock-btn.book:hover { background: rgba(255,255,255,0.18); }
+    .dock-btn.wa:hover { background: var(--primary-pale); }
+    .dock-btn.book { color: #fff; }
+    .dock-btn.book:hover { background: rgba(255,255,255,0.18); }
 
     .dock-divider {
       width: 1px;
@@ -875,7 +873,7 @@
       margin: 0 3px;
     }
 
-    /* RESPONSIVE */
+    /* ===== RESPONSIVE BREAKPOINTS (exact same layout, fluid) ===== */
     @media (max-width: 1200px) {
       .header-inner {
         grid-template-columns: auto 1fr;
@@ -894,6 +892,7 @@
 
       .grid {
         grid-template-columns: repeat(3, 1fr);
+        padding: 20px 40px;
       }
     }
 
@@ -901,6 +900,7 @@
       .grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
+        padding: 20px 20px;
       }
 
       .footer-top {
@@ -922,6 +922,7 @@
       .grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
+        padding: 16px 8px;
       }
 
       .card {
@@ -1028,6 +1029,7 @@
       .grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
+        padding: 12px 4px;
       }
 
       .main-img {
@@ -1045,10 +1047,54 @@
       .dock-btn span {
         font-size: 8px;
       }
+
+      .cat-chips button {
+        font-size: 11px;
+        padding: 7px 12px;
+      }
+
+      .result-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .sort-select {
+        width: 100%;
+      }
+    }
+
+    /* Additional tweaks for very narrow devices */
+    @media (max-width: 360px) {
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 12px 6px;
+      }
+
+      .main-img {
+        height: 160px;
+      }
+
+      .thumbs img {
+        height: 40px;
+      }
+
+      .card h3 {
+        font-size: 14px;
+        min-height: auto;
+      }
+
+      .actions {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .actions button {
+        font-size: 9px;
+        padding: 8px 2px;
+      }
     }
   </style>
 </head>
-
 <body>
 
   <!-- AYAH -->
@@ -1085,20 +1131,6 @@
       </nav>
     </div>
   </header>
-
-  <!-- CATEGORY NAV
-  <nav class="catnav">
-    <div class="catnav-inner">
-      <a href="products.html" class="catnav-link active">Shop All</a>
-      <a href="products.html?category=Platform+Scales" class="catnav-link">Platform Scales</a>
-      <a href="products.html?category=Counter+Scales" class="catnav-link">Counter Scales</a>
-      <a href="products.html?category=Animal+Scales" class="catnav-link">Animal Scales</a>
-      <a href="products.html?category=Load+Cells" class="catnav-link">Load Cells</a>
-      <a href="products.html?category=Indicators" class="catnav-link">Indicators</a>
-      <a href="products.html?category=Lab+Scales" class="catnav-link">Lab Scales</a>
-      <a href="products.html?category=Hanging+Scales" class="catnav-link">Hanging Scales</a>
-    </div>
-  </nav> -->
 
   <!-- PAGE TITLE -->
   <section class="page-title">
@@ -1546,5 +1578,4 @@
     console.log('✅ Catalogue loaded with', PRODUCTS.length, 'demo products');
   </script>
 </body>
-
 </html>
