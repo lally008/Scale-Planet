@@ -37,6 +37,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .utility-inner { max-width: 1600px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: center; align-items: center; gap: 24px; flex-wrap: wrap; }
 .utility-item { display: flex; align-items: center; gap: 6px; color: var(--text-soft); }
 .utility-item i { color: var(--primary); }
+.utility-item a { color: var(--text-soft); transition: color 0.2s; }
 .utility-item a:hover { color: var(--primary); }
 
 .header { background: var(--paper); padding: 14px 0; position: sticky; top: 0; z-index: 200; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
@@ -104,10 +105,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .footer { background: var(--primary); color: #fff; padding: 70px 0 28px; }
 .footer-inner { max-width: 1440px; margin: 0 auto; padding: 0 24px; }
-.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 50px; padding-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1.2fr; gap: 40px; padding-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.15); }
 .footer-brand img { height: 44px; margin-bottom: 18px; background: #fff; padding: 5px 9px; border-radius: 6px; }
 .footer-brand p { font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.8; max-width: 340px; margin-bottom: 16px; }
-.footer-socials { display: flex; gap: 10px; margin-top: 12px; }
+.footer-socials { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
 .footer-socials a { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; transition: all 0.3s; }
 .footer-socials a:hover { background: #fff; color: var(--primary); border-color: #fff; }
 .footer-col h4 { font-family: var(--font-body); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #fff; margin-bottom: 20px; font-weight: 800; }
@@ -124,7 +125,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .footer-bottom a { color: rgba(255,255,255,0.6); transition: color 0.3s; }
 .footer-bottom a:hover { color: #fff; }
 
-/* DOCK */
 .dock { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 900; background: var(--primary); border-radius: 100px; padding: 5px; display: flex; align-items: center; gap: 3px; box-shadow: 0 20px 50px -10px rgba(62, 64, 149, 0.5); transition: transform 0.3s; }
 .dock:hover { transform: translateX(-50%) translateY(-3px); }
 .dock-btn { display: flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 100px; font-family: var(--font-body); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #fff; transition: all 0.2s; white-space: nowrap; }
@@ -176,7 +176,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 <div class="utility">
   <div class="utility-inner">
-    <span class="utility-item"><i class="fas fa-phone"></i> 0323 4005335</span>
+    <span class="utility-item"><i class="fas fa-phone"></i> <a href="tel:03234005335">0323 4005335</a></span>
     <span class="utility-item"><i class="fas fa-clock"></i> Mon–Sat · 11:00 AM – 7:00 PM</span>
   </div>
 </div>
@@ -223,7 +223,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 <section class="contact-layout">
   <div class="map-panel">
-    <iframe src="https://www.google.com/maps?q=Samanabad+Lahore&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps?q=Scale+Planet+Samanabad+Lahore&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 
   <div class="info-panel">
@@ -232,11 +232,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <h3>Direct Channels</h3>
       <div class="contact-line">
         <i class="fas fa-map-marker-alt"></i>
-        <div><div class="lbl">Address</div><a href="https://maps.app.goo.gl/gRXEVtVEj3MvMvVB9?g_st=ac" target="_blank" class="val">Samanabad, Lahore, Pakistan</a></div>
+        <div><div class="lbl">Address 1</div><a href="https://maps.app.goo.gl/gRXEVtVEj3MvMvVB9?g_st=ac" target="_blank" class="val">Samanabad, Lahore, Pakistan</a></div>
+      </div>
+      <div class="contact-line">
+        <i class="fas fa-map-marker-alt"></i>
+        <div><div class="lbl">Address 2</div><span class="val">20-A Branthroad Lahore</span></div>
       </div>
       <div class="contact-line">
         <i class="fab fa-whatsapp"></i>
         <div><div class="lbl">WhatsApp / Phone</div><a href="https://wa.me/923234005335" target="_blank" class="val">0323 4005335</a></div>
+      </div>
+      <div class="contact-line">
+        <i class="fas fa-phone"></i>
+        <div><div class="lbl">Phone</div><a href="tel:03205855335" class="val">0320 5855335</a></div>
       </div>
       <div class="contact-line">
         <i class="fas fa-envelope"></i>
@@ -299,6 +307,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         </ul>
       </div>
       <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Shop All Products</a></li>
+          <li><a href="products.html?category=Platform+Scales">Platform Scales</a></li>
+          <li><a href="products.html?category=Counter+Scales">Counter Scales</a></li>
+          <li><a href="products.html?category=Lab+Scales">Lab Scales</a></li>
+          <li><a href="home-service.html">Book a Home Service</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
         <h4>Support</h4>
         <ul>
           <li><a href="home-service.html">Book a Home Service</a></li>
@@ -309,7 +328,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       <div class="footer-col">
         <h4>Visit Us</h4>
         <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span><a href="https://maps.app.goo.gl/gRXEVtVEj3MvMvVB9?g_st=ac" target="_blank">Samanabad, Lahore, Pakistan</a></span></div>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>20-A Branthroad Lahore</span></div>
         <div class="footer-contact-item"><i class="fab fa-whatsapp"></i><a href="https://wa.me/923234005335" target="_blank">0323 4005335</a></div>
+        <div class="footer-contact-item"><i class="fas fa-phone"></i><a href="tel:03205855335">0320 5855335</a></div>
         <div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:Scale.planet786@gmail.com">Scale.planet786@gmail.com</a></div>
         <div class="footer-contact-item"><i class="fas fa-clock"></i><span>Mon–Sat · 11:00 AM – 7:00 PM</span></div>
       </div>
