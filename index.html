@@ -1,1258 +1,3524 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scale Planet — Precision Weighing Solutions</title>
-<link rel="icon" type="image/x-icon" href="images/favicon.ico">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scale Planet — Precision Weighing Solutions</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #3e4095;
-  --primary-deep: #2d2e6b;
-  --primary-mid: #4a4dae;
-  --primary-light: #5668c4;
-  --primary-soft: #a4a7e0;
-  --primary-pale: #eeeffa;
-  --paper: #ffffff;
-  --paper-2: #fafbff;
-  --paper-3: #f2f3fb;
-  --line: #e0e2ee;
-  --line-dark: #c9cee3;
-  --text: #1a1d3f;
-  --text-soft: #52557a;
-  --text-muted: #8b8fab;
-  --green: #18a957;
-  --green-wa: #25D366;
-  --green-wa-dark: #1da851;
-  --font-display: 'Orbitron', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --radius: 6px;
-  --radius-lg: 12px;
-}
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); background: var(--paper); color: var(--text); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-a { text-decoration: none; color: inherit; }
-img { max-width: 100%; display: block; -webkit-user-drag: none; pointer-events: none; }
-button { font-family: inherit; cursor: pointer; border: none; background: none; }
-.wrap { max-width: 1600px; margin: 0 auto; padding: 0 24px; }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* AYAH */
-.ayah { background: var(--primary); color: #fff; padding: 14px 20px; text-align: center; border-bottom: 2px solid var(--primary-deep); }
-.ayah-text { font-family: 'Noto Kufi Arabic', serif; font-size: 14px; font-weight: 700; color: #fff; line-height: 1.8; direction: rtl; gap: 40px; display: flex; justify-content: center; flex-wrap: wrap; align-items: center; }
-.ayah-text .urdu { font-family: 'Noto Kufi Arabic', serif; font-size: 13px; color: var(--primary-pale); direction: rtl; }
-.ayah-text .separator { color: var(--primary-soft); font-size: 10px; }
+    :root {
+      --primary: #3e4095;
+      --primary-deep: #2d2e6b;
+      --primary-mid: #4a4dae;
+      --primary-light: #5668c4;
+      --primary-soft: #a4a7e0;
+      --primary-pale: #eeeffa;
+      --paper: #ffffff;
+      --paper-2: #fafbff;
+      --paper-3: #f2f3fb;
+      --line: #e0e2ee;
+      --line-dark: #c9cee3;
+      --text: #1a1d3f;
+      --text-soft: #52557a;
+      --text-muted: #8b8fab;
+      --green: #18a957;
+      --green-wa: #25D366;
+      --green-wa-dark: #1da851;
+      --font-display: 'Orbitron', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --radius: 6px;
+      --radius-lg: 12px;
+    }
 
-/* UTILITY */
-.utility { background: var(--paper-2); border-bottom: 1px solid var(--line); padding: 8px 0; font-size: 13px; }
-.utility-inner { max-width: 1600px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: center; align-items: center; gap: 24px; flex-wrap: wrap; }
-.utility-item { display: flex; align-items: center; gap: 6px; color: var(--text-soft); }
-.utility-item i { color: var(--primary); }
-.utility-item a { color: var(--text-soft); transition: color 0.2s; }
-.utility-item a:hover { color: var(--primary); }
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* HEADER */
-.header { background: var(--paper); padding: 14px 0; position: sticky; top: 0; z-index: 200; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
-.header-inner { max-width: 1600px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 32px; }
-.logo-wrap { display: flex; align-items: center; flex-shrink: 0; }
-.logo-wrap img { height: 52px; width: auto; }
-.search-bar { max-width: 640px; width: 100%; position: relative; justify-self: center; }
-.search-bar input { width: 100%; padding: 11px 44px 11px 16px; border: 1px solid var(--line-dark); border-radius: 6px; background: #fff; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text); outline: none; transition: border-color 0.2s; }
-.search-bar input::placeholder { color: var(--text-muted); }
-.search-bar input:focus { border-color: var(--primary); }
-.search-bar button { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 14px; }
-.search-bar button:hover { background: var(--primary-pale); }
-.header-nav { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
-.header-nav a { font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 0; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
-.header-nav a:hover { color: var(--primary); border-bottom-color: var(--primary); }
-.header-nav a.highlight { background: var(--primary); color: #fff; padding: 9px 16px; border-radius: 100px; border-bottom: none; }
-.header-nav a.highlight:hover { background: var(--primary-deep); color: #fff; }
-.header-nav a.highlight i { margin-right: 6px; font-size: 12px; }
-.header-nav .delivery-label { display: inline-flex; align-items: center; background: var(--primary); color: #fff; padding: 9px 16px; border-radius: 100px; font-family: var(--font-body); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; cursor: pointer; user-select: none; transition: background 0.2s; }
-.header-nav .delivery-label:hover { background: var(--primary-deep); }
-.header-nav .delivery-label i { margin-right: 6px; font-size: 12px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--paper);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* SEARCH SUGGESTIONS */
-.search-suggest { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: #fff; border: 1px solid var(--line-dark); border-radius: 8px; box-shadow: 0 12px 32px -10px rgba(62, 64, 149, 0.25); z-index: 300; display: none; overflow: hidden; }
-.search-suggest.show { display: block; }
-.search-suggest a { display: flex; align-items: center; gap: 10px; padding: 10px 14px; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text); border-bottom: 1px solid var(--line); text-transform: none; letter-spacing: 0; }
-.search-suggest a:last-child { border-bottom: none; }
-.search-suggest a:hover { background: var(--primary-pale); color: var(--primary); }
-.search-suggest a i { color: var(--primary); font-size: 12px; }
-.search-suggest a span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.search-suggest a small { color: var(--text-muted); font-size: 11px; font-weight: 600; white-space: nowrap; }
-@media (max-width: 768px) {
-  .search-suggest { left: auto; right: 0; width: min(320px, calc(100vw - 24px)); }
-  .search-suggest a small { display: none; }
-  .search-suggest a span { white-space: normal; }
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-/* CATEGORY NAV */
-.catnav { background: var(--paper-3); border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
-.catnav::-webkit-scrollbar { display: none; }
-.catnav-inner { max-width: 1600px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none; }
-.catnav-inner::-webkit-scrollbar { display: none; }
-.catnav-link { padding: 13px 16px; font-size: 13px; font-weight: 600; color: var(--text-soft); white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.3px; }
-.catnav-link:hover { color: var(--primary); border-bottom-color: var(--primary); }
-.catnav-link.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 800; }
+    img {
+      max-width: 100%;
+      display: block;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
 
-/* PAGE BANNER */
-.page-banner { background: var(--primary); padding: 40px 24px; text-align: center; color: #fff; position: relative; overflow: hidden; }
-.page-banner::before { content: ''; position: absolute; top: -50%; right: -10%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 70%); }
-.page-banner h1 { font-family: var(--font-display); font-size: clamp(26px, 4.5vw, 46px); font-weight: 800; letter-spacing: 1.5px; line-height: 1.15; color: #fff; max-width: 1000px; margin: 0 auto; position: relative; text-transform: uppercase; }
-.page-banner h1 sup { font-size: 0.45em; vertical-align: super; font-weight: 600; }
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
 
-/* PROMO GRID */
-.promo-grid-wrap { max-width: 1600px; margin: 0 auto; padding: 32px 24px; }
-.promo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.promo-tile { position: relative; height: 260px; border-radius: var(--radius-lg); overflow: hidden; cursor: pointer; transition: transform 0.4s ease; display: flex; align-items: flex-end; padding: 28px 26px; background-size: cover; background-position: center; background-repeat: no-repeat; box-shadow: 0 8px 24px -8px rgba(62, 64, 149, 0.15); }
-.promo-tile::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 55%, rgba(0,0,0,0.05) 100%); z-index: 1; transition: background 0.4s; }
-.promo-tile:hover { transform: translateY(-4px); box-shadow: 0 16px 40px -12px rgba(62, 64, 149, 0.3); }
-.promo-tile:hover::before { background: linear-gradient(to top, rgba(62, 64, 149, 0.9) 0%, rgba(62, 64, 149, 0.3) 55%, rgba(62, 64, 149, 0.05) 100%); }
-.promo-tile.tile-1 { background-image: url('images/c1.webp'); }
-.promo-tile.tile-2 { background-image: url('images/c2.webp'); }
-.promo-tile.tile-3 { background-image: url('images/c3.webp'); }
-.promo-tile.tile-4 { background-image: url('images/c4.webp'); }
-.promo-text { position: relative; z-index: 2; color: #fff; }
-.promo-text h3 { font-family: var(--font-body); font-size: 20px; font-weight: 800; letter-spacing: 0.3px; line-height: 1.2; margin-bottom: 12px; text-shadow: 0 2px 8px rgba(0,0,0,0.3); text-transform: uppercase; }
-.promo-cta { display: inline-block; font-size: 13px; font-weight: 700; color: #fff; text-decoration: underline; text-underline-offset: 4px; margin-bottom: 10px; transition: color 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-.promo-tile:hover .promo-cta { color: var(--primary-pale); }
-.promo-text p { font-size: 11px; opacity: 0.85; line-height: 1.4; }
+    .wrap {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-/* FEATURE ROW */
-.feature-row { background: var(--paper); padding: 8px 24px 40px; }
-.feature-row-inner { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-.feature-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 20px; transition: all 0.3s; display: flex; flex-direction: column; }
-.feature-card:hover { border-color: var(--primary); box-shadow: 0 12px 32px -12px rgba(62, 64, 149, 0.15); }
-.feature-card-header { font-family: var(--font-body); font-size: 14px; font-weight: 800; color: var(--text); padding-bottom: 14px; margin-bottom: 16px; border-bottom: 1px solid var(--line); text-transform: uppercase; letter-spacing: 0.5px; }
+    /* AYAH */
+    .ayah {
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 20px;
+      text-align: center;
+      border-bottom: 2px solid var(--primary-deep);
+    }
 
-/* FEATURE PRODUCTS */
-.fp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-.fp-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 12px; display: flex; flex-direction: column; min-width: 0; box-shadow: 0 4px 18px rgba(62, 64, 149, 0.06); transition: all 0.3s ease; position: relative; }
-.fp-card:hover { border-color: var(--primary); box-shadow: 0 12px 32px -12px rgba(62, 64, 149, 0.25); transform: translateY(-3px); }
-.fp-badge { display: inline-block; align-self: flex-start; background: var(--primary); color: #fff; padding: 5px 11px; border-radius: 14px; font-family: var(--font-body); font-size: 11px; font-weight: 800; letter-spacing: 0.3px; margin-bottom: 8px; text-transform: uppercase; }
-.fp-badge.green { background: #18a957; }
-.fp-main-img { height: 200px; width: 100%; object-fit: contain; border-radius: 9px; background: #fff; cursor: pointer; transition: transform 0.4s ease; }
-.fp-main-img:hover { transform: scale(1.04); }
-.fp-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin: 10px 0; }
-.fp-thumbs img { width: 100%; height: 44px; object-fit: cover; border: 1px solid var(--line); border-radius: 6px; cursor: pointer; transition: border-color 0.2s; }
-.fp-thumbs img.active { border: 2px solid var(--primary); }
-.fp-card h3 { font-family: var(--font-body); font-size: 15px; font-weight: 700; line-height: 1.3; color: var(--text); margin: 6px 0 8px; min-height: 40px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.fp-cap { font-size: 12px; color: var(--text-soft); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-weight: 500; }
-.fp-cap i { color: var(--primary); font-size: 11px; }
-.fp-features { display: flex; flex-wrap: wrap; gap: 5px 8px; font-size: 11px; color: var(--text-soft); margin-bottom: 12px; }
-.fp-features span { display: inline-flex; align-items: center; gap: 4px; }
-.fp-features span::before { content: "✓"; color: var(--primary); font-weight: 900; font-size: 11px; }
-.fp-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: auto; }
-.fp-actions button { border-radius: 7px; padding: 10px 6px; font-family: var(--font-body); font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; letter-spacing: 0.3px; display: flex; align-items: center; justify-content: center; gap: 5px; text-transform: uppercase; }
-.fp-ask-btn { border: none; background: var(--primary); color: #fff; }
-.fp-ask-btn:hover { background: var(--primary-deep); transform: translateY(-1px); }
-.fp-detail-btn { border: 1px solid #b4b8c2; background: #757b89; color: #fff; }
-.fp-detail-btn:hover { background: #a2a7b3; border-color: #a2a7b3; color: #fff; transform: translateY(-1px); }
+    .ayah-text {
+      font-family: 'Noto Kufi Arabic', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.8;
+      direction: rtl;
+      gap: 40px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+    }
 
-/* FIND RIGHT SCALE */
-.find-scale { background: var(--paper); padding: 60px 24px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.find-scale-inner { max-width: 1600px; margin: 0 auto; }
-.find-scale-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-.find-scale-head i { color: var(--primary); font-size: 22px; }
-.find-scale-head h2 { font-family: var(--font-display); font-size: clamp(20px, 3vw, 28px); font-weight: 800; letter-spacing: 1px; color: var(--text); text-transform: uppercase; }
-.find-scale-sub { font-family: var(--font-body); font-size: 14px; color: var(--text-soft); margin-bottom: 26px; }
-.find-scale-form { display: grid; grid-template-columns: 1fr 1fr 220px; gap: 14px; align-items: stretch; }
-.fs-field select { width: 100%; padding: 16px 18px; border: 1.5px solid var(--line-dark); border-radius: var(--radius); background: var(--paper); font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text); outline: none; cursor: pointer; transition: border-color 0.3s; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%233e4095' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 18px center; }
-.fs-field select:focus { border-color: var(--primary); }
-.fs-btn { padding: 16px 26px; background: var(--primary); color: #fff; border-radius: var(--radius); font-family: var(--font-body); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s; white-space: nowrap; }
-.fs-btn:hover { background: var(--primary-deep); transform: translateY(-2px); box-shadow: 0 12px 28px -10px rgba(62, 64, 149, 0.5); }
+    .ayah-text .urdu {
+      font-family: 'Noto Kufi Arabic', serif;
+      font-size: 13px;
+      color: var(--primary-pale);
+      direction: rtl;
+    }
 
-/* BUILD YOUR OWN SCALE */
-.build-scale { background: var(--paper-2); padding: 70px 24px; border-bottom: 1px solid var(--line); }
-.build-scale-inner { max-width: 1600px; margin: 0 auto; }
-.build-scale .sec-head { margin-bottom: 30px; }
-.build-scale .sec-head h2 { font-family: var(--font-display); font-size: clamp(20px, 3vw, 28px); font-weight: 800; letter-spacing: 1px; color: var(--text); margin-bottom: 8px; text-transform: uppercase; }
-.build-scale .sec-head h2 em { color: var(--primary); font-style: normal; }
-.build-scale .sec-head p { font-family: var(--font-body); font-size: 14px; color: var(--text-soft); }
-.bys-form { display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 16px; align-items: end; background: var(--paper); padding: 30px 26px; border-radius: var(--radius-lg); border: 1px solid var(--line); }
-.bys-field { display: flex; flex-direction: column; }
-.bys-field label { font-family: var(--font-body); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; font-weight: 700; }
-.bys-field select { width: 100%; padding: 14px 16px; border: 1.5px solid var(--line-dark); border-radius: var(--radius); background: var(--paper); font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text); outline: none; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%233e4095' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; transition: border-color 0.3s; }
-.bys-field select:focus { border-color: var(--primary); }
-.bys-btn { padding: 14px 24px; background: var(--primary); color: #fff; border-radius: var(--radius); font-family: var(--font-body); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s; white-space: nowrap; }
-.bys-btn:hover { background: var(--primary-deep); transform: translateY(-2px); }
-.bys-result { margin-top: 24px; background: var(--primary); color: #fff; border-radius: var(--radius-lg); padding: 36px 32px; position: relative; overflow: hidden; animation: fadeUp 0.5s ease; }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.bys-result::before { content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 70%); }
-.bys-result-badge { display: inline-block; font-family: var(--font-body); font-size: 11px; letter-spacing: 1.5px; color: #fff; padding: 5px 14px; border: 1px solid rgba(255,255,255,0.4); border-radius: 100px; margin-bottom: 12px; font-weight: 700; text-transform: uppercase; position: relative; }
-.bys-result h3 { font-family: var(--font-body); font-size: 22px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 26px; position: relative; }
-.bys-result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; margin-bottom: 28px; position: relative; }
-.bys-result-item { padding: 18px 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-lg); }
-.bys-result-item .lbl { font-family: var(--font-body); font-size: 10px; letter-spacing: 1.5px; color: var(--primary-pale); text-transform: uppercase; margin-bottom: 6px; font-weight: 700; }
-.bys-result-item .val { font-family: var(--font-body); font-size: 14px; font-weight: 700; color: #fff; letter-spacing: 0.5px; text-transform: uppercase; }
-.bys-result-actions { display: flex; gap: 14px; flex-wrap: wrap; position: relative; }
-.bys-wa-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; background: #25D366; color: #fff; border-radius: var(--radius); font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; }
-.bys-wa-btn:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 12px 28px -10px rgba(37, 211, 102, 0.5); }
-.bys-reset-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25); border-radius: var(--radius); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; }
-.bys-reset-btn:hover { background: rgba(255,255,255,0.25); }
+    .ayah-text .separator {
+      color: var(--primary-soft);
+      font-size: 10px;
+    }
 
-/* SHOP BY CATEGORY */
-.cat-section { padding: 70px 24px; border-bottom: 1px solid var(--line); background: var(--paper); }
-.cat-section-inner { max-width: 1600px; margin: 0 auto; }
-.cat-section .sec-head { margin-bottom: 26px; }
-.cat-section .sec-head h2 { font-family: var(--font-display); font-size: clamp(20px, 3vw, 28px); font-weight: 800; letter-spacing: 1px; color: var(--text); margin-bottom: 8px; text-transform: uppercase; }
-.cat-section .sec-head h2 em { color: var(--primary); font-style: normal; }
-.cat-section .sec-head p { font-family: var(--font-body); font-size: 14px; color: var(--text-soft); }
-.cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.cat-tile { background: linear-gradient(135deg, #ffffff 0%, #eef1fb 100%); border: 1px solid var(--line); border-radius: 14px; padding: 12px; display: flex; flex-direction: row; align-items: center; gap: 14px; position: relative; transition: all 0.3s ease; cursor: pointer; min-width: 0; box-shadow: 0 4px 18px rgba(62, 64, 149, 0.06); }
-.cat-tile:hover { border-color: var(--primary); box-shadow: 0 12px 32px -12px rgba(62, 64, 149, 0.25); transform: translateY(-3px); }
-.cat-img { width: 40%; max-width: 130px; aspect-ratio: 1 / 0.85; flex-shrink: 0; border-radius: 10px; overflow: hidden; background: var(--paper-3); }
-.cat-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.cat-info { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
-.cat-name { font-family: var(--font-body); font-size: 15px; font-weight: 800; letter-spacing: 0.2px; color: var(--primary-deep); line-height: 1.25; }
-.cat-desc { font-family: var(--font-body); font-size: 12px; color: var(--text-soft); line-height: 1.4; font-weight: 500; }
-.cat-go { margin-top: 6px; width: 28px; height: 28px; border-radius: 50%; background: var(--primary-deep); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; transition: background 0.3s ease, transform 0.3s ease; }
-.cat-tile:hover .cat-go { background: var(--primary); transform: translateX(3px); }
+    /* UTILITY */
+    .utility {
+      background: var(--paper-2);
+      border-bottom: 1px solid var(--line);
+      padding: 8px 0;
+      font-size: 13px;
+    }
 
-/* FAQ */
-.faq-section { background: var(--paper-2); padding: 70px 24px; border-bottom: 1px solid var(--line); }
-.faq-inner { max-width: 1600px; margin: 0 auto; }
-.faq-inner .sec-head { margin-bottom: 26px; }
-.faq-inner .sec-head h2 { font-family: var(--font-display); font-size: clamp(20px, 3vw, 28px); font-weight: 800; letter-spacing: 1px; color: var(--text); margin-bottom: 8px; text-transform: uppercase; }
-.faq-inner .sec-head h2 em { color: var(--primary); font-style: normal; }
-.faq-inner .sec-head p { font-family: var(--font-body); font-size: 14px; color: var(--text-soft); }
-.faq-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 14px; }
-.faq-item { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; transition: all 0.3s; }
-.faq-item:hover { border-color: var(--primary); }
-.faq-q { width: 100%; padding: 20px 22px; display: flex; align-items: center; justify-content: space-between; gap: 18px; text-align: left; font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--text); background: transparent; cursor: pointer; transition: color 0.3s; letter-spacing: 0.2px; }
-.faq-q:hover { color: var(--primary); }
-.faq-q i { color: var(--primary); font-size: 13px; transition: transform 0.4s; flex-shrink: 0; }
-.faq-item.open .faq-q i { transform: rotate(45deg); }
-.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 22px; }
-.faq-item.open .faq-a { max-height: 1400px; padding: 0 22px 22px; }
-.faq-a p { font-family: var(--font-body); font-size: 13px; color: var(--text-soft); line-height: 1.7; }
-.faq-a a { color: var(--primary); font-weight: 700; }
-.faq-a strong { color: var(--text); }
-.faq-a p + p, .faq-a p + ul, .faq-a ul + p { margin-top: 10px; }
-.faq-a ul { margin: 10px 0 0 18px; font-family: var(--font-body); font-size: 13px; color: var(--text-soft); line-height: 1.7; }
+    .utility-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
 
-/* BRANDS */
-.brands-section { padding: 60px 0; background: var(--paper); }
-.section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; padding: 0 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 28px; flex-wrap: wrap; }
-.section-head .head-left { flex: 1; min-width: 280px; }
-.section-head .sec-index { font-family: var(--font-body); font-size: 11px; color: var(--primary); letter-spacing: 1.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; font-weight: 800; text-transform: uppercase; }
-.section-head .sec-index::before { content: ''; width: 26px; height: 2px; background: var(--primary); }
-.section-head h2 { font-family: var(--font-display); font-size: clamp(20px, 3vw, 28px); font-weight: 800; letter-spacing: 1px; line-height: 1.15; color: var(--text); margin-bottom: 6px; text-transform: uppercase; }
-.section-head h2 .ital { color: var(--primary); font-style: normal; }
-.section-head p { font-family: var(--font-body); font-size: 14px; color: var(--text-soft); max-width: 520px; }
-.section-head .head-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--primary); border-bottom: 1.5px solid var(--primary); padding-bottom: 4px; transition: all 0.3s; font-weight: 800; }
-.section-head .head-link:hover { gap: 12px; }
-.brand-ledger { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; }
-.ledger-item { background: var(--paper); height: 100px; display: flex; align-items: center; justify-content: center; padding: 20px; transition: all 0.3s; font-family: var(--font-body); font-size: 15px; font-weight: 700; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.5px; }
-.ledger-item:hover { background: var(--primary-pale); color: var(--primary); }
+    .utility-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-soft);
+    }
 
-/* NEWSLETTER */
-.newsletter { background: var(--paper); padding: 70px 0; }
-.newsletter-inner { max-width: 1440px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-.nl-title { font-family: var(--font-display); font-size: clamp(20px, 3.5vw, 28px); font-weight: 800; letter-spacing: 1px; line-height: 1.2; color: var(--text); margin-bottom: 16px; text-transform: uppercase; }
-.nl-title em { color: var(--primary); font-style: normal; }
-.nl-desc { font-family: var(--font-body); font-size: 14px; color: var(--text-soft); margin-bottom: 24px; max-width: 440px; }
-.nl-form { display: flex; gap: 0; border-bottom: 2px solid var(--primary); max-width: 460px; }
-.nl-form input { flex: 1; padding: 12px 0; border: none; background: transparent; font-size: 14px; outline: none; font-family: var(--font-body); color: var(--text); font-weight: 500; }
-.nl-form input::placeholder { color: var(--text-muted); }
-.nl-form button { padding: 12px 18px; font-family: var(--font-body); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--primary); font-weight: 800; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
-.nl-form button:hover { color: var(--primary-deep); }
-.nl-right { padding-left: 50px; border-left: 1px solid var(--line); }
-.nl-right h4 { font-family: var(--font-body); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--primary); margin-bottom: 16px; font-weight: 800; }
-.nl-socials { display: flex; gap: 12px; margin-top: 16px; }
-.nl-socials a { width: 40px; height: 40px; border: 1px solid var(--line-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 15px; transition: all 0.3s; }
-.nl-socials a:hover { background: var(--primary); color: #fff; border-color: var(--primary); transform: translateY(-3px); }
-.nl-quote { font-family: var(--font-body); font-size: 13px; font-style: italic; color: var(--text-soft); line-height: 1.7; margin-top: 24px; padding-left: 16px; border-left: 3px solid var(--primary); }
+    .utility-item i {
+      color: var(--primary);
+    }
 
-/* FOOTER */
-.footer { background: var(--primary); color: #fff; padding: 70px 0 28px; }
-.footer-inner { max-width: 1440px; margin: 0 auto; padding: 0 24px; }
-.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1.2fr; gap: 40px; padding-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.15); }
-.footer-brand img { height: 44px; margin-bottom: 18px; background: #fff; padding: 5px 9px; border-radius: 6px; }
-.footer-brand p { font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.8; max-width: 340px; margin-bottom: 16px; }
-.footer-socials { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
-.footer-socials a { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; transition: all 0.3s; }
-.footer-socials a:hover { background: #fff; color: var(--primary); border-color: #fff; }
-.footer-col h4 { font-family: var(--font-body); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #fff; margin-bottom: 20px; font-weight: 800; }
-.footer-col ul { list-style: none; }
-.footer-col ul li { margin-bottom: 11px; }
-.footer-col ul li a { font-family: var(--font-body); font-size: 13px; color: rgba(255,255,255,0.75); transition: color 0.3s; font-weight: 500; }
-.footer-col ul li a:hover { color: #fff; }
-.footer-contact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; font-family: var(--font-body); }
-.footer-contact-item i { color: #fff; font-size: 13px; margin-top: 4px; flex-shrink: 0; }
-.footer-contact-item a { color: rgba(255,255,255,0.75); }
-.footer-contact-item a:hover { color: #fff; }
-.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.6); flex-wrap: wrap; gap: 16px; font-weight: 500; }
-.footer-bottom .legal { display: flex; gap: 20px; flex-wrap: wrap; }
-.footer-bottom a { color: rgba(255,255,255,0.6); transition: color 0.3s; }
-.footer-bottom a:hover { color: #fff; }
+    .utility-item a {
+      color: var(--text-soft);
+      transition: color 0.2s;
+    }
 
-/* DOCK */
-.dock { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 900; background: var(--primary); border-radius: 100px; padding: 5px; display: flex; align-items: center; gap: 3px; box-shadow: 0 20px 50px -10px rgba(62, 64, 149, 0.5); transition: transform 0.3s; }
-.dock:hover { transform: translateX(-50%) translateY(-3px); }
-.dock-btn { display: flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 100px; font-family: var(--font-body); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #fff; transition: all 0.2s; white-space: nowrap; }
-.dock-btn i { font-size: 14px; }
-.dock-btn:hover { background: rgba(255,255,255,0.18); }
-.dock-btn.wa { background: #fff; color: var(--primary); }
-.dock-btn.wa:hover { background: var(--primary-pale); }
-.dock-btn.book { color: #fff; }
-.dock-btn.book:hover { background: rgba(255,255,255,0.18); }
-.dock-divider { width: 1px; height: 22px; background: rgba(255,255,255,0.3); margin: 0 3px; }
+    .utility-item a:hover {
+      color: var(--primary);
+    }
 
-/* TOAST */
-.toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--primary); color: #fff; padding: 13px 22px; border-radius: 100px; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.5px; box-shadow: 0 20px 50px -10px rgba(62, 64, 149, 0.5); z-index: 10000; opacity: 0; pointer-events: none; transition: all 0.4s; display: flex; align-items: center; gap: 10px; }
-.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-.toast i { color: var(--primary-pale); }
+    /* HEADER */
+    .header {
+      background: var(--paper);
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
 
-/* ============================================================
+    .header-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .logo-wrap img {
+      height: 52px;
+      width: auto;
+    }
+
+    .search-bar {
+      max-width: 640px;
+      width: 100%;
+      position: relative;
+      justify-self: center;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 11px 44px 11px 16px;
+      border: 1px solid var(--line-dark);
+      border-radius: 6px;
+      background: #fff;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-bar input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-bar input:focus {
+      border-color: var(--primary);
+    }
+
+    .search-bar button {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 14px;
+    }
+
+    .search-bar button:hover {
+      background: var(--primary-pale);
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+
+    .header-nav a {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .header-nav a:hover {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .header-nav a.highlight {
+      background: var(--primary);
+      color: #fff;
+      padding: 9px 16px;
+      border-radius: 100px;
+      border-bottom: none;
+    }
+
+    .header-nav a.highlight:hover {
+      background: var(--primary-deep);
+      color: #fff;
+    }
+
+    .header-nav a.highlight i {
+      margin-right: 6px;
+      font-size: 12px;
+    }
+
+    .header-nav .delivery-label {
+      display: inline-flex;
+      align-items: center;
+      background: var(--primary);
+      color: #fff;
+      padding: 9px 16px;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .header-nav .delivery-label:hover {
+      background: var(--primary-deep);
+    }
+
+    .header-nav .delivery-label i {
+      margin-right: 6px;
+      font-size: 12px;
+    }
+
+    /* SEARCH SUGGESTIONS */
+    .search-suggest {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid var(--line-dark);
+      border-radius: 8px;
+      box-shadow: 0 12px 32px -10px rgba(62, 64, 149, 0.25);
+      z-index: 300;
+      display: none;
+      overflow: hidden;
+    }
+
+    .search-suggest.show {
+      display: block;
+    }
+
+    .search-suggest a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      border-bottom: 1px solid var(--line);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .search-suggest a:last-child {
+      border-bottom: none;
+    }
+
+    .search-suggest a:hover {
+      background: var(--primary-pale);
+      color: var(--primary);
+    }
+
+    .search-suggest a i {
+      color: var(--primary);
+      font-size: 12px;
+    }
+
+    .search-suggest a span {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .search-suggest a small {
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 768px) {
+      .search-suggest {
+        left: auto;
+        right: 0;
+        width: min(320px, calc(100vw - 24px));
+      }
+
+      .search-suggest a small {
+        display: none;
+      }
+
+      .search-suggest a span {
+        white-space: normal;
+      }
+    }
+
+    /* CATEGORY NAV */
+    .catnav {
+      background: var(--paper-3);
+      border-bottom: 1px solid var(--line);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .catnav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .catnav-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .catnav-inner::-webkit-scrollbar {
+      display: none;
+    }
+
+    .catnav-link {
+      padding: 13px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-soft);
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .catnav-link:hover {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .catnav-link.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      font-weight: 800;
+    }
+
+    /* PAGE BANNER */
+    .page-banner {
+      background: var(--primary);
+      padding: 40px 24px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.06), transparent 70%);
+    }
+
+    .page-banner h1 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 4.5vw, 46px);
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      line-height: 1.15;
+      color: #fff;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      text-transform: uppercase;
+    }
+
+    .page-banner h1 sup {
+      font-size: 0.45em;
+      vertical-align: super;
+      font-weight: 600;
+    }
+
+    /* PROMO GRID */
+    .promo-grid-wrap {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    .promo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .promo-tile {
+      position: relative;
+      height: 260px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 28px 26px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow: 0 8px 24px -8px rgba(62, 64, 149, 0.15);
+    }
+
+    .promo-tile::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.25) 55%, rgba(0, 0, 0, 0.05) 100%);
+      z-index: 1;
+      transition: background 0.4s;
+    }
+
+    .promo-tile:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px -12px rgba(62, 64, 149, 0.3);
+    }
+
+    .promo-tile:hover::before {
+      background: linear-gradient(to top, rgba(62, 64, 149, 0.9) 0%, rgba(62, 64, 149, 0.3) 55%, rgba(62, 64, 149, 0.05) 100%);
+    }
+
+    .promo-tile.tile-1 {
+      background-image: url('images/c1.webp');
+    }
+
+    .promo-tile.tile-2 {
+      background-image: url('images/c2.webp');
+    }
+
+    .promo-tile.tile-3 {
+      background-image: url('images/c3.webp');
+    }
+
+    .promo-tile.tile-4 {
+      background-image: url('images/c4.webp');
+    }
+
+    .promo-text {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+    }
+
+    .promo-text h3 {
+      font-family: var(--font-body);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      text-transform: uppercase;
+    }
+
+    .promo-cta {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .promo-tile:hover .promo-cta {
+      color: var(--primary-pale);
+    }
+
+    .promo-text p {
+      font-size: 11px;
+      opacity: 0.85;
+      line-height: 1.4;
+    }
+
+    /* FEATURE ROW */
+    .feature-row {
+      background: var(--paper);
+      padding: 8px 24px 40px;
+    }
+
+    .feature-row-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 12px 32px -12px rgba(62, 64, 149, 0.15);
+    }
+
+    .feature-card-header {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* FEATURE PRODUCTS */
+    .fp-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .fp-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      box-shadow: 0 4px 18px rgba(62, 64, 149, 0.06);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .fp-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 12px 32px -12px rgba(62, 64, 149, 0.25);
+      transform: translateY(-3px);
+    }
+
+    .fp-badge {
+      display: inline-block;
+      align-self: flex-start;
+      background: var(--primary);
+      color: #fff;
+      padding: 5px 11px;
+      border-radius: 14px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .fp-badge.green {
+      background: #18a957;
+    }
+
+    .fp-main-img {
+      height: 200px;
+      width: 100%;
+      object-fit: contain;
+      border-radius: 9px;
+      background: #fff;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+    }
+
+    .fp-main-img:hover {
+      transform: scale(1.04);
+    }
+
+    .fp-thumbs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      margin: 10px 0;
+    }
+
+    .fp-thumbs img {
+      width: 100%;
+      height: 44px;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .fp-thumbs img.active {
+      border: 2px solid var(--primary);
+    }
+
+    .fp-card h3 {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin: 6px 0 8px;
+      min-height: 40px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .fp-cap {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+
+    .fp-cap i {
+      color: var(--primary);
+      font-size: 11px;
+    }
+
+    .fp-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px 8px;
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    .fp-features span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .fp-features span::before {
+      content: "✓";
+      color: var(--primary);
+      font-weight: 900;
+      font-size: 11px;
+    }
+
+    .fp-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: auto;
+    }
+
+    .fp-actions button {
+      border-radius: 7px;
+      padding: 10px 6px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      text-transform: uppercase;
+    }
+
+    .fp-ask-btn {
+      border: none;
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .fp-ask-btn:hover {
+      background: var(--primary-deep);
+      transform: translateY(-1px);
+    }
+
+    .fp-detail-btn {
+      border: 1px solid #b4b8c2;
+      background: #757b89;
+      color: #fff;
+    }
+
+    .fp-detail-btn:hover {
+      background: #a2a7b3;
+      border-color: #a2a7b3;
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* FIND RIGHT SCALE */
+    .find-scale {
+      background: var(--paper);
+      padding: 60px 24px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .find-scale-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .find-scale-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .find-scale-head i {
+      color: var(--primary);
+      font-size: 22px;
+    }
+
+    .find-scale-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--text);
+      text-transform: uppercase;
+    }
+
+    .find-scale-sub {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--text-soft);
+      margin-bottom: 26px;
+    }
+
+    .find-scale-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr 220px;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .fs-field select {
+      width: 100%;
+      padding: 16px 18px;
+      border: 1.5px solid var(--line-dark);
+      border-radius: var(--radius);
+      background: var(--paper);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.3s;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%233e4095' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 18px center;
+    }
+
+    .fs-field select:focus {
+      border-color: var(--primary);
+    }
+
+    .fs-btn {
+      padding: 16px 26px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+
+    .fs-btn:hover {
+      background: var(--primary-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -10px rgba(62, 64, 149, 0.5);
+    }
+
+    /* BUILD YOUR OWN SCALE */
+    .build-scale {
+      background: var(--paper-2);
+      padding: 70px 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .build-scale-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .build-scale .sec-head {
+      margin-bottom: 30px;
+    }
+
+    .build-scale .sec-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--text);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .build-scale .sec-head h2 em {
+      color: var(--primary);
+      font-style: normal;
+    }
+
+    .build-scale .sec-head p {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--text-soft);
+    }
+
+    .bys-form {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr) auto;
+      gap: 16px;
+      align-items: end;
+      background: var(--paper);
+      padding: 30px 26px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+    }
+
+    .bys-field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bys-field label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .bys-field select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid var(--line-dark);
+      border-radius: var(--radius);
+      background: var(--paper);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%233e4095' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      transition: border-color 0.3s;
+    }
+
+    .bys-field select:focus {
+      border-color: var(--primary);
+    }
+
+    .bys-btn {
+      padding: 14px 24px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+
+    .bys-btn:hover {
+      background: var(--primary-deep);
+      transform: translateY(-2px);
+    }
+
+    .bys-result {
+      margin-top: 24px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.5s ease;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .bys-result::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.12), transparent 70%);
+    }
+
+    .bys-result-badge {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: #fff;
+      padding: 5px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 100px;
+      margin-bottom: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    .bys-result h3 {
+      font-family: var(--font-body);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 26px;
+      position: relative;
+    }
+
+    .bys-result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .bys-result-item {
+      padding: 18px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-lg);
+    }
+
+    .bys-result-item .lbl {
+      font-family: var(--font-body);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: var(--primary-pale);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .bys-result-item .val {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .bys-result-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .bys-wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      background: #25D366;
+      color: #fff;
+      border-radius: var(--radius);
+      font-weight: 800;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+    }
+
+    .bys-wa-btn:hover {
+      background: #1da851;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -10px rgba(37, 211, 102, 0.5);
+    }
+
+    .bys-reset-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 22px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: var(--radius);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+    }
+
+    .bys-reset-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* SHOP BY CATEGORY */
+    .cat-section {
+      padding: 70px 24px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .cat-section-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .cat-section .sec-head {
+      margin-bottom: 26px;
+    }
+
+    .cat-section .sec-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--text);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .cat-section .sec-head h2 em {
+      color: var(--primary);
+      font-style: normal;
+    }
+
+    .cat-section .sec-head p {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--text-soft);
+    }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .cat-tile {
+      background: linear-gradient(135deg, #ffffff 0%, #eef1fb 100%);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      min-width: 0;
+      box-shadow: 0 4px 18px rgba(62, 64, 149, 0.06);
+    }
+
+    .cat-tile:hover {
+      border-color: var(--primary);
+      box-shadow: 0 12px 32px -12px rgba(62, 64, 149, 0.25);
+      transform: translateY(-3px);
+    }
+
+    .cat-img {
+      width: 40%;
+      max-width: 130px;
+      aspect-ratio: 1 / 0.85;
+      flex-shrink: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--paper-3);
+    }
+
+    .cat-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cat-info {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .cat-name {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      color: var(--primary-deep);
+      line-height: 1.25;
+    }
+
+    .cat-desc {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-soft);
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    .cat-go {
+      margin-top: 6px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--primary-deep);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .cat-tile:hover .cat-go {
+      background: var(--primary);
+      transform: translateX(3px);
+    }
+
+    /* FAQ */
+    .faq-section {
+      background: var(--paper-2);
+      padding: 70px 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .faq-inner .sec-head {
+      margin-bottom: 26px;
+    }
+
+    .faq-inner .sec-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--text);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .faq-inner .sec-head h2 em {
+      color: var(--primary);
+      font-style: normal;
+    }
+
+    .faq-inner .sec-head p {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--text-soft);
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 14px;
+    }
+
+    .faq-item {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .faq-item:hover {
+      border-color: var(--primary);
+    }
+
+    .faq-q {
+      width: 100%;
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      text-align: left;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      background: transparent;
+      cursor: pointer;
+      transition: color 0.3s;
+      letter-spacing: 0.2px;
+    }
+
+    .faq-q:hover {
+      color: var(--primary);
+    }
+
+    .faq-q i {
+      color: var(--primary);
+      font-size: 13px;
+      transition: transform 0.4s;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-q i {
+      transform: rotate(45deg);
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      padding: 0 22px;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 1400px;
+      padding: 0 22px 22px;
+    }
+
+    .faq-a p {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
+    .faq-a a {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .faq-a strong {
+      color: var(--text);
+    }
+
+    .faq-a p+p,
+    .faq-a p+ul,
+    .faq-a ul+p {
+      margin-top: 10px;
+    }
+
+    .faq-a ul {
+      margin: 10px 0 0 18px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
+    /* BRANDS */
+    .brands-section {
+      padding: 60px 0;
+      background: var(--paper);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 0 0 28px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .section-head .head-left {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .section-head .sec-index {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--primary);
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .section-head .sec-index::before {
+      content: '';
+      width: 26px;
+      height: 2px;
+      background: var(--primary);
+    }
+
+    .section-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 800;
+      letter-spacing: 1px;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .section-head h2 .ital {
+      color: var(--primary);
+      font-style: normal;
+    }
+
+    .section-head p {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--text-soft);
+      max-width: 520px;
+    }
+
+    .section-head .head-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--primary);
+      border-bottom: 1.5px solid var(--primary);
+      padding-bottom: 4px;
+      transition: all 0.3s;
+      font-weight: 800;
+    }
+
+    .section-head .head-link:hover {
+      gap: 12px;
+    }
+
+    .brand-ledger {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .ledger-item {
+      background: var(--paper);
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: all 0.3s;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .ledger-item:hover {
+      background: var(--primary-pale);
+      color: var(--primary);
+    }
+
+    /* NEWSLETTER */
+    .newsletter {
+      background: var(--paper);
+      padding: 70px 0;
+    }
+
+    .newsletter-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .nl-title {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 3.5vw, 28px);
+      font-weight: 800;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .nl-title em {
+      color: var(--primary);
+      font-style: normal;
+    }
+
+    .nl-desc {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--text-soft);
+      margin-bottom: 24px;
+      max-width: 440px;
+    }
+
+    .nl-form {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--primary);
+      max-width: 460px;
+    }
+
+    .nl-form input {
+      flex: 1;
+      padding: 12px 0;
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      outline: none;
+      font-family: var(--font-body);
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .nl-form input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .nl-form button {
+      padding: 12px 18px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s;
+    }
+
+    .nl-form button:hover {
+      color: var(--primary-deep);
+    }
+
+    .nl-right {
+      padding-left: 50px;
+      border-left: 1px solid var(--line);
+    }
+
+    .nl-right h4 {
+      font-family: var(--font-body);
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 16px;
+      font-weight: 800;
+    }
+
+    .nl-socials {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .nl-socials a {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--line-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 15px;
+      transition: all 0.3s;
+    }
+
+    .nl-socials a:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .nl-quote {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-soft);
+      line-height: 1.7;
+      margin-top: 24px;
+      padding-left: 16px;
+      border-left: 3px solid var(--primary);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--primary);
+      color: #fff;
+      padding: 70px 0 28px;
+    }
+
+    .footer-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr 1.2fr;
+      gap: 40px;
+      padding-bottom: 50px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .footer-brand img {
+      height: 44px;
+      margin-bottom: 18px;
+      background: #fff;
+      padding: 5px 9px;
+      border-radius: 6px;
+    }
+
+    .footer-brand p {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.8;
+      max-width: 340px;
+      margin-bottom: 16px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-socials a {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 13px;
+      transition: all 0.3s;
+    }
+
+    .footer-socials a:hover {
+      background: #fff;
+      color: var(--primary);
+      border-color: #fff;
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-body);
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 11px;
+    }
+
+    .footer-col ul li a {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.75);
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+
+    .footer-col ul li a:hover {
+      color: #fff;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.6;
+      font-family: var(--font-body);
+    }
+
+    .footer-contact-item i {
+      color: #fff;
+      font-size: 13px;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    .footer-contact-item a {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .footer-contact-item a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      flex-wrap: wrap;
+      gap: 16px;
+      font-weight: 500;
+    }
+
+    .footer-bottom .legal {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom a {
+      color: rgba(255, 255, 255, 0.6);
+      transition: color 0.3s;
+    }
+
+    .footer-bottom a:hover {
+      color: #fff;
+    }
+
+    /* DOCK */
+    .dock {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 900;
+      background: var(--primary);
+      border-radius: 100px;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      box-shadow: 0 20px 50px -10px rgba(62, 64, 149, 0.5);
+      transition: transform 0.3s;
+    }
+
+    .dock:hover {
+      transform: translateX(-50%) translateY(-3px);
+    }
+
+    .dock-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 18px;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #fff;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .dock-btn i {
+      font-size: 14px;
+    }
+
+    .dock-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .dock-btn.wa {
+      background: #fff;
+      color: var(--primary);
+    }
+
+    .dock-btn.wa:hover {
+      background: var(--primary-pale);
+    }
+
+    .dock-btn.book {
+      color: #fff;
+    }
+
+    .dock-btn.book:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .dock-divider {
+      width: 1px;
+      height: 22px;
+      background: rgba(255, 255, 255, 0.3);
+      margin: 0 3px;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--primary);
+      color: #fff;
+      padding: 13px 22px;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 0 20px 50px -10px rgba(62, 64, 149, 0.5);
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast i {
+      color: var(--primary-pale);
+    }
+
+    /* ============================================================
    SAME DAY DELIVERY POPUP — COMPACT / SQUARE
    ============================================================ */
-.sdd-overlay {
-  position: fixed; inset: 0;
-  background: rgba(10, 10, 26, 0.78);
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-  z-index: 9998;
-  display: none; align-items: center; justify-content: center;
-  padding: 20px; overflow-y: auto;
-  opacity: 0; transition: opacity 0.3s ease;
-}
-.sdd-overlay.show { display: flex; opacity: 1; }
+    .sdd-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 26, 0.78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 9998;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
 
-.sdd-popup {
-  background: var(--paper);
-  width: 100%;
-  max-width: 480px;              /* ← compact width */
-  border-radius: 18px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6);
-  animation: sddPopIn 0.4s cubic-bezier(0.22,1,0.36,1) both;
-  margin: auto;
-}
-@keyframes sddPopIn { from { opacity: 0; transform: translateY(20px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    .sdd-overlay.show {
+      display: flex;
+      opacity: 1;
+    }
 
-.sdd-close {
-  position: absolute; top: 12px; right: 12px;
-  width: 32px; height: 32px; border-radius: 50%;
-  background: rgba(255,255,255,0.95); color: var(--primary-deep);
-  font-size: 13px; display: flex; align-items: center; justify-content: center;
-  cursor: pointer; z-index: 10;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
-  transition: all 0.3s; border: none;
-}
-.sdd-close:hover { background: #e74c3c; color: #fff; transform: rotate(90deg) scale(1.08); }
+    .sdd-popup {
+      background: var(--paper);
+      width: 100%;
+      max-width: 480px;
+      /* ← compact width */
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.6);
+      animation: sddPopIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+      margin: auto;
+    }
 
-/* Compact hero */
-.sdd-hero {
-  background: linear-gradient(135deg, #2d2e6b 0%, #3e4095 45%, #4a4dae 100%);
-  color: #fff; padding: 20px 22px 22px;
-  position: relative; overflow: hidden;
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-}
-.sdd-hero::after {
-  content: ''; position: absolute; inset: 0;
-  background-image:
-    radial-gradient(circle at 92% 88%, rgba(255,214,51,0.16) 0%, transparent 45%),
-    radial-gradient(circle at 12% 10%, rgba(255,255,255,0.08) 0%, transparent 55%);
-  pointer-events: none;
-}
-.sdd-hero-left { position: relative; z-index: 2; max-width: 68%; }
-.sdd-truck-icon {
-  width: 38px; height: 38px; border-radius: 10px;
-  background: rgba(255,255,255,0.14); border: 1.5px solid rgba(255,255,255,0.25);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px; margin-bottom: 10px;
-}
-.sdd-title {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 900; line-height: 1.05; letter-spacing: 0.6px;
-  margin-bottom: 4px; text-transform: uppercase;
-}
-.sdd-title span { display: block; }
-.sdd-title .accent { color: #ffd633; display: inline; text-shadow: 0 2px 12px rgba(255,214,51,0.4); }
-.sdd-urdu {
-  font-family: 'Noto Kufi Arabic', serif; direction: rtl;
-  font-size: 11.5px; font-weight: 700; color: rgba(255,255,255,0.9);
-  margin-top: 6px; line-height: 1.6;
-}
-.sdd-hero-right {
-  position: relative; z-index: 2; width: 78px; flex-shrink: 0;
-  display: flex; align-items: flex-end; justify-content: center;
-}
-.sdd-minar-svg { width: 100%; height: auto; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.3)); }
+    @keyframes sddPopIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+      }
 
-/* Body */
-.sdd-body { padding: 18px 20px 20px; background: var(--paper); }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
 
-.sdd-badges { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
-.sdd-badge {
-  display: flex; align-items: center; gap: 5px;
-  font-family: var(--font-body); font-size: 10.5px; font-weight: 800;
-  color: var(--primary-deep); text-transform: uppercase; letter-spacing: 0.3px;
-}
-.sdd-badge i { color: var(--primary); font-size: 11px; }
+    .sdd-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--primary-deep);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+      transition: all 0.3s;
+      border: none;
+    }
 
-.sdd-desc { font-family: var(--font-body); font-size: 11.5px; color: var(--text-soft); line-height: 1.55; margin-bottom: 14px; }
-.sdd-desc strong { color: var(--text); font-weight: 800; }
+    .sdd-close:hover {
+      background: #e74c3c;
+      color: #fff;
+      transform: rotate(90deg) scale(1.08);
+    }
 
-.sdd-cat-title { font-family: var(--font-body); font-size: 11.5px; font-weight: 800; color: var(--primary-deep); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 10px; }
+    /* Compact hero */
+    .sdd-hero {
+      background: linear-gradient(135deg, #2d2e6b 0%, #3e4095 45%, #4a4dae 100%);
+      color: #fff;
+      padding: 20px 22px 22px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
 
-.sdd-cat-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-bottom: 14px; }
-.sdd-cat {
-  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px;
-  padding: 7px 2px; border-radius: 8px;
-  background: var(--paper-2); border: 1px solid var(--line);
-  transition: all 0.25s; cursor: pointer; text-decoration: none; color: inherit;
-}
-.sdd-cat:hover { border-color: var(--primary); background: var(--primary-pale); transform: translateY(-2px); box-shadow: 0 8px 18px -8px rgba(62,64,149,0.3); }
-.sdd-cat-icon { width: 100%; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--primary); transition: transform 0.3s; }
-.sdd-cat:hover .sdd-cat-icon { transform: scale(1.12); }
-.sdd-cat-name { font-family: var(--font-body); font-size: 8px; font-weight: 700; color: var(--text); line-height: 1.15; text-transform: uppercase; letter-spacing: 0.1px; }
+    .sdd-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 92% 88%, rgba(255, 214, 51, 0.16) 0%, transparent 45%),
+        radial-gradient(circle at 12% 10%, rgba(255, 255, 255, 0.08) 0%, transparent 55%);
+      pointer-events: none;
+    }
 
-.sdd-trust { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 10px 6px; background: var(--paper-3); border-radius: 10px; margin-bottom: 14px; }
-.sdd-trust-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; font-family: var(--font-body); font-size: 7.5px; font-weight: 700; color: var(--text); line-height: 1.2; text-transform: uppercase; letter-spacing: 0.1px; padding: 0 2px; }
-.sdd-trust-item i { font-size: 13px; color: var(--primary); }
+    .sdd-hero-left {
+      position: relative;
+      z-index: 2;
+      max-width: 68%;
+    }
 
-.sdd-actions { display: grid; grid-template-columns: 1.3fr 1fr; gap: 8px; align-items: stretch; }
-.sdd-wa-btn {
-  display: flex; align-items: center; justify-content: center; gap: 7px;
-  padding: 11px 12px; background: var(--green-wa); color: #fff;
-  border-radius: 100px; font-family: var(--font-body); font-size: 10.5px; font-weight: 800;
-  text-transform: uppercase; letter-spacing: 0.4px; text-decoration: none;
-  transition: all 0.25s; box-shadow: 0 8px 22px -8px rgba(37,211,102,0.6);
-  white-space: nowrap;
-}
-.sdd-wa-btn:hover { background: var(--green-wa-dark); transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(37,211,102,0.7); }
-.sdd-wa-btn i { font-size: 14px; }
+    .sdd-truck-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
 
-.sdd-call-block {
-  display: flex; align-items: center; gap: 8px;
-  padding: 8px 10px; background: var(--primary-pale);
-  border: 1.5px solid var(--primary-soft); border-radius: 10px;
-  text-decoration: none; transition: all 0.25s; min-width: 0;
-}
-.sdd-call-block:hover { background: var(--primary); border-color: var(--primary); }
-.sdd-call-icon { width: 30px; height: 30px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; transition: all 0.25s; }
-.sdd-call-block:hover .sdd-call-icon { background: #fff; color: var(--primary); }
-.sdd-call-num { font-family: var(--font-body); font-size: 12.5px; font-weight: 900; color: var(--primary-deep); letter-spacing: 0.2px; line-height: 1.1; transition: color 0.25s; white-space: nowrap; }
-.sdd-call-num small { display: block; font-size: 7.5px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.3px; margin-top: 1px; text-transform: uppercase; }
-.sdd-call-block:hover .sdd-call-num { color: #fff; }
-.sdd-call-block:hover .sdd-call-num small { color: rgba(255,255,255,0.85); }
+    .sdd-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: 0.6px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
 
-.sdd-footnote { margin-top: 10px; font-family: var(--font-body); font-size: 9.5px; color: var(--text-muted); text-align: center; letter-spacing: 0.2px; }
-.sdd-footnote i { color: var(--primary); margin-right: 3px; }
+    .sdd-title span {
+      display: block;
+    }
 
-/* RESPONSIVE */
-@media (max-width: 1200px) {
-  .header-inner { grid-template-columns: auto 1fr; row-gap: 12px; }
-  .header-nav { grid-column: 1 / -1; justify-content: center; flex-wrap: wrap; }
-  .search-bar { max-width: 100%; }
-}
-@media (max-width: 1100px) {
-  .promo-grid { grid-template-columns: repeat(2, 1fr); }
-  .feature-row-inner { grid-template-columns: repeat(2, 1fr); }
-  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
-  .newsletter-inner { grid-template-columns: 1fr; gap: 40px; }
-  .nl-right { padding-left: 0; border-left: none; border-top: 1px solid var(--line); padding-top: 32px; }
-  .find-scale-form { grid-template-columns: 1fr 1fr; }
-  .find-scale-form .fs-btn { grid-column: 1 / -1; }
-  .bys-form { grid-template-columns: 1fr 1fr; }
-  .bys-btn { grid-column: 1 / -1; }
-  .faq-grid { grid-template-columns: 1fr; }
-  .cat-grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 768px) {
-  .utility-inner { gap: 14px; font-size: 12px; }
-  .utility-item { font-size: 12px; }
-  .promo-grid { grid-template-columns: 1fr; }
-  .promo-tile { height: 200px; }
-  .feature-row-inner { grid-template-columns: 1fr; }
-  .feature-row { padding: 8px 12px 40px; }
-  .feature-card { padding: 12px; }
-  .fp-grid { gap: 10px; }
-  .fp-card { padding: 9px; border-radius: 10px; }
-  .fp-main-img { height: 130px; }
-  .fp-thumbs img { height: 34px; }
-  .fp-card h3 { font-size: 12px; min-height: 32px; }
-  .fp-cap { font-size: 10px; }
-  .fp-features { font-size: 9px; gap: 3px 6px; }
-  .fp-actions { grid-template-columns: 1fr; }
-  .fp-actions button { font-size: 10px; padding: 9px 4px; }
-  .fp-badge { font-size: 9px; padding: 4px 8px; }
-  .section-head { flex-direction: column; align-items: flex-start; }
-  .footer-top { grid-template-columns: 1fr; }
-  .footer-bottom { flex-direction: column; text-align: center; }
-  .dock { left: 12px; right: 12px; transform: none; justify-content: space-between; padding: 4px; }
-  .dock:hover { transform: translateY(-3px); }
-  .dock-btn { padding: 9px 12px; font-size: 10px; }
-  .dock-btn span { display: inline; font-size: 9px; }
-  .page-banner { padding: 40px 20px; }
-  .find-scale, .build-scale, .cat-section, .faq-section { padding: 50px 20px; }
-  .find-scale-form { grid-template-columns: 1fr; }
-  .bys-form { grid-template-columns: 1fr; padding: 22px 18px; }
-  .header-nav a { font-size: 11px; padding: 5px 0; }
-  .header-nav a.highlight { padding: 7px 12px; font-size: 11px; }
-  .header-nav .delivery-label { padding: 7px 12px; font-size: 11px; }
-  .ayah-text { font-size: 12px; gap: 16px; }
-  .ayah-text .urdu { font-size: 11px; }
-  .cat-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .cat-tile { padding: 8px; gap: 8px; border-radius: 12px; }
-  .cat-img { width: 38%; border-radius: 8px; }
-  .cat-name { font-size: 12px; }
-  .cat-desc { font-size: 10px; line-height: 1.3; }
-  .cat-go { width: 24px; height: 24px; font-size: 10px; margin-top: 4px; }
+    .sdd-title .accent {
+      color: #ffd633;
+      display: inline;
+      text-shadow: 0 2px 12px rgba(255, 214, 51, 0.4);
+    }
 
-  /* Popup — stays compact on mobile too */
-  .sdd-popup { max-width: 100%; border-radius: 14px; }
-  .sdd-hero { padding: 16px 16px 16px; }
-  .sdd-hero-left { max-width: 72%; }
-  .sdd-hero-right { width: 60px; }
-  .sdd-title { font-size: 17px; }
-  .sdd-urdu { font-size: 10.5px; }
-  .sdd-body { padding: 14px 16px 16px; }
-  .sdd-cat-grid { gap: 5px; }
-  .sdd-cat-icon { height: 22px; font-size: 14px; }
-  .sdd-cat-name { font-size: 7.5px; }
-  .sdd-wa-btn { font-size: 10px; padding: 10px 10px; }
-  .sdd-call-num { font-size: 11.5px; }
-}
-@media (max-width: 480px) {
-  .logo-wrap img { height: 40px; }
-  .dock-btn { padding: 8px 10px; }
-  .dock-btn i { font-size: 13px; }
-  .dock-btn span { font-size: 8px; }
-  .fp-main-img { height: 110px; }
-}
-@media (max-width: 400px) {
-  .sdd-hero-right { display: none; }
-  .sdd-hero-left { max-width: 100%; }
-  .sdd-cat-grid { grid-template-columns: repeat(3, 1fr); }
-  .sdd-trust { grid-template-columns: repeat(2, 1fr); }
-  .sdd-actions { grid-template-columns: 1fr; }
-}
-</style>
+    .sdd-urdu {
+      font-family: 'Noto Kufi Arabic', serif;
+      direction: rtl;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.9);
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+
+    .sdd-hero-right {
+      position: relative;
+      z-index: 2;
+      width: 78px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .sdd-minar-svg {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.3));
+    }
+
+    /* Body */
+    .sdd-body {
+      padding: 18px 20px 20px;
+      background: var(--paper);
+    }
+
+    .sdd-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .sdd-badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-body);
+      font-size: 10.5px;
+      font-weight: 800;
+      color: var(--primary-deep);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .sdd-badge i {
+      color: var(--primary);
+      font-size: 11px;
+    }
+
+    .sdd-desc {
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      color: var(--text-soft);
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .sdd-desc strong {
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .sdd-cat-title {
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--primary-deep);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 10px;
+    }
+
+    .sdd-cat-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .sdd-cat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 4px;
+      padding: 7px 2px;
+      border-radius: 8px;
+      background: var(--paper-2);
+      border: 1px solid var(--line);
+      transition: all 0.25s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .sdd-cat:hover {
+      border-color: var(--primary);
+      background: var(--primary-pale);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px -8px rgba(62, 64, 149, 0.3);
+    }
+
+    .sdd-cat-icon {
+      width: 100%;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--primary);
+      transition: transform 0.3s;
+    }
+
+    .sdd-cat:hover .sdd-cat-icon {
+      transform: scale(1.12);
+    }
+
+    .sdd-cat-name {
+      font-family: var(--font-body);
+      font-size: 8px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.15;
+      text-transform: uppercase;
+      letter-spacing: 0.1px;
+    }
+
+    .sdd-trust {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      padding: 10px 6px;
+      background: var(--paper-3);
+      border-radius: 10px;
+      margin-bottom: 14px;
+    }
+
+    .sdd-trust-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 4px;
+      font-family: var(--font-body);
+      font-size: 7.5px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.1px;
+      padding: 0 2px;
+    }
+
+    .sdd-trust-item i {
+      font-size: 13px;
+      color: var(--primary);
+    }
+
+    .sdd-actions {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 8px;
+      align-items: stretch;
+    }
+
+    .sdd-wa-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 11px 12px;
+      background: var(--green-wa);
+      color: #fff;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      text-decoration: none;
+      transition: all 0.25s;
+      box-shadow: 0 8px 22px -8px rgba(37, 211, 102, 0.6);
+      white-space: nowrap;
+    }
+
+    .sdd-wa-btn:hover {
+      background: var(--green-wa-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px -10px rgba(37, 211, 102, 0.7);
+    }
+
+    .sdd-wa-btn i {
+      font-size: 14px;
+    }
+
+    .sdd-call-block {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      background: var(--primary-pale);
+      border: 1.5px solid var(--primary-soft);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.25s;
+      min-width: 0;
+    }
+
+    .sdd-call-block:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .sdd-call-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+      transition: all 0.25s;
+    }
+
+    .sdd-call-block:hover .sdd-call-icon {
+      background: #fff;
+      color: var(--primary);
+    }
+
+    .sdd-call-num {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 900;
+      color: var(--primary-deep);
+      letter-spacing: 0.2px;
+      line-height: 1.1;
+      transition: color 0.25s;
+      white-space: nowrap;
+    }
+
+    .sdd-call-num small {
+      display: block;
+      font-size: 7.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.3px;
+      margin-top: 1px;
+      text-transform: uppercase;
+    }
+
+    .sdd-call-block:hover .sdd-call-num {
+      color: #fff;
+    }
+
+    .sdd-call-block:hover .sdd-call-num small {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .sdd-footnote {
+      margin-top: 10px;
+      font-family: var(--font-body);
+      font-size: 9.5px;
+      color: var(--text-muted);
+      text-align: center;
+      letter-spacing: 0.2px;
+    }
+
+    .sdd-footnote i {
+      color: var(--primary);
+      margin-right: 3px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1200px) {
+      .header-inner {
+        grid-template-columns: auto 1fr;
+        row-gap: 12px;
+      }
+
+      .header-nav {
+        grid-column: 1 / -1;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .search-bar {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .promo-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .feature-row-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+
+      .newsletter-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .nl-right {
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid var(--line);
+        padding-top: 32px;
+      }
+
+      .find-scale-form {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .find-scale-form .fs-btn {
+        grid-column: 1 / -1;
+      }
+
+      .bys-form {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .bys-btn {
+        grid-column: 1 / -1;
+      }
+
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cat-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .utility-inner {
+        gap: 14px;
+        font-size: 12px;
+      }
+
+      .utility-item {
+        font-size: 12px;
+      }
+
+      .promo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .promo-tile {
+        height: 200px;
+      }
+
+      .feature-row-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-row {
+        padding: 8px 12px 40px;
+      }
+
+      .feature-card {
+        padding: 12px;
+      }
+
+      .fp-grid {
+        gap: 10px;
+      }
+
+      .fp-card {
+        padding: 9px;
+        border-radius: 10px;
+      }
+
+      .fp-main-img {
+        height: 130px;
+      }
+
+      .fp-thumbs img {
+        height: 34px;
+      }
+
+      .fp-card h3 {
+        font-size: 12px;
+        min-height: 32px;
+      }
+
+      .fp-cap {
+        font-size: 10px;
+      }
+
+      .fp-features {
+        font-size: 9px;
+        gap: 3px 6px;
+      }
+
+      .fp-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .fp-actions button {
+        font-size: 10px;
+        padding: 9px 4px;
+      }
+
+      .fp-badge {
+        font-size: 9px;
+        padding: 4px 8px;
+      }
+
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .dock {
+        left: 12px;
+        right: 12px;
+        transform: none;
+        justify-content: space-between;
+        padding: 4px;
+      }
+
+      .dock:hover {
+        transform: translateY(-3px);
+      }
+
+      .dock-btn {
+        padding: 9px 12px;
+        font-size: 10px;
+      }
+
+      .dock-btn span {
+        display: inline;
+        font-size: 9px;
+      }
+
+      .page-banner {
+        padding: 40px 20px;
+      }
+
+      .find-scale,
+      .build-scale,
+      .cat-section,
+      .faq-section {
+        padding: 50px 20px;
+      }
+
+      .find-scale-form {
+        grid-template-columns: 1fr;
+      }
+
+      .bys-form {
+        grid-template-columns: 1fr;
+        padding: 22px 18px;
+      }
+
+      .header-nav a {
+        font-size: 11px;
+        padding: 5px 0;
+      }
+
+      .header-nav a.highlight {
+        padding: 7px 12px;
+        font-size: 11px;
+      }
+
+      .header-nav .delivery-label {
+        padding: 7px 12px;
+        font-size: 11px;
+      }
+
+      .ayah-text {
+        font-size: 12px;
+        gap: 16px;
+      }
+
+      .ayah-text .urdu {
+        font-size: 11px;
+      }
+
+      .cat-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .cat-tile {
+        padding: 8px;
+        gap: 8px;
+        border-radius: 12px;
+      }
+
+      .cat-img {
+        width: 38%;
+        border-radius: 8px;
+      }
+
+      .cat-name {
+        font-size: 12px;
+      }
+
+      .cat-desc {
+        font-size: 10px;
+        line-height: 1.3;
+      }
+
+      .cat-go {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+        margin-top: 4px;
+      }
+
+      /* Popup — stays compact on mobile too */
+      .sdd-popup {
+        max-width: 100%;
+        border-radius: 14px;
+      }
+
+      .sdd-hero {
+        padding: 16px 16px 16px;
+      }
+
+      .sdd-hero-left {
+        max-width: 72%;
+      }
+
+      .sdd-hero-right {
+        width: 60px;
+      }
+
+      .sdd-title {
+        font-size: 17px;
+      }
+
+      .sdd-urdu {
+        font-size: 10.5px;
+      }
+
+      .sdd-body {
+        padding: 14px 16px 16px;
+      }
+
+      .sdd-cat-grid {
+        gap: 5px;
+      }
+
+      .sdd-cat-icon {
+        height: 22px;
+        font-size: 14px;
+      }
+
+      .sdd-cat-name {
+        font-size: 7.5px;
+      }
+
+      .sdd-wa-btn {
+        font-size: 10px;
+        padding: 10px 10px;
+      }
+
+      .sdd-call-num {
+        font-size: 11.5px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-wrap img {
+        height: 40px;
+      }
+
+      .dock-btn {
+        padding: 8px 10px;
+      }
+
+      .dock-btn i {
+        font-size: 13px;
+      }
+
+      .dock-btn span {
+        font-size: 8px;
+      }
+
+      .fp-main-img {
+        height: 110px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .sdd-hero-right {
+        display: none;
+      }
+
+      .sdd-hero-left {
+        max-width: 100%;
+      }
+
+      .sdd-cat-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .sdd-trust {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .sdd-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- AYAH -->
-<div class="ayah">
-  <div class="ayah-text">
-    <span>وَأَقِيمُوا الْوَزْنَ بِالْقِسْطِ وَلَا تُخْسِرُوا الْمِيزَانَ</span>
-    <span class="separator">◆</span>
-    <span class="urdu">"انصاف کے ساتھ وزن قائم کرو اور تول میں کمی نہ کرو۔"</span>
-  </div>
-</div>
-
-<!-- UTILITY -->
-<div class="utility">
-  <div class="utility-inner">
-    <span class="utility-item"><i class="fas fa-phone"></i> <a href="tel:03234005335">0323 4005335</a></span>
-    <span class="utility-item"><i class="fas fa-clock"></i> Mon–Sat · 11:00 AM – 7:00 PM</span>
-  </div>
-</div>
-
-<!-- HEADER -->
-<header class="header">
-  <div class="header-inner">
-    <a href="index.html" class="logo-wrap"><img src="images/logo.png" alt="Scale Planet"></a>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="What can we help you find?">
-      <button onclick="searchProducts()" aria-label="Search"><i class="fas fa-arrow-right"></i></button>
-      <div class="search-suggest" id="searchSuggest"></div>
+  <!-- AYAH -->
+  <div class="ayah">
+    <div class="ayah-text">
+      <span>وَأَقِيمُوا الْوَزْنَ بِالْقِسْطِ وَلَا تُخْسِرُوا الْمِيزَانَ</span>
+      <span class="separator">◆</span>
+      <span class="urdu">"انصاف کے ساتھ وزن قائم کرو اور تول میں کمی نہ کرو۔"</span>
     </div>
-    <nav class="header-nav">
-      <a href="products.html">Products</a>
-      <a href="services.html">Services</a>
-      <a href="contact.html">Contact</a>
-      <a href="privacy.html">Privacy</a>
-      <span class="delivery-label"><i class="fas fa-truck-fast"></i>Same day Delivery in Lahore</span>
-    </nav>
   </div>
-</header>
 
-<!-- CATEGORY NAV -->
-<nav class="catnav">
-  <div class="catnav-inner">
-    <a href="products.html" class="catnav-link active">Shop All</a>
-    <a href="products.html?category=Platform+Scales" class="catnav-link">Platform Scales</a>
-    <a href="products.html?category=Counter+Scales" class="catnav-link">Counter Scales</a>
-    <a href="products.html?category=Animal+Scales" class="catnav-link">Animal Scales</a>
-    <a href="products.html?category=Load+Cells" class="catnav-link">Load Cells</a>
-    <a href="products.html?category=Indicators" class="catnav-link">Indicators</a>
-    <a href="products.html?category=Lab+Scales" class="catnav-link">Lab Scales</a>
-    <a href="products.html?category=Hanging+Scales" class="catnav-link">Hanging Scales</a>
+  <!-- UTILITY -->
+  <div class="utility">
+    <div class="utility-inner">
+      <span class="utility-item"><i class="fas fa-phone"></i> <a href="tel:03234005335">0323 4005335</a></span>
+      <span class="utility-item"><i class="fas fa-clock"></i> Mon–Sat · 11:00 AM – 7:00 PM</span>
+    </div>
   </div>
-</nav>
 
-<!-- ============================================================
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo-wrap"><img src="images/logo.png" alt="Scale Planet"></a>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="What can we help you find?">
+        <button onclick="searchProducts()" aria-label="Search"><i class="fas fa-arrow-right"></i></button>
+        <div class="search-suggest" id="searchSuggest"></div>
+      </div>
+      <nav class="header-nav">
+        <a href="products.html">Products</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <span class="delivery-label"><i class="fas fa-truck-fast"></i>Same day Delivery in Lahore</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CATEGORY NAV -->
+  <nav class="catnav">
+    <div class="catnav-inner">
+      <a href="products.html" class="catnav-link active">Shop All</a>
+      <a href="products.html?category=Platform+Scales" class="catnav-link">Platform Scales</a>
+      <a href="products.html?category=Counter+Scales" class="catnav-link">Counter Scales</a>
+      <a href="products.html?category=Animal+Scales" class="catnav-link">Animal Scales</a>
+      <a href="products.html?category=Load+Cells" class="catnav-link">Load Cells</a>
+      <a href="products.html?category=Indicators" class="catnav-link">Indicators</a>
+      <a href="products.html?category=Lab+Scales" class="catnav-link">Lab Scales</a>
+      <a href="products.html?category=Hanging+Scales" class="catnav-link">Hanging Scales</a>
+    </div>
+  </nav>
+
+  <!-- ============================================================
      SAME DAY DELIVERY POPUP — COMPACT
      ============================================================ -->
-<div class="sdd-overlay" id="sddOverlay" onclick="if(event.target===this) closeSameDayDelivery()">
-  <div class="sdd-popup" role="dialog" aria-modal="true" aria-labelledby="sddTitle">
+  <div class="sdd-overlay" id="sddOverlay" onclick="if(event.target===this) closeSameDayDelivery()">
+    <div class="sdd-popup" role="dialog" aria-modal="true" aria-labelledby="sddTitle">
 
-    <button class="sdd-close" onclick="closeSameDayDelivery()" aria-label="Close">
-      <i class="fas fa-times"></i>
-    </button>
-
-    <div class="sdd-hero">
-      <div class="sdd-hero-left">
-        <div class="sdd-truck-icon"><i class="fas fa-truck-fast"></i></div>
-        <h2 class="sdd-title" id="sddTitle">
-          <span>Same Day Delivery</span>
-          <span>in <span class="accent">Lahore</span></span>
-        </h2>
-        <div class="sdd-urdu">آج آرڈر کریں، آج ہی ڈیلیوری پائیں!</div>
-      </div>
-      <div class="sdd-hero-right">
-        <svg class="sdd-minar-svg" viewBox="0 0 120 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="20" y="200" width="80" height="8" rx="1.5" fill="#e8c76a" opacity="0.95"/>
-          <rect x="28" y="192" width="64" height="9" rx="1.5" fill="#f0d37a"/>
-          <rect x="36" y="184" width="48" height="9" rx="1" fill="#e8c76a"/>
-          <rect x="42" y="177" width="36" height="8" rx="1" fill="#f0d37a"/>
-          <path d="M50 177 L54 60 L66 60 L70 177 Z" fill="#f5dd8a"/>
-          <path d="M54 60 L60 40 L66 60 Z" fill="#f0d37a"/>
-          <ellipse cx="60" cy="40" rx="7" ry="5" fill="#e8c76a"/>
-          <rect x="58.5" y="26" width="3" height="12" fill="#e8c76a"/>
-          <circle cx="60" cy="24" r="3.4" fill="#f0d37a"/>
-          <circle cx="62" cy="23" r="3" fill="#3e4095"/>
-          <rect x="47" y="100" width="26" height="5" rx="1" fill="#e8c76a"/>
-          <rect x="45" y="135" width="30" height="5" rx="1" fill="#e8c76a"/>
-          <rect x="43" y="160" width="34" height="5" rx="1" fill="#e8c76a"/>
-          <path d="M56 155 Q60 148 64 155 L64 160 L56 160 Z" fill="#3e4095" opacity="0.85"/>
-          <path d="M56 38 Q60 33 64 38" stroke="#fff" stroke-width="0.8" fill="none" opacity="0.6"/>
-        </svg>
-      </div>
-    </div>
-
-    <div class="sdd-body">
-      <div class="sdd-badges">
-        <div class="sdd-badge"><i class="fas fa-bolt"></i> Fast</div>
-        <div class="sdd-badge"><i class="fas fa-shield-halved"></i> Safe</div>
-        <div class="sdd-badge"><i class="fas fa-circle-check"></i> Reliable</div>
-      </div>
-
-      <p class="sdd-desc">
-        Get your weighing scale delivered on the <strong>same day</strong> in Lahore. Order before the cut-off time and receive it at your doorstep — today!
-      </p>
-
-      <h3 class="sdd-cat-title">Our Weighing Scale Categories</h3>
-      <div class="sdd-cat-grid">
-        <a href="products.html?category=Counter+Scales" class="sdd-cat">
-          <div class="sdd-cat-icon"><i class="fas fa-cash-register"></i></div>
-          <div class="sdd-cat-name">Table Top<br>Scales</div>
-        </a>
-        <a href="products.html?category=Platform+Scales" class="sdd-cat">
-          <div class="sdd-cat-icon"><i class="fas fa-weight-hanging"></i></div>
-          <div class="sdd-cat-name">Platform<br>Scales</div>
-        </a>
-        <a href="products.html?category=Platform+Scales" class="sdd-cat">
-          <div class="sdd-cat-icon"><i class="fas fa-industry"></i></div>
-          <div class="sdd-cat-name">Industrial<br>Scales</div>
-        </a>
-        <a href="products.html?category=Load+Cells" class="sdd-cat">
-          <div class="sdd-cat-icon"><i class="fas fa-microchip"></i></div>
-          <div class="sdd-cat-name">Load<br>Cells</div>
-        </a>
-        <a href="products.html?category=Lab+Scales" class="sdd-cat">
-          <div class="sdd-cat-icon"><i class="fas fa-flask"></i></div>
-          <div class="sdd-cat-name">Lab<br>Balances</div>
-        </a>
-        <a href="products.html?category=Platform+Scales" class="sdd-cat">
-          <div class="sdd-cat-icon"><i class="fas fa-truck"></i></div>
-          <div class="sdd-cat-name">Weigh<br>bridges</div>
-        </a>
-      </div>
-
-      <div class="sdd-trust">
-        <div class="sdd-trust-item"><i class="fas fa-shield-halved"></i> 100% Original</div>
-        <div class="sdd-trust-item"><i class="fas fa-truck"></i> Pro Delivery</div>
-        <div class="sdd-trust-item"><i class="fas fa-certificate"></i> Warranty</div>
-        <div class="sdd-trust-item"><i class="fas fa-headset"></i> After Sales</div>
-      </div>
-
-      <div class="sdd-actions">
-        <a href="https://wa.me/923234005335?text=Hello%20Scale%20Planet%20Team!%20I%20want%20to%20place%20a%20Same%20Day%20Delivery%20order%20in%20Lahore.%20Please%20guide%20me." target="_blank" class="sdd-wa-btn">
-          <i class="fab fa-whatsapp"></i> Order on WhatsApp
-        </a>
-        <a href="tel:03234005335" class="sdd-call-block">
-          <div class="sdd-call-icon"><i class="fas fa-phone"></i></div>
-          <div class="sdd-call-num">0323-4005335<small>(WhatsApp Only)</small></div>
-        </a>
-      </div>
-
-      <p class="sdd-footnote"><i class="fas fa-circle-info"></i> Get Complete Details, Prices &amp; Delivery Info</p>
-    </div>
-  </div>
-</div>
-
-<!-- PAGE BANNER -->
-<section class="page-banner">
-  <h1>Precision Weighing Solutions for Your Business<sup>TM</sup></h1>
-</section>
-
-<!-- PROMO GRID -->
-<section class="promo-grid-wrap">
-  <div class="promo-grid">
-    <a href="products.html" class="promo-tile tile-1">
-      <div class="promo-text">
-        <h3>Precision Weighing Solutions</h3>
-        <div class="promo-cta">Shop Now</div>
-        <p>*20 years of excellence in weighing industry</p>
-      </div>
-    </a>
-    <a href="products.html?category=Platform+Scales" class="promo-tile tile-2">
-      <div class="promo-text">
-        <h3>Filling Machines and Batching Systems</h3>
-        <div class="promo-cta">Shop Now</div>
-        <p>*20 years of excellence in weighing industry</p>
-      </div>
-    </a>
-    <a href="products.html?category=Platform+Scales" class="promo-tile tile-3">
-      <div class="promo-text">
-        <h3>Heavy Duty Platform Scales</h3>
-        <div class="promo-cta">Shop Now</div>
-        <p>*Built for industrial environments with precision accuracy</p>
-      </div>
-    </a>
-    <a href="products.html?category=Lab+Scales" class="promo-tile tile-4">
-      <div class="promo-text">
-        <h3>High Precision Lab Equipment</h3>
-        <div class="promo-cta">Shop Now</div>
-        <p>*Analytical balances and laboratory weighing solutions</p>
-      </div>
-    </a>
-  </div>
-</section>
-
-<!-- FEATURE ROW -->
-<section class="feature-row">
-  <div class="feature-row-inner">
-    <div class="feature-card">
-      <div class="feature-card-header">Recently viewed and more</div>
-      <div class="fp-grid" id="fpRecent"></div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-card-header">New at Scale Planet</div>
-      <div class="fp-grid" id="fpNew"></div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-card-header">Stock up on essentials</div>
-      <div class="fp-grid" id="fpStock"></div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-card-header">Most purchased this month</div>
-      <div class="fp-grid" id="fpMost"></div>
-    </div>
-  </div>
-</section>
-
-<!-- FIND THE RIGHT SCALE -->
-<section class="find-scale">
-  <div class="find-scale-inner">
-    <div class="find-scale-head">
-      <i class="fas fa-bolt"></i>
-      <h2>Find the Right Scale</h2>
-    </div>
-    <p class="find-scale-sub">Choose your approximate requirement and get a quick demo recommendation.</p>
-    <div class="find-scale-form">
-      <div class="fs-field">
-        <select id="fsApplication">
-          <option value="">Application</option>
-          <option value="Shop / Grocery">Shop / Grocery</option>
-          <option value="Warehouse / Platform">Warehouse / Platform</option>
-          <option value="Poultry / Animal">Poultry / Animal</option>
-          <option value="Laboratory / Precision">Laboratory / Precision</option>
-          <option value="Truck / Weighbridge">Truck / Weighbridge</option>
-        </select>
-      </div>
-      <div class="fs-field">
-        <select id="fsCapacity">
-          <option value="">Capacity</option>
-          <option value="1kg">Up to 1 kg</option>
-          <option value="5kg">Up to 5 kg</option>
-          <option value="10kg">Up to 10 kg</option>
-          <option value="30kg">Up to 30 kg</option>
-          <option value="100kg">Up to 100 kg</option>
-          <option value="500kg">Up to 500 kg</option>
-          <option value="1000kg+">Over 1 Ton</option>
-        </select>
-      </div>
-      <button class="fs-btn" onclick="findMyScale()">
-        Find My Scale <i class="fas fa-arrow-right"></i>
+      <button class="sdd-close" onclick="closeSameDayDelivery()" aria-label="Close">
+        <i class="fas fa-times"></i>
       </button>
+
+      <div class="sdd-hero">
+        <div class="sdd-hero-left">
+          <div class="sdd-truck-icon"><i class="fas fa-truck-fast"></i></div>
+          <h2 class="sdd-title" id="sddTitle">
+            <span>Same Day Delivery</span>
+            <span>in <span class="accent">Lahore</span></span>
+          </h2>
+          <div class="sdd-urdu">آج آرڈر کریں، آج ہی ڈیلیوری پائیں!</div>
+        </div>
+        <div class="sdd-hero-right">
+          <svg class="sdd-minar-svg" viewBox="0 0 120 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="20" y="200" width="80" height="8" rx="1.5" fill="#e8c76a" opacity="0.95" />
+            <rect x="28" y="192" width="64" height="9" rx="1.5" fill="#f0d37a" />
+            <rect x="36" y="184" width="48" height="9" rx="1" fill="#e8c76a" />
+            <rect x="42" y="177" width="36" height="8" rx="1" fill="#f0d37a" />
+            <path d="M50 177 L54 60 L66 60 L70 177 Z" fill="#f5dd8a" />
+            <path d="M54 60 L60 40 L66 60 Z" fill="#f0d37a" />
+            <ellipse cx="60" cy="40" rx="7" ry="5" fill="#e8c76a" />
+            <rect x="58.5" y="26" width="3" height="12" fill="#e8c76a" />
+            <circle cx="60" cy="24" r="3.4" fill="#f0d37a" />
+            <circle cx="62" cy="23" r="3" fill="#3e4095" />
+            <rect x="47" y="100" width="26" height="5" rx="1" fill="#e8c76a" />
+            <rect x="45" y="135" width="30" height="5" rx="1" fill="#e8c76a" />
+            <rect x="43" y="160" width="34" height="5" rx="1" fill="#e8c76a" />
+            <path d="M56 155 Q60 148 64 155 L64 160 L56 160 Z" fill="#3e4095" opacity="0.85" />
+            <path d="M56 38 Q60 33 64 38" stroke="#fff" stroke-width="0.8" fill="none" opacity="0.6" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="sdd-body">
+        <div class="sdd-badges">
+          <div class="sdd-badge"><i class="fas fa-bolt"></i> Fast</div>
+          <div class="sdd-badge"><i class="fas fa-shield-halved"></i> Safe</div>
+          <div class="sdd-badge"><i class="fas fa-circle-check"></i> Reliable</div>
+        </div>
+
+        <p class="sdd-desc">
+          Get your weighing scale delivered on the <strong>same day</strong> in Lahore. Order before the cut-off time
+          and receive it at your doorstep — today!
+        </p>
+
+        <h3 class="sdd-cat-title">Our Weighing Scale Categories</h3>
+        <div class="sdd-cat-grid">
+          <a href="products.html?category=Counter+Scales" class="sdd-cat">
+            <div class="sdd-cat-icon"><i class="fas fa-cash-register"></i></div>
+            <div class="sdd-cat-name">Table Top<br>Scales</div>
+          </a>
+          <a href="products.html?category=Platform+Scales" class="sdd-cat">
+            <div class="sdd-cat-icon"><i class="fas fa-weight-hanging"></i></div>
+            <div class="sdd-cat-name">Platform<br>Scales</div>
+          </a>
+          <a href="products.html?category=Platform+Scales" class="sdd-cat">
+            <div class="sdd-cat-icon"><i class="fas fa-industry"></i></div>
+            <div class="sdd-cat-name">Industrial<br>Scales</div>
+          </a>
+          <a href="products.html?category=Load+Cells" class="sdd-cat">
+            <div class="sdd-cat-icon"><i class="fas fa-microchip"></i></div>
+            <div class="sdd-cat-name">Load<br>Cells</div>
+          </a>
+          <a href="products.html?category=Lab+Scales" class="sdd-cat">
+            <div class="sdd-cat-icon"><i class="fas fa-flask"></i></div>
+            <div class="sdd-cat-name">Lab<br>Balances</div>
+          </a>
+          <a href="products.html?category=Platform+Scales" class="sdd-cat">
+            <div class="sdd-cat-icon"><i class="fas fa-truck"></i></div>
+            <div class="sdd-cat-name">Weigh<br>bridges</div>
+          </a>
+        </div>
+
+        <div class="sdd-trust">
+          <div class="sdd-trust-item"><i class="fas fa-shield-halved"></i> 100% Original</div>
+          <div class="sdd-trust-item"><i class="fas fa-truck"></i> Pro Delivery</div>
+          <div class="sdd-trust-item"><i class="fas fa-certificate"></i> Warranty</div>
+          <div class="sdd-trust-item"><i class="fas fa-headset"></i> After Sales</div>
+        </div>
+
+        <div class="sdd-actions">
+          <a href="https://wa.me/923234005335?text=Hello%20Scale%20Planet%20Team!%20I%20want%20to%20place%20a%20Same%20Day%20Delivery%20order%20in%20Lahore.%20Please%20guide%20me."
+            target="_blank" class="sdd-wa-btn">
+            <i class="fab fa-whatsapp"></i> Order on WhatsApp
+          </a>
+          <a href="tel:03234005335" class="sdd-call-block">
+            <div class="sdd-call-icon"><i class="fas fa-phone"></i></div>
+            <div class="sdd-call-num">0323-4005335<small>(WhatsApp Only)</small></div>
+          </a>
+        </div>
+
+        <p class="sdd-footnote"><i class="fas fa-circle-info"></i> Get Complete Details, Prices &amp; Delivery Info</p>
+      </div>
     </div>
   </div>
-</section>
 
-<!-- BUILD YOUR OWN SCALE -->
-<section class="build-scale">
-  <div class="build-scale-inner">
-    <div class="sec-head">
-      <h2>Build Your <em>Own Scale</em></h2>
-      <p>Tell us your requirements — we'll fabricate a scale exactly to your specifications.</p>
+  <!-- PAGE BANNER -->
+  <section class="page-banner">
+    <h1>Precision Weighing Solutions for Your Business<sup>TM</sup></h1>
+  </section>
+
+  <!-- PROMO GRID -->
+  <section class="promo-grid-wrap">
+    <div class="promo-grid">
+      <a href="products.html" class="promo-tile tile-1">
+        <div class="promo-text">
+          <h3>Precision Weighing Solutions</h3>
+          <div class="promo-cta">Shop Now</div>
+          <p>*20 years of excellence in weighing industry</p>
+        </div>
+      </a>
+      <a href="products.html?category=Platform+Scales" class="promo-tile tile-2">
+        <div class="promo-text">
+          <h3>Filling Machines and Batching Systems</h3>
+          <div class="promo-cta">Shop Now</div>
+          <p>*20 years of excellence in weighing industry</p>
+        </div>
+      </a>
+      <a href="products.html?category=Platform+Scales" class="promo-tile tile-3">
+        <div class="promo-text">
+          <h3>Heavy Duty Platform Scales</h3>
+          <div class="promo-cta">Shop Now</div>
+          <p>*Built for industrial environments with precision accuracy</p>
+        </div>
+      </a>
+      <a href="products.html?category=Lab+Scales" class="promo-tile tile-4">
+        <div class="promo-text">
+          <h3>High Precision Lab Equipment</h3>
+          <div class="promo-cta">Shop Now</div>
+          <p>*Analytical balances and laboratory weighing solutions</p>
+        </div>
+      </a>
     </div>
-    <div class="bys-form">
-      <div class="bys-field">
-        <label>Application</label>
-        <select id="bysCategory">
-          <option value="">Select application</option>
-          <option value="Shop / Grocery">Shop / Grocery</option>
-          <option value="Warehouse / Platform">Warehouse / Platform</option>
-          <option value="Poultry / Animal">Poultry / Animal</option>
-          <option value="Laboratory / Precision">Laboratory / Precision</option>
-          <option value="Truck / Weighbridge">Truck / Weighbridge</option>
-        </select>
+  </section>
+
+  <!-- FEATURE ROW -->
+  <section class="feature-row">
+    <div class="feature-row-inner">
+      <div class="feature-card">
+        <div class="feature-card-header">Recently viewed and more</div>
+        <div class="fp-grid" id="fpRecent"></div>
       </div>
-      <div class="bys-field">
-        <label>Capacity</label>
-        <select id="bysCapacity">
-          <option value="">Select capacity</option>
-          <option value="5kg">5 kg</option>
-          <option value="10kg">10 kg</option>
-          <option value="20kg">20 kg</option>
-          <option value="30kg">30 kg</option>
-          <option value="50kg">50 kg</option>
-          <option value="100kg">100 kg</option>
-          <option value="200kg">200 kg</option>
-          <option value="300kg">300 kg</option>
-          <option value="500kg">500 kg</option>
-          <option value="1000kg">1000 kg (1 Ton)</option>
-          <option value="2000kg">2000 kg (2 Ton)</option>
-        </select>
+      <div class="feature-card">
+        <div class="feature-card-header">New at Scale Planet</div>
+        <div class="fp-grid" id="fpNew"></div>
       </div>
-      <div class="bys-field">
-        <label>Preferred Platform Material</label>
-        <select id="bysPlatform">
-          <option value="">Select material</option>
-          <option value="MS / Mild Steel">MS / Mild Steel</option>
-          <option value="Stainless Steel (SS 304)">Stainless Steel (SS 304)</option>
-          <option value="Stainless Steel (SS 316)">Stainless Steel (SS 316)</option>
-          <option value="Painted Carbon Steel">Painted Carbon Steel</option>
-          <option value="Galvanized Steel">Galvanized Steel</option>
-        </select>
+      <div class="feature-card">
+        <div class="feature-card-header">Stock up on essentials</div>
+        <div class="fp-grid" id="fpStock"></div>
       </div>
-      <button class="bys-btn" onclick="generateMyScale()">
-        <i class="fas fa-cogs"></i> Generate My Scale
-      </button>
+      <div class="feature-card">
+        <div class="feature-card-header">Most purchased this month</div>
+        <div class="fp-grid" id="fpMost"></div>
+      </div>
     </div>
-    <div class="bys-result" id="bysResult" style="display:none;">
-      <div class="bys-result-badge">Your Custom Configuration</div>
-      <h3>Scale Specification</h3>
-      <div class="bys-result-grid" id="bysResultGrid"></div>
-      <div class="bys-result-actions">
-        <a href="#" id="bysWhatsappBtn" target="_blank" class="bys-wa-btn">
-          <i class="fab fa-whatsapp"></i> Get this Quote on WhatsApp
-        </a>
-        <button class="bys-reset-btn" onclick="resetBuildScale()">
-          <i class="fas fa-redo"></i> Start Over
+  </section>
+
+  <!-- FIND THE RIGHT SCALE -->
+  <section class="find-scale">
+    <div class="find-scale-inner">
+      <div class="find-scale-head">
+        <i class="fas fa-bolt"></i>
+        <h2>Find the Right Scale</h2>
+      </div>
+      <p class="find-scale-sub">Choose your approximate requirement and get a quick demo recommendation.</p>
+      <div class="find-scale-form">
+        <div class="fs-field">
+          <select id="fsApplication">
+            <option value="">Application</option>
+            <option value="Shop / Grocery">Shop / Grocery</option>
+            <option value="Warehouse / Platform">Warehouse / Platform</option>
+            <option value="Poultry / Animal">Poultry / Animal</option>
+            <option value="Laboratory / Precision">Laboratory / Precision</option>
+            <option value="Truck / Weighbridge">Truck / Weighbridge</option>
+          </select>
+        </div>
+        <div class="fs-field">
+          <select id="fsCapacity">
+            <option value="">Capacity</option>
+            <option value="1kg">Up to 1 kg</option>
+            <option value="5kg">Up to 5 kg</option>
+            <option value="10kg">Up to 10 kg</option>
+            <option value="30kg">Up to 30 kg</option>
+            <option value="100kg">Up to 100 kg</option>
+            <option value="500kg">Up to 500 kg</option>
+            <option value="1000kg+">Over 1 Ton</option>
+          </select>
+        </div>
+        <button class="fs-btn" onclick="findMyScale()">
+          Find My Scale <i class="fas fa-arrow-right"></i>
         </button>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SHOP BY CATEGORY -->
-<section class="cat-section">
-  <div class="cat-section-inner">
-    <div class="sec-head">
-      <h2>Shop by <em>Category</em></h2>
-      <p>Every weighing solution we make, organised by what it does best.</p>
+  <!-- BUILD YOUR OWN SCALE -->
+  <section class="build-scale">
+    <div class="build-scale-inner">
+      <div class="sec-head">
+        <h2>Build Your <em>Own Scale</em></h2>
+        <p>Tell us your requirements — we'll fabricate a scale exactly to your specifications.</p>
+      </div>
+      <div class="bys-form">
+        <div class="bys-field">
+          <label>Application</label>
+          <select id="bysCategory">
+            <option value="">Select application</option>
+            <option value="Shop / Grocery">Shop / Grocery</option>
+            <option value="Warehouse / Platform">Warehouse / Platform</option>
+            <option value="Poultry / Animal">Poultry / Animal</option>
+            <option value="Laboratory / Precision">Laboratory / Precision</option>
+            <option value="Truck / Weighbridge">Truck / Weighbridge</option>
+          </select>
+        </div>
+        <div class="bys-field">
+          <label>Capacity</label>
+          <select id="bysCapacity">
+            <option value="">Select capacity</option>
+            <option value="5kg">5 kg</option>
+            <option value="10kg">10 kg</option>
+            <option value="20kg">20 kg</option>
+            <option value="30kg">30 kg</option>
+            <option value="50kg">50 kg</option>
+            <option value="100kg">100 kg</option>
+            <option value="200kg">200 kg</option>
+            <option value="300kg">300 kg</option>
+            <option value="500kg">500 kg</option>
+            <option value="1000kg">1000 kg (1 Ton)</option>
+            <option value="2000kg">2000 kg (2 Ton)</option>
+          </select>
+        </div>
+        <div class="bys-field">
+          <label>Preferred Platform Material</label>
+          <select id="bysPlatform">
+            <option value="">Select material</option>
+            <option value="MS / Mild Steel">MS / Mild Steel</option>
+            <option value="Stainless Steel (SS 304)">Stainless Steel (SS 304)</option>
+            <option value="Stainless Steel (SS 316)">Stainless Steel (SS 316)</option>
+            <option value="Painted Carbon Steel">Painted Carbon Steel</option>
+            <option value="Galvanized Steel">Galvanized Steel</option>
+          </select>
+        </div>
+        <button class="bys-btn" onclick="generateMyScale()">
+          <i class="fas fa-cogs"></i> Generate My Scale
+        </button>
+      </div>
+      <div class="bys-result" id="bysResult" style="display:none;">
+        <div class="bys-result-badge">Your Custom Configuration</div>
+        <h3>Scale Specification</h3>
+        <div class="bys-result-grid" id="bysResultGrid"></div>
+        <div class="bys-result-actions">
+          <a href="#" id="bysWhatsappBtn" target="_blank" class="bys-wa-btn">
+            <i class="fab fa-whatsapp"></i> Get this Quote on WhatsApp
+          </a>
+          <button class="bys-reset-btn" onclick="resetBuildScale()">
+            <i class="fas fa-redo"></i> Start Over
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="cat-grid">
-      <a href="products.html?category=Animal+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/animal-scales.png" alt="Animal Scales" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Animal Scales</div>
-          <div class="cat-desc">Reliable weighing for livestock and animals.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Lab+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/lab-balances.png" alt="Lab Balances" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Lab Balances</div>
-          <div class="cat-desc">High accuracy for precise results.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Counting+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/counting-scales.png" alt="Counting Scales" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Counting Scales</div>
-          <div class="cat-desc">Fast &amp; accurate piece counting.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Barcode+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/barcode-scales.png" alt="Barcode Scales" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Barcode Scales</div>
-          <div class="cat-desc">Smart weighing with label printing.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Load+Cells" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/load-cells.png" alt="Load Cells" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Load Cells</div>
-          <div class="cat-desc">Precision sensors for accurate measurement.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Platform+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/platform-scales.png" alt="Platform Scales" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Platform Scales</div>
-          <div class="cat-desc">Heavy duty weighing for industrial use.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Table+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/table-scales.png" alt="Table Scales" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Table Scales</div>
-          <div class="cat-desc">Compact, accurate and easy to use.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=ACS+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/acs-scales.png" alt="ACS Scales" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">ACS Scales</div>
-          <div class="cat-desc">Durable &amp; reliable weighing solutions.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=100KG+TCS+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/100kg-tcs-scales.png" alt="100KG TCS Scales" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">100KG TCS Scales</div>
-          <div class="cat-desc">Perfect for medium capacity weighing.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Printers" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/printers.png" alt="Printers" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Printers</div>
-          <div class="cat-desc">Print labels, receipts &amp; barcodes with ease.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Weighbridge" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/weighbridge.png" alt="Weighbridge" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Weighbridge</div>
-          <div class="cat-desc">For heavy vehicles and bulk material.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Accessories" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/accessories.png" alt="Accessories" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Accessories</div>
-          <div class="cat-desc">Everything you need for your weighing setup.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- FAQ -->
-<section class="faq-section">
-  <div class="faq-inner">
-    <div class="sec-head">
-      <h2>Frequently <em>Asked</em></h2>
-      <p>Quick answers about our weighing equipment, services, and Pakistan-wide delivery.</p>
+  <!-- SHOP BY CATEGORY -->
+  <section class="cat-section">
+    <div class="cat-section-inner">
+      <div class="sec-head">
+        <h2>Shop by <em>Category</em></h2>
+        <p>Every weighing solution we make, organised by what it does best.</p>
+      </div>
+      <div class="cat-grid">
+        <a href="products.html?category=Animal+Scales" class="cat-tile">
+          <div class="cat-img"><img src="images/categories/animal-scales.png" alt="Animal Scales" loading="lazy"></div>
+          <div class="cat-info">
+            <div class="cat-name">Animal Scales</div>
+            <div class="cat-desc">Reliable weighing for livestock and animals.</div>
+            <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
+          </div>
+        </a>
+        <a href="products.html?category=Lab+Scales" class="cat-tile">
+          <div class="cat-img"><img src="images/categories/lab-balances.png" alt="Lab Balances" loading="lazy"></div>
+          <div class="cat-info">
+            <div class="cat-name">Lab Balances</div>
+            <div class="cat-desc">High accuracy for precise results.</div>
+            <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
+          </div>
+        </a>
+        <a href="products.html?category=Counting+Scales" class="cat-tile">
+          <div class="cat-img"><img src="images/categories/counting-scales.png" alt="Counting Scales" loading="lazy">
+          </div>
+          <div class="cat-info">
+            <div class="cat-name">Counting Scales</div>
+            <div class="cat-desc">Fast &amp; accurate piece counting.</div>
+            <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
+          </div>
+        </a>
+        <a href="products.html?category=Barcode+Scales" class="cat-tile">
+          <div class="cat-img"><img src="images/categories/barcode-scales.png" alt="Barcode Scales" loading="lazy">
+          </div>
+          <div class="cat-info">
+            <div class="cat-name">Barcode Scales</div>
+            <div class="cat-desc">Smart weighing with label printing.</div>
+            <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
+          </div>
+        </a>
+        <a href="products.html?category=Load+Cells" class="cat-tile">
+          <div class="cat-img"><img src="images/categories/load-cells.png" alt="Load Cells" loading="lazy"></div>
+          <div class="cat-info">
+            <div class="cat-name">Load Cells</div>
+            <div class="cat-desc">Precision sensors for accurate measurement.</div>
+            <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
+          </div>
+        </a>
+        <a href="products.html?category=Platform+Scales" class="cat-tile">
+          <div class="cat-img"><img src="images/categories/platform-scales.png" alt="Platform Scales" loading="lazy">
+          </div>
+          <div class="cat-info">
+            <div class="cat-name">Platform Scales</div>
+            <div class="cat-desc">Heavy duty weighing for industrial use.</div>
+            <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
+          </div>
+        </a>
+        <a href="products.html?category=Table+Scales" class="cat-tile">
+          <div class="cat-img"><img src="images/categories/table-scales.png" alt="Table Scales" loading="lazy"></div>
+          <div class="cat-info">
+            <div class="cat-name">Table Scales</div>
+            <div class="cat-desc">Compact, accurate and easy to use.</div>
+            <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
+          </div>
+        </a>
+        <a href="products.html?category=ACS+Scales" class="cat-tile">
+          <div class="cat-img"><img src="images/categories/acs-scales.png" alt="ACS Scales" loading="lazy"></div>
+          <div class="cat-info">
+            <div class="cat-name">ACS Scales</div>
+            <div class="cat-desc">Durable &amp; reliable weighing solutions.</div>
+            <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
+          </div>
+        </a>
+        <a href="products.html?category=100KG+TCS+Scales" class="cat-tile">
+          <div class="cat-img"><img src="images/categories/100kg-tcs-scales.png" alt="100KG TCS Scales" loading="lazy">
+          </div>
+          <div class="cat-info">
+            <div class="cat-name">100KG TCS Scales</div>
+            <div class="cat-desc">Perfect for medium capacity weighing.</div>
+            <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
+          </div>
+        </a>
+        <a href="products.html?category=Printers" class="cat-tile">
+          <div class="cat-img"><img src="images/categories/printers.png" alt="Printers" loading="lazy"></div>
+          <div class="cat-info">
+            <div class="cat-name">Printers</div>
+            <div class="cat-desc">Print labels, receipts &amp; barcodes with ease.</div>
+            <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
+          </div>
+        </a>
+        <a href="products.html?category=Weighbridge" class="cat-tile">
+          <div class="cat-img"><img src="images/categories/weighbridge.png" alt="Weighbridge" loading="lazy"></div>
+          <div class="cat-info">
+            <div class="cat-name">Weighbridge</div>
+            <div class="cat-desc">For heavy vehicles and bulk material.</div>
+            <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
+          </div>
+        </a>
+        <a href="products.html?category=Accessories" class="cat-tile">
+          <div class="cat-img"><img src="images/categories/accessories.png" alt="Accessories" loading="lazy"></div>
+          <div class="cat-info">
+            <div class="cat-name">Accessories</div>
+            <div class="cat-desc">Everything you need for your weighing setup.</div>
+            <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
+          </div>
+        </a>
+      </div>
     </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)"><span>What is the price of a weighing scale in Pakistan?</span><i class="fas fa-plus"></i></button>
-        <div class="faq-a"><p>The price of a weighing scale in Pakistan depends on the type, weighing capacity, platform size, accuracy, indicator, load cells, material quality, and application. Small commercial digital scales are generally suitable for shops and counters, while heavy-duty platform scales, industrial scales, animal scales, crane scales, laboratory balances, and other specialized weighing systems are designed for different requirements.</p><p>At Scale Planet, we provide weighing solutions for shops, businesses, warehouses, factories, industries, laboratories, agriculture, livestock, and commercial applications. Available capacities can range from small digital scales to high-capacity industrial weighing systems.</p><p>For an accurate price, it is best to specify the required capacity, platform size, scale type, and application. Scale Planet can help you select a weighing scale according to your requirements and budget.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)"><span>Which weighing scale is best for shops and businesses in Pakistan?</span><i class="fas fa-plus"></i></button>
-        <div class="faq-a"><p>The right weighing scale depends on what you need to weigh and how frequently the scale will be used. For retail shops and counters, a digital counter weighing scale may be suitable for everyday products. For warehouses, factories, and heavier goods, a platform weighing scale is generally more appropriate.</p><p>For specialized applications, businesses may require price computing scales, platform scales, label or barcode scales, crane scales, animal scales, counting scales, or laboratory balances.</p><p>When selecting a commercial weighing scale, consider:</p><ul><li>Maximum weighing capacity</li><li>Required accuracy and readability</li><li>Platform or pan size</li><li>Frequency of use</li><li>Indoor or industrial environment</li><li>Digital indicator and display</li><li>Tare and zero functions</li><li>Power/battery requirements</li><li>Connectivity requirements, if applicable</li></ul><p>Scale Planet can help you choose a weighing scale based on your product, capacity, and business application rather than simply choosing a scale by price.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)"><span>What is the difference between a digital weighing scale and a mechanical scale?</span><i class="fas fa-plus"></i></button>
-        <div class="faq-a"><p>A digital weighing scale uses electronic sensors, commonly load cells, to measure weight and display the result electronically. A mechanical weighing scale uses mechanical components such as springs, levers, or other mechanical mechanisms to indicate weight.</p><p>Digital scales are widely used because they can provide easy-to-read digital measurements and may include features such as tare, zero, counting, price calculation, battery operation, data interfaces, or other electronic functions, depending on the model.</p><p>Mechanical scales can still be useful for certain applications where a simple non-electronic weighing system is preferred.</p><p>The best choice depends on your application, required accuracy, operating environment, capacity, and available features. Scale Planet offers different weighing solutions for commercial, industrial, laboratory, agricultural, livestock, and other applications.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)"><span>How do I choose the right weighing scale capacity – 30KG, 100KG, 300KG, 500KG or 1 Ton?</span><i class="fas fa-plus"></i></button>
-        <div class="faq-a"><p>Choosing the correct weighing capacity is important for accurate and reliable weighing. First, determine the maximum weight you normally need to measure, then select a scale with an appropriate capacity and suitable readability for your application.</p><p>For example:</p><ul><li>30KG scale – suitable for many small retail, commercial, kitchen, parcel, and general weighing applications.</li><li>100KG scale – useful for heavier products and commercial applications.</li><li>300KG scale – commonly considered for larger goods and heavier commercial weighing.</li><li>500KG scale – suitable for many industrial and warehouse applications.</li><li>1 Ton weighing scale – designed for substantially heavier industrial and material-handling requirements.</li></ul><p>Capacity alone is not enough. You should also consider platform size, load-cell capacity, accuracy, readability, installation conditions, and the type of material being weighed.</p><p>If you are unsure whether you need a 300KG, 500KG, 1 Ton, or another capacity, contact Scale Planet with your product type, approximate maximum weight, and required platform size. We can help identify a suitable weighing solution.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)"><span>How often should a weighing scale be calibrated?</span><i class="fas fa-plus"></i></button>
-        <div class="faq-a"><p>Regular calibration helps maintain confidence in weighing results. The appropriate calibration interval depends on the type of scale, frequency of use, operating environment, required accuracy, and applicable quality or regulatory requirements.</p><p>Pakistan National Accreditation Council (PNAC) guidance states that weighing machines should be traceably calibrated and should be calibrated after servicing or at least once per year, with calibration documented by a calibration certificate. PNAC also recommends regular checks between calibrations using suitable control weights.</p><p>A scale should also be checked if you notice:</p><ul><li>Unstable or inconsistent readings</li><li>A noticeable difference from known test weights</li><li>The scale has been moved or installed in a new location</li><li>The scale has been overloaded or physically damaged</li><li>Load cells, indicator, or other major components have been serviced or replaced</li></ul><p>For commercial weighing equipment, applicable verification and regulatory requirements should also be considered. In Punjab, the Directorate General of Industries, Prices, Weights &amp; Measures is responsible for inspection and verification of commercial weights and measures.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)"><span>Which platform weighing scale is suitable for industrial, warehouse and factory use?</span><i class="fas fa-plus"></i></button>
-        <div class="faq-a"><p>For industrial, warehouse, and factory applications, the correct platform weighing scale depends on the maximum load, platform dimensions, weighing environment, required accuracy, installation method, and type of material being weighed.</p><p>Heavy-duty platform scales are commonly used for weighing items such as bags, boxes, drums, pallets, raw materials, finished goods, and other industrial products. Depending on the application, a weighing system may include a steel platform, load cells, digital indicator, junction box, ramps, and other accessories.</p><p>Before purchasing an industrial weighing scale, consider:</p><ul><li>Maximum capacity</li><li>Platform size</li><li>Load-cell specification</li><li>Indicator type</li><li>Required readability</li><li>Floor or pit installation</li><li>Ramp requirements</li><li>Indoor or outdoor environment</li><li>Moisture, dust, and operating conditions</li><li>Required calibration or verification</li></ul><p>Scale Planet provides weighing solutions for warehouses, factories, shops, agriculture, livestock, industrial businesses, and commercial applications. Contact us with your required capacity and platform dimensions so we can recommend a suitable configuration.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- BRANDS -->
-<section class="brands-section">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="head-left">
-        <div class="sec-index">Partners</div>
-        <h2>Brands You <span class="ital">Trust</span></h2>
-        <p>Global manufacturers we're proud to represent in Pakistan.</p>
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <div class="sec-head">
+        <h2>Frequently <em>Asked</em></h2>
+        <p>Quick answers about our weighing equipment, services, and Pakistan-wide delivery.</p>
       </div>
-      <a href="products.html" class="head-link">Full Catalogue <i class="fas fa-arrow-right"></i></a>
-    </div>
-    <div class="brand-ledger">
-      <div class="ledger-item">Ohaus</div>
-      <div class="ledger-item">Mettler Toledo</div>
-      <div class="ledger-item">Sartorius</div>
-      <div class="ledger-item">Shimadzu</div>
-      <div class="ledger-item">A&amp;D</div>
-      <div class="ledger-item">Rice Lake</div>
-      <div class="ledger-item">Kern</div>
-      <div class="ledger-item">HBM</div>
-      <div class="ledger-item">Cas</div>
-      <div class="ledger-item">Salter</div>
-    </div>
-  </div>
-</section>
-
-<!-- NEWSLETTER -->
-<section class="newsletter">
-  <div class="newsletter-inner">
-    <div class="nl-left">
-      <div class="sec-index" style="color: var(--primary); font-family: var(--font-body); font-size: 11px; letter-spacing: 1.5px; margin-bottom: 12px; font-weight: 800; text-transform: uppercase;">Stay in the Loop</div>
-      <h2 class="nl-title">Sign Up &amp; <em>Save</em> On Your Next Order.</h2>
-      <p class="nl-desc">Subscribe to receive a promo code, plus occasional product drops and weighing tips from our engineers.</p>
-      <form class="nl-form" id="nlForm">
-        <input type="email" id="nlEmail" placeholder="your@email.com" required>
-        <button type="submit">Subscribe <i class="fas fa-arrow-right"></i></button>
-      </form>
-      <div id="nlMsg" style="margin-top:12px; font-size:13px; display:none;"></div>
-    </div>
-    <div class="nl-right">
-      <h4>Follow Us</h4>
-      <p style="color: var(--text-soft); font-size: 13px; margin-bottom: 16px;">Connect for updates, tips, and offers.</p>
-      <div class="nl-socials">
-        <a href="https://www.facebook.com/share/1EoPxNpaMi/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/scale.planet?stkn=MXM4Ym5kbzVlNWxmZA==" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://youtube.com/@scaleplanet786?si=Olh7_k4Ayipf8AL4" target="_blank"><i class="fab fa-youtube"></i></a>
-        <a href="https://wa.me/923234005335" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        <a href="http://tiktok.com/@scale.planet" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>What is the price of a weighing scale in
+            Pakistan?</span><i class="fas fa-plus"></i></button>
+        <div class="faq-a">
+          <p>The price of a weighing scale in Pakistan depends on the type, weighing capacity, platform size, accuracy,
+            indicator, load cells, material quality, and application. Small commercial digital scales are generally
+            suitable for shops and counters, while heavy-duty platform scales, industrial scales, animal scales, crane
+            scales, laboratory balances, and other specialized weighing systems are designed for different requirements.
+          </p>
+          <p>At Scale Planet, we provide weighing solutions for shops, businesses, warehouses, factories, industries,
+            laboratories, agriculture, livestock, and commercial applications. Available capacities can range from small
+            digital scales to high-capacity industrial weighing systems.</p>
+          <p>For an accurate price, it is best to specify the required capacity, platform size, scale type, and
+            application. Scale Planet can help you select a weighing scale according to your requirements and budget.
+          </p>
+        </div>
       </div>
-      <p class="nl-quote">"Every measurement counts. Trust the precision, trust the brand."</p>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Which weighing scale is best for shops and businesses in
+            Pakistan?</span><i class="fas fa-plus"></i></button>
+        <div class="faq-a">
+          <p>The right weighing scale depends on what you need to weigh and how frequently the scale will be used. For
+            retail shops and counters, a digital counter weighing scale may be suitable for everyday products. For
+            warehouses, factories, and heavier goods, a platform weighing scale is generally more appropriate.</p>
+          <p>For specialized applications, businesses may require price computing scales, platform scales, label or
+            barcode scales, crane scales, animal scales, counting scales, or laboratory balances.</p>
+          <p>When selecting a commercial weighing scale, consider:</p>
+          <ul>
+            <li>Maximum weighing capacity</li>
+            <li>Required accuracy and readability</li>
+            <li>Platform or pan size</li>
+            <li>Frequency of use</li>
+            <li>Indoor or industrial environment</li>
+            <li>Digital indicator and display</li>
+            <li>Tare and zero functions</li>
+            <li>Power/battery requirements</li>
+            <li>Connectivity requirements, if applicable</li>
+          </ul>
+          <p>Scale Planet can help you choose a weighing scale based on your product, capacity, and business application
+            rather than simply choosing a scale by price.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>What is the difference between a digital weighing scale
+            and a mechanical scale?</span><i class="fas fa-plus"></i></button>
+        <div class="faq-a">
+          <p>A digital weighing scale uses electronic sensors, commonly load cells, to measure weight and display the
+            result electronically. A mechanical weighing scale uses mechanical components such as springs, levers, or
+            other mechanical mechanisms to indicate weight.</p>
+          <p>Digital scales are widely used because they can provide easy-to-read digital measurements and may include
+            features such as tare, zero, counting, price calculation, battery operation, data interfaces, or other
+            electronic functions, depending on the model.</p>
+          <p>Mechanical scales can still be useful for certain applications where a simple non-electronic weighing
+            system is preferred.</p>
+          <p>The best choice depends on your application, required accuracy, operating environment, capacity, and
+            available features. Scale Planet offers different weighing solutions for commercial, industrial, laboratory,
+            agricultural, livestock, and other applications.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>How do I choose the right weighing scale capacity – 30KG,
+            100KG, 300KG, 500KG or 1 Ton?</span><i class="fas fa-plus"></i></button>
+        <div class="faq-a">
+          <p>Choosing the correct weighing capacity is important for accurate and reliable weighing. First, determine
+            the maximum weight you normally need to measure, then select a scale with an appropriate capacity and
+            suitable readability for your application.</p>
+          <p>For example:</p>
+          <ul>
+            <li>30KG scale – suitable for many small retail, commercial, kitchen, parcel, and general weighing
+              applications.</li>
+            <li>100KG scale – useful for heavier products and commercial applications.</li>
+            <li>300KG scale – commonly considered for larger goods and heavier commercial weighing.</li>
+            <li>500KG scale – suitable for many industrial and warehouse applications.</li>
+            <li>1 Ton weighing scale – designed for substantially heavier industrial and material-handling requirements.
+            </li>
+          </ul>
+          <p>Capacity alone is not enough. You should also consider platform size, load-cell capacity, accuracy,
+            readability, installation conditions, and the type of material being weighed.</p>
+          <p>If you are unsure whether you need a 300KG, 500KG, 1 Ton, or another capacity, contact Scale Planet with
+            your product type, approximate maximum weight, and required platform size. We can help identify a suitable
+            weighing solution.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>How often should a weighing scale be calibrated?</span><i
+            class="fas fa-plus"></i></button>
+        <div class="faq-a">
+          <p>Regular calibration helps maintain confidence in weighing results. The appropriate calibration interval
+            depends on the type of scale, frequency of use, operating environment, required accuracy, and applicable
+            quality or regulatory requirements.</p>
+          <p>Pakistan National Accreditation Council (PNAC) guidance states that weighing machines should be traceably
+            calibrated and should be calibrated after servicing or at least once per year, with calibration documented
+            by a calibration certificate. PNAC also recommends regular checks between calibrations using suitable
+            control weights.</p>
+          <p>A scale should also be checked if you notice:</p>
+          <ul>
+            <li>Unstable or inconsistent readings</li>
+            <li>A noticeable difference from known test weights</li>
+            <li>The scale has been moved or installed in a new location</li>
+            <li>The scale has been overloaded or physically damaged</li>
+            <li>Load cells, indicator, or other major components have been serviced or replaced</li>
+          </ul>
+          <p>For commercial weighing equipment, applicable verification and regulatory requirements should also be
+            considered. In Punjab, the Directorate General of Industries, Prices, Weights &amp; Measures is responsible
+            for inspection and verification of commercial weights and measures.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Which platform weighing scale is suitable for industrial,
+            warehouse and factory use?</span><i class="fas fa-plus"></i></button>
+        <div class="faq-a">
+          <p>For industrial, warehouse, and factory applications, the correct platform weighing scale depends on the
+            maximum load, platform dimensions, weighing environment, required accuracy, installation method, and type of
+            material being weighed.</p>
+          <p>Heavy-duty platform scales are commonly used for weighing items such as bags, boxes, drums, pallets, raw
+            materials, finished goods, and other industrial products. Depending on the application, a weighing system
+            may include a steel platform, load cells, digital indicator, junction box, ramps, and other accessories.</p>
+          <p>Before purchasing an industrial weighing scale, consider:</p>
+          <ul>
+            <li>Maximum capacity</li>
+            <li>Platform size</li>
+            <li>Load-cell specification</li>
+            <li>Indicator type</li>
+            <li>Required readability</li>
+            <li>Floor or pit installation</li>
+            <li>Ramp requirements</li>
+            <li>Indoor or outdoor environment</li>
+            <li>Moisture, dust, and operating conditions</li>
+            <li>Required calibration or verification</li>
+          </ul>
+          <p>Scale Planet provides weighing solutions for warehouses, factories, shops, agriculture, livestock,
+            industrial businesses, and commercial applications. Contact us with your required capacity and platform
+            dimensions so we can recommend a suitable configuration.</p>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+    </div>
+  </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <img src="images/logo.png" alt="Scale Planet">
-        <p>Scale Planet is a trusted name in Digital &amp; Industrial Weighing Solutions with 10 years of experience. We provide reliable weighing scales and equipment designed to meet the needs of businesses across Pakistan.</p>
-        <div class="footer-socials">
+  <!-- BRANDS -->
+  <section class="brands-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="head-left">
+          <div class="sec-index">Partners</div>
+          <h2>Brands You <span class="ital">Trust</span></h2>
+          <p>Global manufacturers we're proud to represent in Pakistan.</p>
+        </div>
+        <a href="products.html" class="head-link">Full Catalogue <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="brand-ledger">
+        <div class="ledger-item">Ohaus</div>
+        <div class="ledger-item">Mettler Toledo</div>
+        <div class="ledger-item">Sartorius</div>
+        <div class="ledger-item">Shimadzu</div>
+        <div class="ledger-item">A&amp;D</div>
+        <div class="ledger-item">Rice Lake</div>
+        <div class="ledger-item">Kern</div>
+        <div class="ledger-item">HBM</div>
+        <div class="ledger-item">Cas</div>
+        <div class="ledger-item">Salter</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <div class="newsletter-inner">
+      <div class="nl-left">
+        <div class="sec-index"
+          style="color: var(--primary); font-family: var(--font-body); font-size: 11px; letter-spacing: 1.5px; margin-bottom: 12px; font-weight: 800; text-transform: uppercase;">
+          Stay in the Loop</div>
+        <h2 class="nl-title">Sign Up &amp; <em>Save</em> On Your Next Order.</h2>
+        <p class="nl-desc">Subscribe to receive a promo code, plus occasional product drops and weighing tips from our
+          engineers.</p>
+        <form class="nl-form" id="nlForm">
+          <input type="email" id="nlEmail" placeholder="your@email.com" required>
+          <button type="submit">Subscribe <i class="fas fa-arrow-right"></i></button>
+        </form>
+        <div id="nlMsg" style="margin-top:12px; font-size:13px; display:none;"></div>
+      </div>
+      <div class="nl-right">
+        <h4>Follow Us</h4>
+        <p style="color: var(--text-soft); font-size: 13px; margin-bottom: 16px;">Connect for updates, tips, and offers.
+        </p>
+        <div class="nl-socials">
           <a href="https://www.facebook.com/share/1EoPxNpaMi/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/scale.planet?stkn=MXM4Ym5kbzVlNWxmZA==" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="https://youtube.com/@scaleplanet786?si=Olh7_k4Ayipf8AL4" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.instagram.com/scale.planet?stkn=MXM4Ym5kbzVlNWxmZA==" target="_blank"><i
+              class="fab fa-instagram"></i></a>
+          <a href="https://youtube.com/@scaleplanet786?si=Olh7_k4Ayipf8AL4" target="_blank"><i
+              class="fab fa-youtube"></i></a>
           <a href="https://wa.me/923234005335" target="_blank"><i class="fab fa-whatsapp"></i></a>
           <a href="http://tiktok.com/@scale.planet" target="_blank"><i class="fab fa-tiktok"></i></a>
         </div>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="services.html">About Us</a></li>
-          <li><a href="products.html">Products</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="products.html">Shop All Products</a></li>
-          <li><a href="products.html?category=Platform+Scales">Platform Scales</a></li>
-          <li><a href="products.html?category=Counter+Scales">Counter Scales</a></li>
-          <li><a href="products.html?category=Lab+Scales">Lab Scales</a></li>
-          <li><a href="home-service.html">Book a Home Service</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Support</h4>
-        <ul>
-          <li><a href="home-service.html">Book a Home Service</a></li>
-          <li><a href="contact.html">Customer Service</a></li>
-          <li><a href="privacy.html">Privacy Policy</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Visit Us</h4>
-        <div class="footer-contact-item">
-          <i class="fas fa-map-marker-alt"></i>
-          <span><a href="https://maps.app.goo.gl/gRXEVtVEj3MvMvVB9?g_st=ac" target="_blank">Samanabad, Lahore, Pakistan</a></span>
-        </div>
-        <div class="footer-contact-item">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>20-A Branthroad Lahore</span>
-        </div>
-        <div class="footer-contact-item">
-          <i class="fab fa-whatsapp"></i>
-          <a href="https://wa.me/923234005335" target="_blank">0323 4005335</a>
-        </div>
-        <div class="footer-contact-item">
-          <i class="fas fa-phone"></i>
-          <a href="tel:03205855335">0320 5855335</a>
-        </div>
-        <div class="footer-contact-item">
-          <i class="fas fa-envelope"></i>
-          <a href="mailto:Scale.planet786@gmail.com">Scale.planet786@gmail.com</a>
-        </div>
-        <div class="footer-contact-item">
-          <i class="fas fa-clock"></i>
-          <span>Mon–Sat · 11:00 AM – 7:00 PM</span>
-        </div>
+        <p class="nl-quote">"Every measurement counts. Trust the precision, trust the brand."</p>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div>© 2015–2026 Scale Planet. All rights reserved.</div>
-      <div class="legal"><a href="privacy.html">Privacy Policy</a><a href="privacy.html">Terms</a><a href="privacy.html">Cookies</a></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="images/logo.png" alt="Scale Planet">
+          <p>Scale Planet is a trusted name in Digital &amp; Industrial Weighing Solutions with 10 years of experience.
+            We provide reliable weighing scales and equipment designed to meet the needs of businesses across Pakistan.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/share/1EoPxNpaMi/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/scale.planet?stkn=MXM4Ym5kbzVlNWxmZA==" target="_blank"><i
+                class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@scaleplanet786?si=Olh7_k4Ayipf8AL4" target="_blank"><i
+                class="fab fa-youtube"></i></a>
+            <a href="https://wa.me/923234005335" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="http://tiktok.com/@scale.planet" target="_blank"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="services.html">About Us</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Shop All Products</a></li>
+            <li><a href="products.html?category=Platform+Scales">Platform Scales</a></li>
+            <li><a href="products.html?category=Counter+Scales">Counter Scales</a></li>
+            <li><a href="products.html?category=Lab+Scales">Lab Scales</a></li>
+            <li><a href="home-service.html">Book a Home Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="home-service.html">Book a Home Service</a></li>
+            <li><a href="contact.html">Customer Service</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Visit Us</h4>
+          <div class="footer-contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span><a href="https://maps.app.goo.gl/gRXEVtVEj3MvMvVB9?g_st=ac" target="_blank">Samanabad, Lahore,
+                Pakistan</a></span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>20-A Branthroad Lahore</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fab fa-whatsapp"></i>
+            <a href="https://wa.me/923234005335" target="_blank">0323 4005335</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone"></i>
+            <a href="tel:03205855335">0320 5855335</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:Scale.planet786@gmail.com">Scale.planet786@gmail.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-clock"></i>
+            <span>Mon–Sat · 11:00 AM – 7:00 PM</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2015–2026 Scale Planet. All rights reserved.</div>
+        <div class="legal"><a href="privacy.html">Privacy Policy</a><a href="privacy.html">Terms</a><a
+            href="privacy.html">Cookies</a></div>
+      </div>
     </div>
+  </footer>
+
+  <!-- DOCK -->
+  <div class="dock">
+    <a href="home-service.html" class="dock-btn book">
+      <i class="fas fa-screwdriver-wrench"></i><span>Book Service</span>
+    </a>
+    <div class="dock-divider"></div>
+    <a href="https://maps.app.goo.gl/gRXEVtVEj3MvMvVB9?g_st=ac" target="_blank" class="dock-btn rev">
+      <i class="fas fa-star"></i><span>Review</span>
+    </a>
+    <div class="dock-divider"></div>
+    <a href="https://wa.me/923234005335" target="_blank" class="dock-btn wa">
+      <i class="fab fa-whatsapp"></i><span>WhatsApp</span>
+    </a>
   </div>
-</footer>
 
-<!-- DOCK -->
-<div class="dock">
-  <a href="home-service.html" class="dock-btn book">
-    <i class="fas fa-screwdriver-wrench"></i><span>Book Service</span>
-  </a>
-  <div class="dock-divider"></div>
-  <a href="https://maps.app.goo.gl/gRXEVtVEj3MvMvVB9?g_st=ac" target="_blank" class="dock-btn rev">
-    <i class="fas fa-star"></i><span>Review</span>
-  </a>
-  <div class="dock-divider"></div>
-  <a href="https://wa.me/923234005335" target="_blank" class="dock-btn wa">
-    <i class="fab fa-whatsapp"></i><span>WhatsApp</span>
-  </a>
-</div>
+  <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
 
-<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
+  <script>
+    /* No Supabase — pure static */
 
-<script>
-/* No Supabase — pure static */
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = msg;
+      t.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+    }
 
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  document.getElementById('toastMsg').textContent = msg;
-  t.classList.add('show');
-  clearTimeout(window.__toastTimer);
-  window.__toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
-}
+    window.findMyScale = function () {
+      const app = document.getElementById('fsApplication').value;
+      const cap = document.getElementById('fsCapacity').value;
+      if (!app || !cap) {showToast('Please select both application and capacity'); return;}
+      window.location.href = `products.html?app=${encodeURIComponent(app)}&capacity=${encodeURIComponent(cap)}`;
+    };
 
-window.findMyScale = function() {
-  const app = document.getElementById('fsApplication').value;
-  const cap = document.getElementById('fsCapacity').value;
-  if (!app || !cap) { showToast('Please select both application and capacity'); return; }
-  window.location.href = `products.html?app=${encodeURIComponent(app)}&capacity=${encodeURIComponent(cap)}`;
-};
-
-window.generateMyScale = function() {
-  const cat = document.getElementById('bysCategory').value;
-  const cap = document.getElementById('bysCapacity').value;
-  const plat = document.getElementById('bysPlatform').value;
-  if (!cat || !cap || !plat) { showToast('Please fill all three fields'); return; }
-  document.getElementById('bysResultGrid').innerHTML = `
+    window.generateMyScale = function () {
+      const cat = document.getElementById('bysCategory').value;
+      const cap = document.getElementById('bysCapacity').value;
+      const plat = document.getElementById('bysPlatform').value;
+      if (!cat || !cap || !plat) {showToast('Please fill all three fields'); return;}
+      document.getElementById('bysResultGrid').innerHTML = `
     <div class="bys-result-item"><div class="lbl">Application</div><div class="val">${esc(cat)}</div></div>
     <div class="bys-result-item"><div class="lbl">Capacity</div><div class="val">${esc(cap)}</div></div>
     <div class="bys-result-item"><div class="lbl">Platform Material</div><div class="val">${esc(plat)}</div></div>
   `;
-  const msg = `Hello Scale Planet Team!\n\nI'd like a custom scale quote:\n\n• Application: ${cat}\n• Capacity: ${cap}\n• Platform Material: ${plat}\n\nPlease share pricing and lead time. Thank you!`;
-  document.getElementById('bysWhatsappBtn').href = `https://wa.me/923234005335?text=${encodeURIComponent(msg)}`;
-  const result = document.getElementById('bysResult');
-  result.style.display = 'block';
-  result.scrollIntoView({ behavior: 'smooth', block: 'center' });
-};
+      const msg = `Hello Scale Planet Team!\n\nI'd like a custom scale quote:\n\n• Application: ${cat}\n• Capacity: ${cap}\n• Platform Material: ${plat}\n\nPlease share pricing and lead time. Thank you!`;
+      document.getElementById('bysWhatsappBtn').href = `https://wa.me/923234005335?text=${encodeURIComponent(msg)}`;
+      const result = document.getElementById('bysResult');
+      result.style.display = 'block';
+      result.scrollIntoView({behavior: 'smooth', block: 'center'});
+    };
 
-window.resetBuildScale = function() {
-  document.getElementById('bysCategory').value = '';
-  document.getElementById('bysCapacity').value = '';
-  document.getElementById('bysPlatform').value = '';
-  document.getElementById('bysResult').style.display = 'none';
-};
+    window.resetBuildScale = function () {
+      document.getElementById('bysCategory').value = '';
+      document.getElementById('bysCapacity').value = '';
+      document.getElementById('bysPlatform').value = '';
+      document.getElementById('bysResult').style.display = 'none';
+    };
 
-window.toggleFaq = function(btn) {
-  const item = btn.closest('.faq-item');
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-  if (!isOpen) item.classList.add('open');
-};
+    window.toggleFaq = function (btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    };
 
-function esc(v) {
-  return String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
-}
+    function esc(v) {
+      return String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
 
-const searchInput = document.getElementById('searchInput');
-window.searchProducts = function() {
-  const q = searchInput.value.trim();
-  if (q) window.location.href = `products.html?search=${encodeURIComponent(q)}`;
-};
-if (searchInput) searchInput.addEventListener('keypress', e => { if (e.key === 'Enter') searchProducts(); });
+    const searchInput = document.getElementById('searchInput');
+    window.searchProducts = function () {
+      const q = searchInput.value.trim();
+      if (q) window.location.href = `products.html?search=${encodeURIComponent(q)}`;
+    };
+    if (searchInput) searchInput.addEventListener('keypress', e => {if (e.key === 'Enter') searchProducts();});
 
-/* Demo products */
-const PRODUCTS = [
-  { id: 1, name: "Digital Platform Weighing Scale", cat: "Platform Scales", badge: "Best Seller", capacity: "50KG – 200KG",
-    features: ["1g readability", "Tare function", "LCD display", "Rechargeable battery"],
-    images: [
-      "https://image.made-in-china.com/202f0j00iAEtTJcPVRpf/50kg-100kg-150kg-200kg-Digital-Platform-Electronic-Weighing-Scale-with-RS232.webp",
-      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Electronic%20Weighing%20Scale.jpg",
-      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Weighing_scale.jpg",
-      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Stabilized-platform%20weighing%20scale%20of%20novel%20design.%20%281918%29%20%2814783395945%29.jpg"
-    ] },
-  { id: 2, name: "Price Computing Scale", cat: "Counter Scales", badge: "Popular", capacity: "3KG – 40KG",
-    features: ["Price calculation", "LCD/LED display", "Tare", "kg / g / lb"],
-    images: [
-      "https://image.made-in-china.com/202f0j00GTQkUSCFajcE/Multiple-Specifications-Available-Good-Quality-Electronic-Price-Computing-Scale.webp",
-      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Electronic%20Weighing%20Scale.jpg",
-      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Weighing%20scale.jpg",
-      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Elements%20of%20Weighing%20scale.jpg"
-    ] },
-  { id: 3, name: "Livestock / Animal Weighing Scale", cat: "Animal Scales", badge: "Heavy Duty", capacity: "1,000KG – 10,000KG",
-    features: ["Heavy-duty platform", "Digital indicator", "Tare function", "Livestock weighing"],
-    images: ["https://image.made-in-china.com/318f0j00etnfHzamHPpJ/livestockanimalsweighingscales-mp4.webp"] },
-  { id: 7, name: "Analytical Laboratory Balance", cat: "Lab Scales", badge: "New", capacity: "200g – 320g class",
-    features: ["High precision", "Draft shield", "Tare function", "LCD display"],
-    images: ["https://5.imimg.com/data5/SELLER/Default/2024/9/451385583/ZM/KC/AI/5832544/digital-weighing-machine-500x500.jpg"] }
-];
-const FEATURE_SECTIONS = { fpRecent: [1, 2], fpNew: [7, 3], fpStock: [2, 7], fpMost: [3, 1] };
-const PLACEHOLDER = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
-  '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500"><rect width="100%" height="100%" fill="#f3f7fb"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#8b8fab" font-family="Arial" font-size="28">Scale Planet Product</text></svg>'
-);
+    /* Demo products */
+    const PRODUCTS = [
+      {
+        id: 1, name: "Digital Platform Weighing Scale", cat: "Platform Scales", badge: "Best Seller", capacity: "50KG – 200KG",
+        features: ["1g readability", "Tare function", "LCD display", "Rechargeable battery"],
+        images: [
+          "https://image.made-in-china.com/202f0j00iAEtTJcPVRpf/50kg-100kg-150kg-200kg-Digital-Platform-Electronic-Weighing-Scale-with-RS232.webp",
+          "https://commons.wikimedia.org/wiki/Special:Redirect/file/Electronic%20Weighing%20Scale.jpg",
+          "https://commons.wikimedia.org/wiki/Special:Redirect/file/Weighing_scale.jpg",
+          "https://commons.wikimedia.org/wiki/Special:Redirect/file/Stabilized-platform%20weighing%20scale%20of%20novel%20design.%20%281918%29%20%2814783395945%29.jpg"
+        ]
+      },
+      {
+        id: 2, name: "Price Computing Scale", cat: "Counter Scales", badge: "Popular", capacity: "3KG – 40KG",
+        features: ["Price calculation", "LCD/LED display", "Tare", "kg / g / lb"],
+        images: [
+          "https://image.made-in-china.com/202f0j00GTQkUSCFajcE/Multiple-Specifications-Available-Good-Quality-Electronic-Price-Computing-Scale.webp",
+          "https://commons.wikimedia.org/wiki/Special:Redirect/file/Electronic%20Weighing%20Scale.jpg",
+          "https://commons.wikimedia.org/wiki/Special:Redirect/file/Weighing%20scale.jpg",
+          "https://commons.wikimedia.org/wiki/Special:Redirect/file/Elements%20of%20Weighing%20scale.jpg"
+        ]
+      },
+      {
+        id: 3, name: "Livestock / Animal Weighing Scale", cat: "Animal Scales", badge: "Heavy Duty", capacity: "1,000KG – 10,000KG",
+        features: ["Heavy-duty platform", "Digital indicator", "Tare function", "Livestock weighing"],
+        images: ["https://image.made-in-china.com/318f0j00etnfHzamHPpJ/livestockanimalsweighingscales-mp4.webp"]
+      },
+      {
+        id: 7, name: "Analytical Laboratory Balance", cat: "Lab Scales", badge: "New", capacity: "200g – 320g class",
+        features: ["High precision", "Draft shield", "Tare function", "LCD display"],
+        images: ["https://5.imimg.com/data5/SELLER/Default/2024/9/451385583/ZM/KC/AI/5832544/digital-weighing-machine-500x500.jpg"]
+      }
+    ];
+    const FEATURE_SECTIONS = {fpRecent: [1, 2], fpNew: [7, 3], fpStock: [2, 7], fpMost: [3, 1]};
+    const PLACEHOLDER = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500"><rect width="100%" height="100%" fill="#f3f7fb"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#8b8fab" font-family="Arial" font-size="28">Scale Planet Product</text></svg>'
+    );
 
-function fpImages(p) {
-  const list = [...p.images];
-  while (list.length < 4) list.push(list[0]);
-  return list.slice(0, 4);
-}
+    function fpImages(p) {
+      const list = [...p.images];
+      while (list.length < 4) list.push(list[0]);
+      return list.slice(0, 4);
+    }
 
-function renderFeatureCard(p, key) {
-  const images = fpImages(p);
-  const slug = `product-detail.html?id=${p.id}`;
-  const uid = `${key}-${p.id}`;
-  const badgeClass = p.badge.toLowerCase().includes('new') ? 'fp-badge green' : 'fp-badge';
-  return `
+    function renderFeatureCard(p, key) {
+      const images = fpImages(p);
+      const slug = `product-detail.html?id=${p.id}`;
+      const uid = `${key}-${p.id}`;
+      const badgeClass = p.badge.toLowerCase().includes('new') ? 'fp-badge green' : 'fp-badge';
+      return `
     <article class="fp-card">
       <span class="${badgeClass}">${esc(p.badge)}</span>
       <img class="fp-main-img" id="main-${uid}" src="${esc(images[0])}" onerror="this.onerror=null; this.src='${PLACEHOLDER}'" onclick="window.location.href='${slug}'" alt="${esc(p.name)}">
@@ -1269,112 +3535,114 @@ function renderFeatureCard(p, key) {
         <button class="fp-detail-btn" onclick="event.stopPropagation(); window.location.href='${slug}'"><i class="fas fa-eye"></i> View Detail</button>
       </div>
     </article>`;
-}
+    }
 
-window.fpSwapImage = function(uid, src, el) {
-  const mainImg = document.getElementById('main-' + uid);
-  if (mainImg) {
-    mainImg.src = src;
-    mainImg.style.opacity = '0.5';
-    setTimeout(() => mainImg.style.opacity = '1', 120);
-  }
-  el.parentElement.querySelectorAll('img').forEach(x => x.classList.remove('active'));
-  el.classList.add('active');
-};
+    window.fpSwapImage = function (uid, src, el) {
+      const mainImg = document.getElementById('main-' + uid);
+      if (mainImg) {
+        mainImg.src = src;
+        mainImg.style.opacity = '0.5';
+        setTimeout(() => mainImg.style.opacity = '1', 120);
+      }
+      el.parentElement.querySelectorAll('img').forEach(x => x.classList.remove('active'));
+      el.classList.add('active');
+    };
 
-window.fpAskForPrice = function(id) {
-  const p = PRODUCTS.find(x => x.id === id);
-  if (!p) return;
-  const msg = `Hello Scale Planet Team!\n\nI'm interested in this product:\n\n*${p.name}*\nCategory: ${p.cat}\nCapacity: ${p.capacity}\n\nPlease share pricing and availability.`;
-  window.open(`https://wa.me/923234005335?text=${encodeURIComponent(msg)}`, '_blank');
-};
+    window.fpAskForPrice = function (id) {
+      const p = PRODUCTS.find(x => x.id === id);
+      if (!p) return;
+      const msg = `Hello Scale Planet Team!\n\nI'm interested in this product:\n\n*${p.name}*\nCategory: ${p.cat}\nCapacity: ${p.capacity}\n\nPlease share pricing and availability.`;
+      window.open(`https://wa.me/923234005335?text=${encodeURIComponent(msg)}`, '_blank');
+    };
 
-Object.keys(FEATURE_SECTIONS).forEach(key => {
-  const el = document.getElementById(key);
-  if (!el) return;
-  el.innerHTML = FEATURE_SECTIONS[key]
-    .map(id => PRODUCTS.find(p => p.id === id))
-    .filter(Boolean)
-    .map(p => renderFeatureCard(p, key))
-    .join('');
-});
-
-/* Search suggestions */
-(function () {
-  const input = document.getElementById('searchInput');
-  const box = document.getElementById('searchSuggest');
-  if (!input || !box || typeof PRODUCTS === 'undefined') return;
-  function hide() { box.classList.remove('show'); }
-  function render() {
-    const tokens = input.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
-    if (!tokens.length) { hide(); return; }
-    const matches = PRODUCTS.filter(p => {
-      const hay = [p.name, p.cat, p.capacity].concat(p.features).join(' ').toLowerCase();
-      return tokens.every(t => hay.includes(t));
-    }).slice(0, 6);
-    if (!matches.length) { hide(); return; }
-    box.innerHTML = matches.map(p =>
-      `<a href="product-detail.html?id=${p.id}"><i class="fas fa-magnifying-glass"></i><span>${esc(p.name)}</span><small>${esc(p.cat)}</small></a>`
-    ).join('');
-    box.classList.add('show');
-  }
-  input.addEventListener('input', render);
-  input.addEventListener('focus', render);
-  input.addEventListener('keydown', e => { if (e.key === 'Escape' || e.key === 'Enter') hide(); });
-  const btn = input.parentElement.querySelector('button');
-  if (btn) btn.addEventListener('click', hide);
-  document.addEventListener('click', e => { if (!e.target.closest('.search-bar')) hide(); });
-})();
-
-/* ============================================================
-   SAME DAY DELIVERY POPUP — open / close
-   ============================================================ */
-function openSameDayDelivery() {
-  const el = document.getElementById('sddOverlay');
-  if (!el) return;
-  el.classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-function closeSameDayDelivery() {
-  const el = document.getElementById('sddOverlay');
-  if (!el) return;
-  el.classList.remove('show');
-  document.body.style.overflow = '';
-}
-window.openSameDayDelivery = openSameDayDelivery;
-window.closeSameDayDelivery = closeSameDayDelivery;
-
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') closeSameDayDelivery();
-});
-
-/* Auto-attach to .delivery-label in header */
-(function autoAttach() {
-  document.querySelectorAll('.delivery-label').forEach(function (el) {
-    el.addEventListener('click', function (e) {
-      e.preventDefault();
-      openSameDayDelivery();
+    Object.keys(FEATURE_SECTIONS).forEach(key => {
+      const el = document.getElementById(key);
+      if (!el) return;
+      el.innerHTML = FEATURE_SECTIONS[key]
+        .map(id => PRODUCTS.find(p => p.id === id))
+        .filter(Boolean)
+        .map(p => renderFeatureCard(p, key))
+        .join('');
     });
-  });
-})();
 
-/* Newsletter */
-const nlForm = document.getElementById('nlForm');
-if (nlForm) {
-  nlForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const msg = document.getElementById('nlMsg');
-    msg.style.display = 'block';
-    msg.style.color = 'var(--primary)';
-    msg.textContent = '✓ Thank you — we\'ll be in touch soon!';
-    document.getElementById('nlEmail').value = '';
-    setTimeout(() => msg.style.display = 'none', 5000);
-  });
-}
+    /* Search suggestions */
+    (function () {
+      const input = document.getElementById('searchInput');
+      const box = document.getElementById('searchSuggest');
+      if (!input || !box || typeof PRODUCTS === 'undefined') return;
+      function hide() {box.classList.remove('show');}
+      function render() {
+        const tokens = input.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+        if (!tokens.length) {hide(); return;}
+        const matches = PRODUCTS.filter(p => {
+          const hay = [p.name, p.cat, p.capacity].concat(p.features).join(' ').toLowerCase();
+          return tokens.every(t => hay.includes(t));
+        }).slice(0, 6);
+        if (!matches.length) {hide(); return;}
+        box.innerHTML = matches.map(p =>
+          `<a href="product-detail.html?id=${p.id}"><i class="fas fa-magnifying-glass"></i><span>${esc(p.name)}</span><small>${esc(p.cat)}</small></a>`
+        ).join('');
+        box.classList.add('show');
+      }
+      input.addEventListener('input', render);
+      input.addEventListener('focus', render);
+      input.addEventListener('keydown', e => {if (e.key === 'Escape' || e.key === 'Enter') hide();});
+      const btn = input.parentElement.querySelector('button');
+      if (btn) btn.addEventListener('click', hide);
+      document.addEventListener('click', e => {if (!e.target.closest('.search-bar')) hide();});
+    })();
 
-document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
-document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
-console.log('✅ Scale Planet homepage ready');
-</script>
+    /* ============================================================
+       SAME DAY DELIVERY POPUP — open / close
+       ============================================================ */
+    function openSameDayDelivery() {
+      const el = document.getElementById('sddOverlay');
+      if (!el) return;
+      el.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSameDayDelivery() {
+      const el = document.getElementById('sddOverlay');
+      if (!el) return;
+      el.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+    window.openSameDayDelivery = openSameDayDelivery;
+    window.closeSameDayDelivery = closeSameDayDelivery;
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeSameDayDelivery();
+    });
+
+    /* Auto-attach to .delivery-label in header */
+    (function autoAttach() {
+      document.querySelectorAll('.delivery-label').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.preventDefault();
+          openSameDayDelivery();
+        });
+      });
+    })();
+
+    /* Newsletter */
+    const nlForm = document.getElementById('nlForm');
+    if (nlForm) {
+      nlForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const msg = document.getElementById('nlMsg');
+        msg.style.display = 'block';
+        msg.style.color = 'var(--primary)';
+        msg.textContent = '✓ Thank you — we\'ll be in touch soon!';
+        document.getElementById('nlEmail').value = '';
+        setTimeout(() => msg.style.display = 'none', 5000);
+      });
+    }
+
+    document.addEventListener('contextmenu', e => {if (e.target.tagName === 'IMG') e.preventDefault();});
+    document.addEventListener('dragstart', e => {if (e.target.tagName === 'IMG') e.preventDefault();});
+    console.log('✅ Scale Planet homepage ready');
+  </script>
+  <script src="/search-suggest.js"></script>
 </body>
+
 </html>
