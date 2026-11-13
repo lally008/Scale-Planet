@@ -310,9 +310,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 .toast i { color: var(--primary-pale); }
 
-/* ============================================================
-   SAME DAY DELIVERY POPUP — COMPACT / SQUARE
-   ============================================================ */
+/* SAME DAY DELIVERY POPUP — COMPACT / SQUARE */
 .sdd-overlay {
   position: fixed; inset: 0;
   background: rgba(10, 10, 26, 0.78);
@@ -327,7 +325,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .sdd-popup {
   background: var(--paper);
   width: 100%;
-  max-width: 480px;              /* ← compact width */
+  max-width: 480px;
   border-radius: 18px;
   overflow: hidden;
   position: relative;
@@ -538,21 +536,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .sdd-actions { grid-template-columns: 1fr; }
 }
 </style>
-
-<style>
-/* Same-day-delivery popup: image frame (replaces the tower icon). Swap images/placeholder.webp with your own image. */
-.sdd-hero-right { width: 104px; align-items: center; margin-top: 24px; }
-.sdd-img-frame { width: 100%; aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden; background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.35); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-.sdd-img-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-@media (max-width: 768px) { .sdd-hero-right { width: 80px; margin-top: 22px; } }
-</style>
-
-<style>
-/* Product cards: make image + thumbnails clickable (the global img rule disables pointer events) */
-.main-img, .fp-main-img, .thumbs img, .fp-thumbs img { pointer-events: auto; }
-.card, .fp-card { cursor: pointer; }
-.thumbs img, .fp-thumbs img, .card button, .fp-card button { cursor: pointer; }
-</style>
 </head>
 <body>
 
@@ -606,16 +589,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   </div>
 </nav>
 
-<!-- ============================================================
-     SAME DAY DELIVERY POPUP — COMPACT
-     ============================================================ -->
+<!-- SAME DAY DELIVERY POPUP -->
 <div class="sdd-overlay" id="sddOverlay" onclick="if(event.target===this) closeSameDayDelivery()">
   <div class="sdd-popup" role="dialog" aria-modal="true" aria-labelledby="sddTitle">
-
-    <button class="sdd-close" onclick="closeSameDayDelivery()" aria-label="Close">
-      <i class="fas fa-times"></i>
-    </button>
-
+    <button class="sdd-close" onclick="closeSameDayDelivery()" aria-label="Close"><i class="fas fa-times"></i></button>
     <div class="sdd-hero">
       <div class="sdd-hero-left">
         <div class="sdd-truck-icon"><i class="fas fa-truck-fast"></i></div>
@@ -626,66 +603,53 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <div class="sdd-urdu">آج آرڈر کریں، آج ہی ڈیلیوری پائیں!</div>
       </div>
       <div class="sdd-hero-right">
-        <div class="sdd-img-frame"><img src="images/placeholder.webp" alt="Same day delivery in Lahore"></div>
+        <svg class="sdd-minar-svg" viewBox="0 0 120 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="20" y="200" width="80" height="8" rx="1.5" fill="#e8c76a" opacity="0.95"/>
+          <rect x="28" y="192" width="64" height="9" rx="1.5" fill="#f0d37a"/>
+          <rect x="36" y="184" width="48" height="9" rx="1" fill="#e8c76a"/>
+          <rect x="42" y="177" width="36" height="8" rx="1" fill="#f0d37a"/>
+          <path d="M50 177 L54 60 L66 60 L70 177 Z" fill="#f5dd8a"/>
+          <path d="M54 60 L60 40 L66 60 Z" fill="#f0d37a"/>
+          <ellipse cx="60" cy="40" rx="7" ry="5" fill="#e8c76a"/>
+          <rect x="58.5" y="26" width="3" height="12" fill="#e8c76a"/>
+          <circle cx="60" cy="24" r="3.4" fill="#f0d37a"/>
+          <circle cx="62" cy="23" r="3" fill="#3e4095"/>
+          <rect x="47" y="100" width="26" height="5" rx="1" fill="#e8c76a"/>
+          <rect x="45" y="135" width="30" height="5" rx="1" fill="#e8c76a"/>
+          <rect x="43" y="160" width="34" height="5" rx="1" fill="#e8c76a"/>
+          <path d="M56 155 Q60 148 64 155 L64 160 L56 160 Z" fill="#3e4095" opacity="0.85"/>
+        </svg>
       </div>
     </div>
-
     <div class="sdd-body">
       <div class="sdd-badges">
         <div class="sdd-badge"><i class="fas fa-bolt"></i> Fast</div>
         <div class="sdd-badge"><i class="fas fa-shield-halved"></i> Safe</div>
         <div class="sdd-badge"><i class="fas fa-circle-check"></i> Reliable</div>
       </div>
-
-      <p class="sdd-desc">
-        Get your weighing scale delivered on the <strong>same day</strong> in Lahore. Order before the cut-off time and receive it at your doorstep — today!
-      </p>
-
+      <p class="sdd-desc">Get your weighing scale delivered on the <strong>same day</strong> in Lahore. Order before the cut-off time and receive it at your doorstep — today!</p>
       <h3 class="sdd-cat-title">Our Weighing Scale Categories</h3>
       <div class="sdd-cat-grid">
-        <a href="products.html?category=Counter+Scales" class="sdd-cat">
-          <div class="sdd-cat-icon"><i class="fas fa-cash-register"></i></div>
-          <div class="sdd-cat-name">Table Top<br>Scales</div>
-        </a>
-        <a href="products.html?category=Platform+Scales" class="sdd-cat">
-          <div class="sdd-cat-icon"><i class="fas fa-weight-hanging"></i></div>
-          <div class="sdd-cat-name">Platform<br>Scales</div>
-        </a>
-        <a href="products.html?category=Platform+Scales" class="sdd-cat">
-          <div class="sdd-cat-icon"><i class="fas fa-industry"></i></div>
-          <div class="sdd-cat-name">Industrial<br>Scales</div>
-        </a>
-        <a href="products.html?category=Load+Cells" class="sdd-cat">
-          <div class="sdd-cat-icon"><i class="fas fa-microchip"></i></div>
-          <div class="sdd-cat-name">Load<br>Cells</div>
-        </a>
-        <a href="products.html?category=Lab+Scales" class="sdd-cat">
-          <div class="sdd-cat-icon"><i class="fas fa-flask"></i></div>
-          <div class="sdd-cat-name">Lab<br>Balances</div>
-        </a>
-        <a href="products.html?category=Platform+Scales" class="sdd-cat">
-          <div class="sdd-cat-icon"><i class="fas fa-truck"></i></div>
-          <div class="sdd-cat-name">Weigh<br>bridges</div>
-        </a>
+        <a href="products.html?category=Counter+Scales" class="sdd-cat"><div class="sdd-cat-icon"><i class="fas fa-cash-register"></i></div><div class="sdd-cat-name">Table Top<br>Scales</div></a>
+        <a href="products.html?category=Platform+Scales" class="sdd-cat"><div class="sdd-cat-icon"><i class="fas fa-weight-hanging"></i></div><div class="sdd-cat-name">Platform<br>Scales</div></a>
+        <a href="products.html?category=Platform+Scales" class="sdd-cat"><div class="sdd-cat-icon"><i class="fas fa-industry"></i></div><div class="sdd-cat-name">Industrial<br>Scales</div></a>
+        <a href="products.html?category=Load+Cells" class="sdd-cat"><div class="sdd-cat-icon"><i class="fas fa-microchip"></i></div><div class="sdd-cat-name">Load<br>Cells</div></a>
+        <a href="products.html?category=Lab+Scales" class="sdd-cat"><div class="sdd-cat-icon"><i class="fas fa-flask"></i></div><div class="sdd-cat-name">Lab<br>Balances</div></a>
+        <a href="products.html?category=Platform+Scales" class="sdd-cat"><div class="sdd-cat-icon"><i class="fas fa-truck"></i></div><div class="sdd-cat-name">Weigh<br>bridges</div></a>
       </div>
-
       <div class="sdd-trust">
         <div class="sdd-trust-item"><i class="fas fa-shield-halved"></i> 100% Original</div>
         <div class="sdd-trust-item"><i class="fas fa-truck"></i> Pro Delivery</div>
         <div class="sdd-trust-item"><i class="fas fa-certificate"></i> Warranty</div>
         <div class="sdd-trust-item"><i class="fas fa-headset"></i> After Sales</div>
       </div>
-
       <div class="sdd-actions">
-        <a href="https://wa.me/923234005335?text=Hello%20Scale%20Planet%20Team!%20I%20want%20to%20place%20a%20Same%20Day%20Delivery%20order%20in%20Lahore.%20Please%20guide%20me." target="_blank" class="sdd-wa-btn">
-          <i class="fab fa-whatsapp"></i> Order on WhatsApp
-        </a>
+        <a href="https://wa.me/923234005335?text=Hello%20Scale%20Planet%20Team!%20I%20want%20to%20place%20a%20Same%20Day%20Delivery%20order%20in%20Lahore.%20Please%20guide%20me." target="_blank" class="sdd-wa-btn"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
         <a href="tel:03234005335" class="sdd-call-block">
           <div class="sdd-call-icon"><i class="fas fa-phone"></i></div>
           <div class="sdd-call-num">0323-4005335<small>(WhatsApp Only)</small></div>
         </a>
       </div>
-
       <p class="sdd-footnote"><i class="fas fa-circle-info"></i> Get Complete Details, Prices &amp; Delivery Info</p>
     </div>
   </div>
@@ -857,110 +821,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   </div>
 </section>
 
-<!-- SHOP BY CATEGORY -->
+<!-- SHOP BY CATEGORY (Dynamic from Supabase) -->
 <section class="cat-section">
   <div class="cat-section-inner">
     <div class="sec-head">
       <h2>Shop by <em>Category</em></h2>
       <p>Every weighing solution we make, organised by what it does best.</p>
     </div>
-    <div class="cat-grid">
-      <a href="products.html?category=Animal+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/animal-scales.png" alt="Animal Scales" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Animal Scales</div>
-          <div class="cat-desc">Reliable weighing for livestock and animals.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Lab+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/lab-balances.png" alt="Lab Balances" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Lab Balances</div>
-          <div class="cat-desc">High accuracy for precise results.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Counting+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/counting-scales.png" alt="Counting Scales" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Counting Scales</div>
-          <div class="cat-desc">Fast &amp; accurate piece counting.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Barcode+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/barcode-scales.png" alt="Barcode Scales" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Barcode Scales</div>
-          <div class="cat-desc">Smart weighing with label printing.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Load+Cells" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/load-cells.png" alt="Load Cells" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Load Cells</div>
-          <div class="cat-desc">Precision sensors for accurate measurement.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Platform+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/platform-scales.png" alt="Platform Scales" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Platform Scales</div>
-          <div class="cat-desc">Heavy duty weighing for industrial use.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Table+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/table-scales.png" alt="Table Scales" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Table Scales</div>
-          <div class="cat-desc">Compact, accurate and easy to use.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=ACS+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/acs-scales.png" alt="ACS Scales" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">ACS Scales</div>
-          <div class="cat-desc">Durable &amp; reliable weighing solutions.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=100KG+TCS+Scales" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/100kg-tcs-scales.png" alt="100KG TCS Scales" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">100KG TCS Scales</div>
-          <div class="cat-desc">Perfect for medium capacity weighing.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Printers" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/printers.png" alt="Printers" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Printers</div>
-          <div class="cat-desc">Print labels, receipts &amp; barcodes with ease.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Weighbridge" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/weighbridge.png" alt="Weighbridge" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Weighbridge</div>
-          <div class="cat-desc">For heavy vehicles and bulk material.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
-      <a href="products.html?category=Accessories" class="cat-tile">
-        <div class="cat-img"><img src="images/categories/accessories.png" alt="Accessories" loading="lazy"></div>
-        <div class="cat-info">
-          <div class="cat-name">Accessories</div>
-          <div class="cat-desc">Everything you need for your weighing setup.</div>
-          <span class="cat-go"><i class="fas fa-chevron-right"></i></span>
-        </div>
-      </a>
+    <div class="cat-grid" id="categoryGrid">
+      <!-- Categories will be loaded here via JS -->
+      <div style="grid-column: 1/-1; text-align: center; padding: 20px; color: var(--text-muted);">
+        <i class="fas fa-spinner fa-spin"></i> Loading categories...
+      </div>
     </div>
   </div>
 </section>
@@ -1011,17 +883,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
       </div>
       <a href="products.html" class="head-link">Full Catalogue <i class="fas fa-arrow-right"></i></a>
     </div>
-    <div class="brand-ledger">
-      <div class="ledger-item">Ohaus</div>
-      <div class="ledger-item">Mettler Toledo</div>
-      <div class="ledger-item">Sartorius</div>
-      <div class="ledger-item">Shimadzu</div>
-      <div class="ledger-item">A&amp;D</div>
-      <div class="ledger-item">Rice Lake</div>
-      <div class="ledger-item">Kern</div>
-      <div class="ledger-item">HBM</div>
-      <div class="ledger-item">Cas</div>
-      <div class="ledger-item">Salter</div>
+    <div class="brand-ledger" id="brandsLedger">
+      <!-- Brands will be loaded here via JS -->
+      <div style="grid-column: 1/-1; text-align: center; padding: 20px; color: var(--text-muted);">
+        <i class="fas fa-spinner fa-spin"></i> Loading brands...
+      </div>
     </div>
   </div>
 </section>
@@ -1149,8 +1015,24 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
 
+<!-- SUPABASE SCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* No Supabase — pure static */
+const supabaseClient = window.supabase.createClient(
+  'https://lwsfenkvgrqnjmsxfuqo.supabase.co',
+  'sb_publishable_K9EjWvaqMevI5z1FPTGUzw_iLFoWI3v'
+);
+
+const PLACEHOLDER = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500"><rect width="100%" height="100%" fill="#f3f7fb"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#8b8fab" font-family="Arial" font-size="28">Scale Planet Product</text></svg>'
+);
+
+let allProducts = [];
+
+function esc(v) {
+  return String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}
 
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -1160,122 +1042,185 @@ function showToast(msg) {
   window.__toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
 }
 
-window.findMyScale = function() {
-  const app = document.getElementById('fsApplication').value;
-  const cap = document.getElementById('fsCapacity').value;
-  if (!app || !cap) { showToast('Please select both application and capacity'); return; }
-  window.location.href = `products.html?app=${encodeURIComponent(app)}&capacity=${encodeURIComponent(cap)}`;
-};
+/* ============================================================
+   LOAD DATA FROM SUPABASE
+   ============================================================ */
+async function loadHomeData() {
+  // 1. Fetch Products
+  const { data: products, error: pError } = await supabaseClient
+    .from('products')
+    .select('*')
+    .order('name', { ascending: true });
 
-window.generateMyScale = function() {
-  const cat = document.getElementById('bysCategory').value;
-  const cap = document.getElementById('bysCapacity').value;
-  const plat = document.getElementById('bysPlatform').value;
-  if (!cat || !cap || !plat) { showToast('Please fill all three fields'); return; }
-  document.getElementById('bysResultGrid').innerHTML = `
-    <div class="bys-result-item"><div class="lbl">Application</div><div class="val">${esc(cat)}</div></div>
-    <div class="bys-result-item"><div class="lbl">Capacity</div><div class="val">${esc(cap)}</div></div>
-    <div class="bys-result-item"><div class="lbl">Platform Material</div><div class="val">${esc(plat)}</div></div>
-  `;
-  const msg = `Hello Scale Planet Team!\n\nI'd like a custom scale quote:\n\n• Application: ${cat}\n• Capacity: ${cap}\n• Platform Material: ${plat}\n\nPlease share pricing and lead time. Thank you!`;
-  document.getElementById('bysWhatsappBtn').href = `https://wa.me/923234005335?text=${encodeURIComponent(msg)}`;
-  const result = document.getElementById('bysResult');
-  result.style.display = 'block';
-  result.scrollIntoView({ behavior: 'smooth', block: 'center' });
-};
+  if (pError) {
+    console.error('Error fetching products:', pError);
+  } else {
+    allProducts = products || [];
+    renderFeatureSections();
+  }
 
-window.resetBuildScale = function() {
-  document.getElementById('bysCategory').value = '';
-  document.getElementById('bysCapacity').value = '';
-  document.getElementById('bysPlatform').value = '';
-  document.getElementById('bysResult').style.display = 'none';
-};
+  // 2. Fetch Categories (for Shop by Category)
+  const { data: categories, error: cError } = await supabaseClient
+    .from('categories')
+    .select('*')
+    .eq('is_main', true)
+    .order('name', { ascending: true });
 
-window.toggleFaq = function(btn) {
-  const item = btn.closest('.faq-item');
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-  if (!isOpen) item.classList.add('open');
-};
+  if (cError) {
+    console.error('Error fetching categories:', cError);
+    document.getElementById('categoryGrid').innerHTML = `<p style="color:red;">Failed to load categories.</p>`;
+  } else {
+    renderHomeCategories(categories || []);
+  }
 
-function esc(v) {
-  return String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+  // 3. Fetch Trusted Brands
+  const { data: brands, error: bError } = await supabaseClient
+    .from('trusted_brands')
+    .select('*')
+    .order('display_order', { ascending: true });
+
+  if (bError) {
+    console.error('Error fetching brands:', bError);
+    document.getElementById('brandsLedger').innerHTML = `<p style="color:red;">Failed to load brands.</p>`;
+  } else {
+    renderHomeBrands(brands || []);
+  }
 }
 
-const searchInput = document.getElementById('searchInput');
-window.searchProducts = function() {
-  const q = searchInput.value.trim();
-  if (q) window.location.href = `products.html?search=${encodeURIComponent(q)}`;
-};
-if (searchInput) searchInput.addEventListener('keypress', e => { if (e.key === 'Enter') searchProducts(); });
+/* ============================================================
+   RENDER FEATURE SECTIONS (Recently Viewed, New, Stock, Most)
+   ============================================================ */
+function renderFeatureSections() {
+  // Yahan hum simple logic laga rahe hain taake data Supabase se aaye.
+  // Agar aapke paas specific "New" ya "Featured" ka column hai to us ke hisaab se filter karein.
+  // Filhal hum sab se pehle 8 products le rahe hain aur unhe 4 sections mein divide kar rahe hain.
 
-/* Demo products */
-const PRODUCTS = [
-  { id: 1, name: "Digital Platform Weighing Scale", cat: "Platform Scales", badge: "Best Seller", capacity: "50KG – 200KG",
-    features: ["1g readability", "Tare function", "LCD display", "Rechargeable battery"],
-    images: [
-      "https://image.made-in-china.com/202f0j00iAEtTJcPVRpf/50kg-100kg-150kg-200kg-Digital-Platform-Electronic-Weighing-Scale-with-RS232.webp",
-      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Electronic%20Weighing%20Scale.jpg",
-      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Weighing_scale.jpg",
-      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Stabilized-platform%20weighing%20scale%20of%20novel%20design.%20%281918%29%20%2814783395945%29.jpg"
-    ] },
-    { id: 2, name: "Price Computing Scale", cat: "Counter Scales", badge: "Popular", capacity: "3KG – 40KG",
-      features: ["Price calculation", "LCD/LED display", "Tare", "kg / g / lb"],
-      images: [
-        "https://image.made-in-china.com/202f0j00GTQkUSCFajcE/Multiple-Specifications-Available-Good-Quality-Electronic-Price-Computing-Scale.webp",
-        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Electronic%20Weighing%20Scale.jpg",
-        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Weighing%20scale.jpg",
-        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Elements%20of%20Weighing%20scale.jpg"
-      ] },
-    { id: 2, name: "Price Computing Scale", cat: "Counter Scales", badge: "Popular", capacity: "3KG – 40KG",
-      features: ["Price calculation", "LCD/LED display", "Tare", "kg / g / lb"],
-      images: [
-        "https://image.made-in-china.com/202f0j00GTQkUSCFajcE/Multiple-Specifications-Available-Good-Quality-Electronic-Price-Computing-Scale.webp",
-        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Electronic%20Weighing%20Scale.jpg",
-        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Weighing%20scale.jpg",
-        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Elements%20of%20Weighing%20scale.jpg"
-      ] },
+  const sections = {
+    fpRecent: allProducts.slice(0, 4), // Pehle 4
+    fpNew: allProducts.slice(4, 8),    // Agle 4
+    fpStock: allProducts.slice(8, 12), // Agle 4
+    fpMost: allProducts.slice(12, 16)  // Agle 4
+  };
+
+  // Agar products kam hain to same products repeat kar dein
+  Object.keys(sections).forEach(key => {
+    if (sections[key].length === 0 && allProducts.length > 0) {
+      sections[key] = allProducts.slice(0, 4);
+    }
+  });
+
+  Object.keys(sections).forEach(key => {
+    const el = document.getElementById(key);
+    if (!el) return;
     
-  { id: 7, name: "Analytical Laboratory Balance", cat: "Lab Scales", badge: "New", capacity: "200g – 320g class",
-    features: ["High precision", "Draft shield", "Tare function", "LCD display"],
-    images: ["https://5.imimg.com/data5/SELLER/Default/2024/9/451385583/ZM/KC/AI/5832544/digital-weighing-machine-500x500.jpg"] }
-];
-const FEATURE_SECTIONS = { fpRecent: [1, 2], fpNew: [7, 3], fpStock: [2, 7], fpMost: [3, 1] };
-const PLACEHOLDER = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
-  '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500"><rect width="100%" height="100%" fill="#f3f7fb"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#8b8fab" font-family="Arial" font-size="28">Scale Planet Product</text></svg>'
-);
+    if (sections[key].length === 0) {
+      el.innerHTML = `<div style="grid-column: 1/-1; text-align:center; font-size:12px; color:var(--text-muted); padding:20px;">No products found.</div>`;
+      return;
+    }
 
-function fpImages(p) {
-  const list = [...p.images];
-  while (list.length < 4) list.push(list[0]);
-  return list.slice(0, 4);
+    el.innerHTML = sections[key].map((p, idx) => {
+      // Image handling
+      let imagesList = [];
+      if (Array.isArray(p.images) && p.images.length > 0) {
+        imagesList = p.images.filter(Boolean);
+      } else if (p.image) {
+        imagesList = [p.image];
+      }
+      while (imagesList.length < 4) imagesList.push(imagesList[0] || PLACEHOLDER);
+      imagesList = imagesList.slice(0, 4);
+
+      const mainImg = imagesList[0];
+      const slug = `product-detail.html?id=${p.id}`;
+      const uid = `${key}-${p.id}-${idx}`;
+      const badgeClass = (p.badge && p.badge.toLowerCase().includes('new')) ? 'fp-badge green' : 'fp-badge';
+      
+      // Features fallback
+      let featuresList = ["High Precision", "Durable", "Warranty"];
+      if (Array.isArray(p.features) && p.features.length > 0) {
+        featuresList = p.features;
+      }
+
+      return `
+        <article class="fp-card">
+          <span class="${badgeClass}">${esc(p.badge || 'Product')}</span>
+          <img class="fp-main-img" id="main-${uid}" src="${esc(mainImg)}" onerror="this.onerror=null; this.src='${PLACEHOLDER}'" onclick="window.location.href='${slug}'" alt="${esc(p.name)}">
+          <div class="fp-thumbs">
+            ${imagesList.map((im, i) => `<img class="${i === 0 ? 'active' : ''}" src="${esc(im)}" onerror="this.onerror=null; this.src='${PLACEHOLDER}'" onclick="event.stopPropagation(); fpSwapImage('${uid}', '${esc(im)}', this)" alt="">`).join('')}
+          </div>
+          <h3>${esc(p.name)}</h3>
+          <div class="fp-cap"><i class="fas fa-weight-hanging"></i> Capacity: ${esc(p.capacity || 'N/A')}</div>
+          <div class="fp-features">
+            ${featuresList.slice(0, 4).map(f => `<span>${esc(f)}</span>`).join('')}
+          </div>
+          <div class="fp-actions">
+            <button class="fp-ask-btn" onclick="event.stopPropagation(); fpAskForPrice(${p.id})"><i class="fas fa-phone"></i> Ask for Price</button>
+            <button class="fp-detail-btn" onclick="event.stopPropagation(); window.location.href='${slug}'"><i class="fas fa-eye"></i> View Detail</button>
+          </div>
+        </article>`;
+    }).join('');
+  });
 }
 
-function renderFeatureCard(p, key) {
-  const images = fpImages(p);
-  const slug = `product-detail.html?id=${p.id}`;
-  const uid = `${key}-${p.id}`;
-  const badgeClass = p.badge.toLowerCase().includes('new') ? 'fp-badge green' : 'fp-badge';
-  return `
-    <article class="fp-card">
-      <span class="${badgeClass}">${esc(p.badge)}</span>
-      <img class="fp-main-img" id="main-${uid}" src="${esc(images[0])}" onerror="this.onerror=null; this.src='${PLACEHOLDER}'" onclick="window.location.href='${slug}'" alt="${esc(p.name)}">
-      <div class="fp-thumbs">
-        ${images.map((im, i) => `<img class="${i === 0 ? 'active' : ''}" src="${esc(im)}" onerror="this.onerror=null; this.src='${PLACEHOLDER}'" onclick="event.stopPropagation(); fpSwapImage('${uid}', '${esc(im)}', this)" alt="">`).join('')}
-      </div>
-      <h3>${esc(p.name)}</h3>
-      <div class="fp-cap"><i class="fas fa-weight-hanging"></i> Capacity: ${esc(p.capacity)}</div>
-      <div class="fp-features">
-        ${p.features.slice(0, 4).map(f => `<span>${esc(f)}</span>`).join('')}
-      </div>
-      <div class="fp-actions">
-        <button class="fp-ask-btn" onclick="event.stopPropagation(); fpAskForPrice(${p.id})"><i class="fas fa-phone"></i> Ask for Price</button>
-        <button class="fp-detail-btn" onclick="event.stopPropagation(); window.location.href='${slug}'"><i class="fas fa-eye"></i> View Detail</button>
-      </div>
-    </article>`;
+/* ============================================================
+   RENDER SHOP BY CATEGORY
+   ============================================================ */
+function renderHomeCategories(categories) {
+  const grid = document.getElementById('categoryGrid');
+  if (!categories || categories.length === 0) {
+    grid.innerHTML = `<p style="color:var(--text-muted);">No categories found.</p>`;
+    return;
+  }
+
+  // Map icons based on category name (fallback to default)
+  const getIcon = (name) => {
+    const n = name.toLowerCase();
+    if (n.includes('animal')) return 'fa-paw';
+    if (n.includes('lab')) return 'fa-flask';
+    if (n.includes('count')) return 'fa-calculator';
+    if (n.includes('barcode')) return 'fa-barcode';
+    if (n.includes('load cell')) return 'fa-microchip';
+    if (n.includes('platform')) return 'fa-weight-hanging';
+    if (n.includes('table')) return 'fa-table';
+    if (n.includes('weighbridge')) return 'fa-truck';
+    if (n.includes('print')) return 'fa-print';
+    return 'fa-scale-balanced';
+  };
+
+  grid.innerHTML = categories.map(cat => {
+    const imgUrl = cat.image || PLACEHOLDER;
+    return `
+      <a href="products.html?category=${encodeURIComponent(cat.name)}" class="cat-tile">
+        <div class="cat-img"><img src="${esc(imgUrl)}" alt="${esc(cat.name)}" loading="lazy" onerror="this.src='${PLACEHOLDER}'"></div>
+        <div class="cat-info">
+          <div class="cat-name">${esc(cat.name)}</div>
+          <div class="cat-desc">Explore our ${esc(cat.name)}.</div>
+          <span class="cat-go"><i class="fas ${getIcon(cat.name)}"></i></span>
+        </div>
+      </a>
+    `;
+  }).join('');
 }
 
+/* ============================================================
+   RENDER TRUSTED BRANDS
+   ============================================================ */
+function renderHomeBrands(brands) {
+  const ledger = document.getElementById('brandsLedger');
+  if (!brands || brands.length === 0) {
+    ledger.innerHTML = `<p style="color:var(--text-muted);">No brands found.</p>`;
+    return;
+  }
+
+  ledger.innerHTML = brands.map(brand => `
+    <div class="ledger-item">
+      <img src="${esc(brand.image_url)}" alt="${esc(brand.alt_text || brand.brand_name)}" style="max-height: 50px; object-fit: contain;" onerror="this.style.display='none'; this.parentElement.textContent='${esc(brand.brand_name)}';">
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   INTERACTION HELPERS
+   ============================================================ */
 window.fpSwapImage = function(uid, src, el) {
   const mainImg = document.getElementById('main-' + uid);
   if (mainImg) {
@@ -1288,52 +1233,19 @@ window.fpSwapImage = function(uid, src, el) {
 };
 
 window.fpAskForPrice = function(id) {
-  const p = PRODUCTS.find(x => x.id === id);
+  const p = allProducts.find(x => x.id === id);
   if (!p) return;
-  const msg = `Hello Scale Planet Team!\n\nI'm interested in this product:\n\n*${p.name}*\nCategory: ${p.cat}\nCapacity: ${p.capacity}\n\nPlease share pricing and availability.`;
+  const msg = `Hello Scale Planet Team!\n\nI'm interested in this product:\n\n*${p.name}*\nCategory: ${p.category || ''}\nCapacity: ${p.capacity || ''}\n\nPlease share pricing and availability.`;
   window.open(`https://wa.me/923234005335?text=${encodeURIComponent(msg)}`, '_blank');
 };
 
-Object.keys(FEATURE_SECTIONS).forEach(key => {
-  const el = document.getElementById(key);
-  if (!el) return;
-  el.innerHTML = FEATURE_SECTIONS[key]
-    .map(id => PRODUCTS.find(p => p.id === id))
-    .filter(Boolean)
-    .map(p => renderFeatureCard(p, key))
-    .join('');
-});
+window.searchProducts = function() {
+  const q = document.getElementById('searchInput').value.trim();
+  if (q) window.location.href = `products.html?search=${encodeURIComponent(q)}`;
+};
+document.getElementById('searchInput').addEventListener('keypress', e => { if (e.key === 'Enter') searchProducts(); });
 
-/* Search suggestions */
-(function () {
-  const input = document.getElementById('searchInput');
-  const box = document.getElementById('searchSuggest');
-  if (!input || !box || typeof PRODUCTS === 'undefined') return;
-  function hide() { box.classList.remove('show'); }
-  function render() {
-    const tokens = input.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
-    if (!tokens.length) { hide(); return; }
-    const matches = PRODUCTS.filter(p => {
-      const hay = [p.name, p.cat, p.capacity].concat(p.features).join(' ').toLowerCase();
-      return tokens.every(t => hay.includes(t));
-    }).slice(0, 6);
-    if (!matches.length) { hide(); return; }
-    box.innerHTML = matches.map(p =>
-      `<a href="product-detail.html?id=${p.id}"><i class="fas fa-magnifying-glass"></i><span>${esc(p.name)}</span><small>${esc(p.cat)}</small></a>`
-    ).join('');
-    box.classList.add('show');
-  }
-  input.addEventListener('input', render);
-  input.addEventListener('focus', render);
-  input.addEventListener('keydown', e => { if (e.key === 'Escape' || e.key === 'Enter') hide(); });
-  const btn = input.parentElement.querySelector('button');
-  if (btn) btn.addEventListener('click', hide);
-  document.addEventListener('click', e => { if (!e.target.closest('.search-bar')) hide(); });
-})();
-
-/* ============================================================
-   SAME DAY DELIVERY POPUP — open / close
-   ============================================================ */
+/* SAME DAY DELIVERY POPUP */
 function openSameDayDelivery() {
   const el = document.getElementById('sddOverlay');
   if (!el) return;
@@ -1348,22 +1260,12 @@ function closeSameDayDelivery() {
 }
 window.openSameDayDelivery = openSameDayDelivery;
 window.closeSameDayDelivery = closeSameDayDelivery;
-
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') closeSameDayDelivery();
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSameDayDelivery(); });
+document.querySelectorAll('.delivery-label').forEach(function (el) {
+  el.addEventListener('click', function (e) { e.preventDefault(); openSameDayDelivery(); });
 });
 
-/* Auto-attach to .delivery-label in header */
-(function autoAttach() {
-  document.querySelectorAll('.delivery-label').forEach(function (el) {
-    el.addEventListener('click', function (e) {
-      e.preventDefault();
-      openSameDayDelivery();
-    });
-  });
-})();
-
-/* Newsletter */
+/* NEWSLETTER */
 const nlForm = document.getElementById('nlForm');
 if (nlForm) {
   nlForm.addEventListener('submit', (e) => {
@@ -1377,19 +1279,14 @@ if (nlForm) {
   });
 }
 
+/* INITIALIZE */
+document.addEventListener('DOMContentLoaded', () => {
+  loadHomeData();
+});
+
 document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
 document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
-console.log('✅ Scale Planet homepage ready');
+console.log('✅ Scale Planet homepage connected to Supabase');
 </script>
-<script>
-/* Clicking anywhere on a product card (except thumbnails and buttons) opens its detail page */
-document.addEventListener('click', function (e) {
-  var card = e.target.closest ? e.target.closest('.card, .fp-card') : null;
-  if (!card || e.target.closest('button, a, .thumbs, .fp-thumbs')) return;
-  var main = card.querySelector('.main-img, .fp-main-img');
-  if (main && e.target !== main) main.click();
-});
-</script>
-<script src="search-suggest.js"></script>
 </body>
 </html>
