@@ -1086,40 +1086,37 @@ async function loadHomeData() {
 }
 
 /* ============================================================
-   RENDER FEATURE SECTIONS
+   RENDER FEATURE SECTIONS (Now showing 2 products per section)
    ============================================================ */
 function renderFeatureSections() {
-  // 1. Recently Viewed (from localStorage)
+  // 1. Recently Viewed (from localStorage) - 2 products
   let recentIds = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
-  let recentProducts = allProducts.filter(p => recentIds.includes(p.id)).slice(0, 4);
+  let recentProducts = allProducts.filter(p => recentIds.includes(p.id)).slice(0, 2);
   if (recentProducts.length === 0) {
-    // Agar kuch nahi dekha, to latest 4 products dikhayein
-    recentProducts = allProducts.slice(0, 4);
+    recentProducts = allProducts.slice(0, 2);
   }
 
-  // 2. New at Scale Planet (Latest by created_at)
+  // 2. New at Scale Planet (Latest by created_at) - 2 products
   let newProducts = [...allProducts].sort((a, b) => {
     return new Date(b.created_at || 0) - new Date(a.created_at || 0);
-  }).slice(0, 4);
+  }).slice(0, 2);
 
-  // 3. Stock up on essentials (Random 4, jo recent/new mein na hon)
+  // 3. Stock up on essentials (Random 2, jo recent/new mein na hon)
   let usedIds = new Set([...recentProducts.map(p => p.id), ...newProducts.map(p => p.id)]);
   let remaining = allProducts.filter(p => !usedIds.has(p.id));
-  // Shuffle remaining
   remaining = remaining.sort(() => 0.5 - Math.random());
-  let stockProducts = remaining.slice(0, 4);
+  let stockProducts = remaining.slice(0, 2);
 
-  // 4. Most purchased (Random 4, jo pehle use na hue hon)
+  // 4. Most purchased (Random 2, jo pehle use na hue hon)
   let finalUsedIds = new Set([...usedIds, ...stockProducts.map(p => p.id)]);
   let remaining2 = allProducts.filter(p => !finalUsedIds.has(p.id));
   remaining2 = remaining2.sort(() => 0.5 - Math.random());
-  let mostProducts = remaining2.slice(0, 4);
+  let mostProducts = remaining2.slice(0, 2);
 
-  // Agar products kam hain, to sab sections mein repeat kar dein
-  const fillIfEmpty = (arr, fallback) => arr.length > 0 ? arr : fallback;
-  stockProducts = fillIfEmpty(stockProducts, allProducts.slice(0, 4));
-  mostProducts = fillIfEmpty(mostProducts, allProducts.slice(0, 4));
-  if (newProducts.length === 0) newProducts = allProducts.slice(0, 4);
+  // Fallback agar products kam hain
+  if (stockProducts.length === 0) stockProducts = allProducts.slice(0, 2);
+  if (mostProducts.length === 0) mostProducts = allProducts.slice(0, 2);
+  if (newProducts.length === 0) newProducts = allProducts.slice(0, 2);
 
   // Render all
   renderSection('fpRecent', recentProducts);
@@ -1176,8 +1173,6 @@ function renderSection(containerId, products) {
       </article>`;
   }).join('');
 }
-
-// Recently viewed update karna (jab user product detail page pe jaye, wo wahan handle hoga. Yahan hum sirf read kar rahe hain).
 
 /* ============================================================
    RENDER SHOP BY CATEGORY
@@ -1305,5 +1300,3 @@ document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') 
 document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
 console.log('✅ Scale Planet homepage connected to Supabase');
 </script>
-</body>
-</html>
