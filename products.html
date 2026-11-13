@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* CSS SAME RAHEGA - Koi change nahi */
+    /* Same CSS as before - I'm pasting the exact CSS you had, no changes */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --primary: #3e4095; --primary-deep: #2d2e6b; --primary-mid: #4a4dae;
@@ -211,7 +211,6 @@
 </head>
 <body>
 
-  <!-- AYAH -->
   <div class="ayah">
     <div class="ayah-text">
       <span>وَأَقِيمُوا الْوَزْنَ بِالْقِسْطِ وَلَا تُخْسِرُوا الْمِيزَانَ</span>
@@ -220,7 +219,6 @@
     </div>
   </div>
 
-  <!-- UTILITY -->
   <div class="utility">
     <div class="utility-inner">
       <span class="utility-item"><i class="fas fa-phone"></i> <a href="tel:03234005335">0323 4005335</a></span>
@@ -228,7 +226,6 @@
     </div>
   </div>
 
-  <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
       <a href="index.html" class="logo-wrap"><img src="images/logo.png" alt="Scale Planet"></a>
@@ -247,7 +244,6 @@
     </div>
   </header>
 
-  <!-- PAGE TITLE -->
   <section class="page-title">
     <div class="page-title-inner">
       <div class="crumbs">
@@ -260,22 +256,11 @@
     </div>
   </section>
 
-  <!-- MAIN -->
   <main class="wrap">
+    <!-- Dynamic Categories will be loaded here -->
     <div class="cat-chips" id="catChips">
       <button class="active" data-cat="all">All Products</button>
-      <button data-cat="Platform Scales">Platform Scales</button>
-      <button data-cat="Counter Scales">Counter Scales</button>
-      <button data-cat="Animal Scales">Animal Scales</button>
-      <button data-cat="Crane Scales">Crane Scales</button>
-      <button data-cat="Load Cells">Load Cells</button>
-      <button data-cat="Indicators">Indicators</button>
-      <button data-cat="Lab Scales">Lab Scales</button>
-      <button data-cat="Counting Scales">Counting Scales</button>
-      <button data-cat="Kitchen Scales">Kitchen Scales</button>
-      <button data-cat="Health Scales">Health Scales</button>
-      <button data-cat="Hanging Scales">Hanging Scales</button>
-      <button data-cat="Electronic Scales">Electronic Scales</button>
+      <!-- Categories from Supabase will be appended here via JS -->
     </div>
 
     <div class="result-bar">
@@ -292,15 +277,12 @@
     <div class="grid" id="grid"></div>
   </main>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
           <img src="images/logo.png" alt="Scale Planet">
-          <p>Scale Planet is a trusted name in Digital &amp; Industrial Weighing Solutions with 10 years of experience.
-            We provide reliable weighing scales and equipment designed to meet the needs of businesses across Pakistan.
-          </p>
+          <p>Scale Planet is a trusted name in Digital &amp; Industrial Weighing Solutions with 10 years of experience. We provide reliable weighing scales and equipment designed to meet the needs of businesses across Pakistan.</p>
           <div class="footer-socials">
             <a href="https://www.facebook.com/share/1EoPxNpaMi/" target="_blank"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.instagram.com/scale.planet?stkn=MXM4Ym5kbzVlNWxmZA==" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -354,7 +336,6 @@
     </div>
   </footer>
 
-  <!-- DOCK -->
   <div class="dock">
     <a href="home-service.html" class="dock-btn book"><i class="fas fa-screwdriver-wrench"></i><span>Book Service</span></a>
     <div class="dock-divider"></div>
@@ -445,7 +426,6 @@
     let currentCat = 'all';
     let currentSearch = '';
     
-    // URL se parameters nikalna
     const params = new URLSearchParams(window.location.search);
     const urlCat = params.get('category');
     const urlSearch = params.get('search');
@@ -463,7 +443,9 @@
         .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
     }
 
-    // ===== SUPABASE SE DATA FETCH KARNA =====
+    // ==========================================
+    // 1. FETCH PRODUCTS FROM SUPABASE
+    // ==========================================
     async function loadProducts() {
       grid.innerHTML = `<div class="empty-state"><i class="fas fa-spinner fa-spin"></i><h3>Loading Products...</h3></div>`;
       
@@ -482,6 +464,39 @@
       filterAndSort();
     }
 
+    // ==========================================
+    // 2. FETCH CATEGORIES FOR CHIPS
+    // ==========================================
+    async function loadCategoriesForChips() {
+      const { data, error } = await supabaseClient
+        .from('categories')
+        .select('name')
+        .eq('is_main', true)
+        .order('name', { ascending: true });
+
+      if (error) {
+        console.error('Error fetching categories:', error);
+        return;
+      }
+
+      // Clear old categories, keep "All Products"
+      catChips.innerHTML = `<button class="active" data-cat="all">All Products</button>`;
+      
+      // Add fetched categories
+      (data || []).forEach(cat => {
+        const btn = document.createElement('button');
+        btn.dataset.cat = cat.name;
+        btn.textContent = cat.name;
+        if (currentCat.toLowerCase() === cat.name.toLowerCase()) {
+          btn.classList.add('active');
+        }
+        catChips.appendChild(btn);
+      });
+    }
+
+    // ==========================================
+    // 3. RENDER PRODUCT CARDS
+    // ==========================================
     function getMainImages(p) {
       let imagesList = [];
       if (Array.isArray(p.images) && p.images.length > 0) {
@@ -498,10 +513,11 @@
       const slug = `product-detail.html?id=${p.id}`;
       const badgeClass = (p.badge && p.badge.toLowerCase().includes('new')) ? 'badge green' : 'badge';
       
-      // Features (agar Supabase mein features column nahi hai to default dikhayein)
-      const featuresList = Array.isArray(p.features) ? p.features : ["High Precision", "Durable", "Warranty"];
+      let featuresList = ["High Precision", "Durable", "Warranty"];
+      if (Array.isArray(p.features) && p.features.length > 0) {
+        featuresList = p.features;
+      }
       
-      // Price handling
       let priceDisplay = "";
       if (p.stock_status === 'ask-price') {
         priceDisplay = `<span style="color:#f39c12; font-weight:700;">Ask for Price</span>`;
@@ -629,16 +645,11 @@
       el.addEventListener('click', function (e) { e.preventDefault(); openSameDayDelivery(); });
     });
 
-    // Activate correct chip on load
-    if (currentCat !== 'all') {
-      catChips.querySelectorAll('button').forEach(b => {
-        if(b.dataset.cat.toLowerCase() === currentCat.toLowerCase()) b.classList.add('active');
-        else b.classList.remove('active');
-      });
-    }
-
-    // Load data
-    loadProducts();
+    // INITIALIZE
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadCategoriesForChips();
+      await loadProducts();
+    });
     
     document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
     document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
