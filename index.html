@@ -1223,6 +1223,11 @@ window.findMyScale = function() {
   window.location.href = `products.html?app=${encodeURIComponent(app)}&capacity=${encodeURIComponent(cap)}`;
 };
 
+window.searchProducts = function() {
+  const q = document.getElementById('searchInput').value.trim();
+  if (q) window.location.href = `products.html?search=${encodeURIComponent(q)}`;
+};
+
 /* ============================================================
    BUILD YOUR OWN SCALE
    ============================================================ */
