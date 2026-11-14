@@ -1214,6 +1214,56 @@ function renderHomeCategories(categories) {
 }
 
 /* ============================================================
+   FIND MY SCALE (Filters)
+   ============================================================ */
+window.findMyScale = function() {
+  const app = document.getElementById('fsApplication').value;
+  const cap = document.getElementById('fsCapacity').value;
+  if (!app || !cap) { showToast('Please select both application and capacity'); return; }
+  window.location.href = `products.html?app=${encodeURIComponent(app)}&capacity=${encodeURIComponent(cap)}`;
+};
+
+/* ============================================================
+   BUILD YOUR OWN SCALE
+   ============================================================ */
+window.generateMyScale = function() {
+  const cat = document.getElementById('bysCategory').value;
+  const cap = document.getElementById('bysCapacity').value;
+  const plat = document.getElementById('bysPlatform').value;
+  if (!cat || !cap || !plat) { showToast('Please fill all three fields'); return; }
+  
+  document.getElementById('bysResultGrid').innerHTML = `
+    <div class="bys-result-item"><div class="lbl">Application</div><div class="val">${esc(cat)}</div></div>
+    <div class="bys-result-item"><div class="lbl">Capacity</div><div class="val">${esc(cap)}</div></div>
+    <div class="bys-result-item"><div class="lbl">Platform Material</div><div class="val">${esc(plat)}</div></div>
+  `;
+  
+  const msg = `Hello Scale Planet Team!\n\nI'd like a custom scale quote:\n\n• Application: ${cat}\n• Capacity: ${cap}\n• Platform Material: ${plat}\n\nPlease share pricing and lead time. Thank you!`;
+  document.getElementById('bysWhatsappBtn').href = `https://wa.me/923234005335?text=${encodeURIComponent(msg)}`;
+  
+  const result = document.getElementById('bysResult');
+  result.style.display = 'block';
+  result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+};
+
+window.resetBuildScale = function() {
+  document.getElementById('bysCategory').value = '';
+  document.getElementById('bysCapacity').value = '';
+  document.getElementById('bysPlatform').value = '';
+  document.getElementById('bysResult').style.display = 'none';
+};
+
+/* ============================================================
+   FAQ TOGGLE
+   ============================================================ */
+window.toggleFaq = function(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+};
+
+/* ============================================================
    RENDER TRUSTED BRANDS
    ============================================================ */
 function renderHomeBrands(brands) {
