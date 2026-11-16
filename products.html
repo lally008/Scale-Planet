@@ -535,7 +535,9 @@
         ${images.map((im, i) => `<img class="${i === 0 ? 'active' : ''}" src="${esc(im)}" onerror="this.onerror=null; this.src='${PLACEHOLDER}'" onclick="event.stopPropagation(); swapImage(${p.id}, '${esc(im)}', this)" alt="">`).join('')}
       </div>
       <h3>${esc(p.name)}</h3>
-      <div class="cap"><i class="fas fa-weight-hanging"></i> Capacity: ${esc(p.capacity || 'N/A')}</div>
+      ${p.capacity && String(p.capacity).trim() !== '' 
+  ? `<div class="cap"><i class="fas fa-weight-hanging"></i> Capacity: ${esc(p.capacity)}</div>` 
+  : ''}
       <div class="features">
         ${featuresList.slice(0, 4).map(f => `<span>${esc(f)}</span>`).join('')}
       </div>
@@ -567,7 +569,10 @@
     window.askForPrice = function(id) {
       const p = allProducts.find(x => x.id === id);
       if (!p) return;
-      const msg = `Hello Scale Planet Team!\n\nI'm interested in this product:\n\n*${p.name}*\nCategory: ${p.category || ''}\nCapacity: ${p.capacity || ''}\n\nPlease share pricing and availability.`;
+      const capacityLine = (p.capacity && String(p.capacity).trim() !== '') 
+  ? `\nCapacity: ${p.capacity}` 
+  : '';
+      const msg = `Hello Scale Planet Team!\n\nI'm interested in this product:\n\n*${p.name}*\nCategory: ${p.category || ''}${capacityLine}\n\nPlease share pricing and availability.`;
       window.open(`https://wa.me/923234005335?text=${encodeURIComponent(msg)}`, '_blank');
     };
 
