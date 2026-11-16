@@ -1164,7 +1164,9 @@ function renderSection(containerId, products) {
           ${imagesList.map((im, i) => `<img class="${i === 0 ? 'active' : ''}" src="${esc(im)}" onerror="this.onerror=null; this.src='${PLACEHOLDER}'" onclick="event.stopPropagation(); fpSwapImage('${uid}', '${esc(im)}', this)" alt="">`).join('')}
         </div>
         <h3>${esc(p.name)}</h3>
-        <div class="fp-cap"><i class="fas fa-weight-hanging"></i> Capacity: ${esc(p.capacity || 'N/A')}</div>
+        ${p.capacity && String(p.capacity).trim() !== '' 
+  ? `<div class="fp-cap"><i class="fas fa-weight-hanging"></i> Capacity: ${esc(p.capacity)}</div>` 
+  : ''}
         <div class="fp-features">
           ${featuresList.slice(0, 4).map(f => `<span>${esc(f)}</span>`).join('')}
         </div>

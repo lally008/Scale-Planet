@@ -425,10 +425,9 @@ function renderProduct(p) {
       <div class="product-cat"><i class="fas fa-tag"></i> ${esc(p.category || 'Uncategorized')}</div>
       <h1 class="product-title">${esc(p.name)}</h1>
 
-      <div class="capacity-box">
-        <i class="fas fa-weight-hanging"></i>
-        <span>${esc(p.capacity || 'N/A')}</span>
-      </div>
+     ${p.capacity && String(p.capacity).trim() !== '' 
+  ? `<div class="fp-cap"><i class="fas fa-weight-hanging"></i> Capacity: ${esc(p.capacity)}</div>` 
+  : ''}
 
       ${priceBlock}
 
