@@ -695,21 +695,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     </a>
   </div>
 </section>
-<!-- SHOP BY CATEGORY (Dynamic from Supabase) -->
-<section class="cat-section">
-  <div class="cat-section-inner">
-    <div class="sec-head">
-      <h2>Shop by <em>Category</em></h2>
-      <p>Every weighing solution we make, organised by what it does best.</p>
-    </div>
-    <div class="cat-grid" id="categoryGrid">
-      <!-- Categories will be loaded here via JS -->
-      <div style="grid-column: 1/-1; text-align: center; padding: 20px; color: var(--text-muted);">
-        <i class="fas fa-spinner fa-spin"></i> Loading categories...
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- FEATURE ROW -->
 <section class="feature-row">
@@ -729,6 +714,21 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <div class="feature-card">
       <div class="feature-card-header">Most purchased this month</div>
       <div class="fp-grid" id="fpMost"></div>
+    </div>
+  </div>
+</section>
+<!-- SHOP BY CATEGORY (Dynamic from Supabase) -->
+<section class="cat-section">
+  <div class="cat-section-inner">
+    <div class="sec-head">
+      <h2>Shop by <em>Category</em></h2>
+      <p>Every weighing solution we make, organised by what it does best.</p>
+    </div>
+    <div class="cat-grid" id="categoryGrid">
+      <!-- Categories will be loaded here via JS -->
+      <div style="grid-column: 1/-1; text-align: center; padding: 20px; color: var(--text-muted);">
+        <i class="fas fa-spinner fa-spin"></i> Loading categories...
+      </div>
     </div>
   </div>
 </section>
