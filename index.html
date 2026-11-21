@@ -137,6 +137,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .fp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
 .fp-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 12px; display: flex; flex-direction: column; min-width: 0; box-shadow: 0 4px 18px rgba(62, 64, 149, 0.06); transition: all 0.3s ease; position: relative; }
 .fp-card:hover { border-color: var(--primary); box-shadow: 0 12px 32px -12px rgba(62, 64, 149, 0.25); transform: translateY(-3px); }
+.fp-card[data-href] { cursor: pointer; }
+.fp-thumbs img { pointer-events: auto; }
 .fp-badge { display: inline-block; align-self: flex-start; background: var(--primary); color: #fff; padding: 5px 11px; border-radius: 14px; font-family: var(--font-body); font-size: 11px; font-weight: 800; letter-spacing: 0.3px; margin-bottom: 8px; text-transform: uppercase; }
 .fp-badge.green { background: #18a957; }
 .fp-main-img { height: 200px; width: 100%; object-fit: contain; border-radius: 9px; background: #fff; cursor: pointer; transition: transform 0.4s ease; }
@@ -1157,7 +1159,7 @@ function renderSection(containerId, products) {
     }
 
     return `
-      <article class="fp-card">
+      <article class="fp-card" data-href="${slug}" role="link" tabindex="0" aria-label="${esc(p.name)}">
         <span class="${badgeClass}">${esc(p.badge || 'Product')}</span>
         <img class="fp-main-img" id="main-${uid}" src="${esc(mainImg)}" onerror="this.onerror=null; this.src='${PLACEHOLDER}'" onclick="window.location.href='${slug}'" alt="${esc(p.name)}">
         <div class="fp-thumbs">
@@ -1315,6 +1317,22 @@ window.searchProducts = function() {
   if (q) window.location.href = `products.html?search=${encodeURIComponent(q)}`;
 };
 document.getElementById('searchInput').addEventListener('keypress', e => { if (e.key === 'Enter') searchProducts(); });
+
+/* WHOLE CARD CLICK → PRODUCT DETAIL */
+function openCard(card) {
+  if (card && card.dataset.href) window.location.href = card.dataset.href;
+}
+document.addEventListener('click', function (e) {
+  const card = e.target.closest('.fp-card[data-href]');
+  if (!card) return;
+  if (e.target.closest('button, a, .fp-thumbs')) return; // buttons & thumbnails apna kaam karen
+  openCard(card);
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key !== 'Enter') return;
+  const card = e.target.closest && e.target.closest('.fp-card[data-href]');
+  if (card && e.target === card) openCard(card);
+});
 
 /* SAME DAY DELIVERY POPUP */
 function openSameDayDelivery() {
