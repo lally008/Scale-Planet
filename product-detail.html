@@ -526,10 +526,10 @@ function renderProduct(p) {
       <div class="description-block">
         <h3>Product Description</h3>
         <div class="description-content">${parseMarkdown(p.description || 'No description available.')}</div>
-      </div>
+        </div>
+        ${getVideoHtml(p.video_url)}
     </div>
-      ${getVideoHtml(p.video_url)}
-  `;
+    `;
 
   /* Main image click -> lightbox */
   const mainImgEl = document.getElementById('mainImage');
