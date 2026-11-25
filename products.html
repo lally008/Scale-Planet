@@ -123,6 +123,11 @@
     .ask-btn:hover { background: var(--primary-deep); transform: translateY(-1px); }
     .detail-btn { border: 1px solid #b4b8c2; background: #757b89; color: #fff; }
     .detail-btn:hover { border-color: #a2a7b3; background: #a2a7b3; color: #fff; transform: translateY(-1px); }
+    .active-filters { align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; background: var(--primary-pale); border: 1px solid var(--primary-soft); border-radius: 10px; padding: 10px 14px; margin-bottom: 6px; font-size: 13px; color: var(--primary-deep); font-weight: 600; }
+    .active-filters i { color: var(--primary); margin-right: 6px; }
+    .active-filters button { display: inline-flex; align-items: center; gap: 6px; background: var(--primary); color: #fff; border-radius: 100px; padding: 6px 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.4px; }
+    .active-filters button i { color: #fff; margin: 0; }
+    .active-filters button:hover { background: var(--primary-deep); }
     .price-box { border-radius: 7px; padding: 10px 6px; background: var(--primary-pale); border: 1px solid var(--primary-soft); color: var(--primary-deep); font-family: var(--font-body); font-size: 12px; font-weight: 800; letter-spacing: 0.3px; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap; }
     @media (max-width: 768px) { .price-box { font-size: 11px; padding: 9px 4px; } }
     .empty-state { grid-column: 1 / -1; text-align: center; padding: 80px 20px; color: var(--text-muted); }
@@ -266,6 +271,8 @@
       <button class="active" data-cat="all">All Products</button>
       <!-- Categories from Supabase will be appended here via JS -->
     </div>
+
+    <div class="active-filters" id="activeFilters" style="display:none;"></div>
 
     <div class="result-bar">
       <div class="result-count"><strong id="resultCount">0</strong> products found</div>
@@ -436,6 +443,87 @@
     if (urlCat) currentCat = urlCat;
     if (urlSearch) currentSearch = urlSearch;
 
+    // "Find the Right Scale" filters (index.html se: ?app=...&capacity=...)
+    let currentApp = params.get('app') || '';
+    let currentCapacity = params.get('capacity') || '';
+
+    // Application -> kaun se products is application ke liye hain (category/name/features mein keywords)
+    const APP_KEYWORDS = {
+      'shop / grocery': ['counter', 'table', 'price', 'computing', 'retail', 'grocery', 'shop', 'kitchen', 'tabletop', 'label', 'barcode', 'pos', 'bench'],
+      'warehouse / platform': ['platform', 'warehouse', 'industrial', 'floor', 'pallet', 'crane', 'hanging', 'counting', 'heavy'],
+      'poultry / animal': ['animal', 'poultry', 'livestock', 'cattle', 'goat', 'sheep', 'cow', 'chicken', 'hanging'],
+      'laboratory / precision': ['lab', 'laboratory', 'analytical', 'precision', 'balance', 'jewel', 'milligram'],
+      'truck / weighbridge': ['weighbridge', 'weigh bridge', 'truck', 'vehicle', 'bridge', 'load cell', 'axle']
+    };
+
+    // Capacity bucket (kg): [pichla limit, is bucket ka limit]
+    const CAP_BUCKETS = {
+      '1kg': [0, 1], '5kg': [1, 5], '10kg': [5, 10], '30kg': [10, 30],
+      '100kg': [30, 100], '500kg': [100, 500], '1000kg+': [500, Infinity]
+    };
+    const CAP_LABELS = {
+      '1kg': 'Up to 1 kg', '5kg': 'Up to 5 kg', '10kg': 'Up to 10 kg', '30kg': 'Up to 30 kg',
+      '100kg': 'Up to 100 kg', '500kg': 'Up to 500 kg', '1000kg+': 'Over 1 Ton'
+    };
+
+    // "50KG – 200KG", "Up to 10 Ton", "1,000KG – 10,000KG", "200g – 320g" -> {min, max} in kg
+    function parseCapacityKg(str) {
+      const s = String(str || '').toLowerCase().replace(/,/g, '');
+      const re = /(\d+(?:\.\d+)?)\s*(kgs|kg|grams|gram|gm|g|tonnes|tonne|tons|ton|t)?\b/g;
+      const items = [];
+      let m;
+      while ((m = re.exec(s)) !== null) items.push({ n: parseFloat(m[1]), u: m[2] || '' });
+      if (!items.length) return null;
+
+      // Jis number ke saath unit na ho (jaise "50 - 200 kg") usay agle unit se lo
+      for (let i = items.length - 1; i >= 0; i--) {
+        if (!items[i].u) items[i].u = (items[i + 1] && items[i + 1].u) || '';
+      }
+      const vals = items
+        .filter(x => x.u)
+        .map(x => /^(g|gm|gram|grams)$/.test(x.u) ? x.n / 1000 : /^(t|ton|tons|tonne|tonnes)$/.test(x.u) ? x.n * 1000 : x.n);
+      if (!vals.length) return null;
+
+      let min = Math.min.apply(null, vals);
+      const max = Math.max.apply(null, vals);
+      if (/up\s*to|upto|max/.test(s)) min = 0;
+      return { min, max };
+    }
+
+    function matchesApp(p, app) {
+      const kws = APP_KEYWORDS[String(app).toLowerCase().trim()];
+      if (!kws) return true;
+      const feats = Array.isArray(p.features) ? p.features.join(' ') : String(p.features || '');
+      const text = [p.category, p.name, p.badge, feats].join(' ').toLowerCase();
+      return kws.some(k => text.includes(k));
+    }
+
+    function matchesCapacity(p, capKey) {
+      const bucket = CAP_BUCKETS[String(capKey).toLowerCase().trim()];
+      if (!bucket) return true;
+      const range = parseCapacityKg(p.capacity);
+      if (!range) return false;
+      return range.max > bucket[0] && range.min <= bucket[1];
+    }
+
+    function renderActiveFilters() {
+      const box = document.getElementById('activeFilters');
+      if (!box) return;
+      if (!currentApp && !currentCapacity) { box.style.display = 'none'; box.innerHTML = ''; return; }
+      const parts = [];
+      if (currentApp) parts.push(`<b>${esc(currentApp)}</b>`);
+      if (currentCapacity) parts.push(`<b>${esc(CAP_LABELS[currentCapacity] || currentCapacity)}</b>`);
+      box.innerHTML = `<span><i class="fas fa-bolt"></i> Scales for ${parts.join(' · ')}</span><button type="button" onclick="clearScaleFilter()"><i class="fas fa-times"></i> Clear filter</button>`;
+      box.style.display = 'flex';
+    }
+
+    window.clearScaleFilter = function () {
+      currentApp = '';
+      currentCapacity = '';
+      try { history.replaceState(null, '', location.pathname); } catch (e) {}
+      filterAndSort();
+    };
+
     const grid = document.getElementById('grid');
     const catChips = document.getElementById('catChips');
     const resultCount = document.getElementById('resultCount');
@@ -599,6 +687,10 @@
         );
       }
 
+      if (currentApp) list = list.filter(p => matchesApp(p, currentApp));
+      if (currentCapacity) list = list.filter(p => matchesCapacity(p, currentCapacity));
+      renderActiveFilters();
+
       const sort = sortSelect.value;
       if (sort === 'name-asc') list.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
       if (sort === 'name-desc') list.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
@@ -621,6 +713,8 @@
       catChips.querySelectorAll('button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentCat = btn.dataset.cat;
+      currentApp = '';
+      currentCapacity = '';
       currentSearch = '';
       searchInput.value = '';
       filterAndSort();
@@ -631,6 +725,8 @@
     function searchProducts() {
       const q = searchInput.value.trim();
       currentSearch = q;
+      currentApp = '';
+      currentCapacity = '';
       currentCat = 'all';
       catChips.querySelectorAll('button').forEach(b => b.classList.remove('active'));
       catChips.querySelector('[data-cat="all"]').classList.add('active');
