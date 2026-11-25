@@ -12,7 +12,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* Same CSS as before - I'm pasting the exact CSS you had, no changes */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --primary: #3e4095; --primary-deep: #2d2e6b; --primary-mid: #4a4dae;
@@ -29,8 +28,7 @@
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; -webkit-user-drag: none; pointer-events: none; }
     button { font-family: inherit; cursor: pointer; border: none; background: none; }
-    
-    /* BAAKI CSS WAHI HAI JO AAPNE BHEJI THI */
+
     .ayah { background: var(--primary); color: #fff; padding: 14px 20px; text-align: center; border-bottom: 2px solid var(--primary-deep); }
     .ayah-text { font-family: 'Noto Kufi Arabic', serif; font-size: 14px; font-weight: 700; color: #fff; line-height: 1.8; direction: rtl; gap: 40px; display: flex; justify-content: center; flex-wrap: wrap; align-items: center; }
     .ayah-text .urdu { font-family: 'Noto Kufi Arabic', serif; font-size: 13px; color: var(--primary-pale); direction: rtl; }
@@ -429,7 +427,7 @@
     let allProducts = [];
     let currentCat = 'all';
     let currentSearch = '';
-    
+
     const params = new URLSearchParams(window.location.search);
     const urlCat = params.get('category');
     const urlSearch = params.get('search');
@@ -448,11 +446,22 @@
     }
 
     // ==========================================
+    // PRODUCT URL: slug wala static page (/products/<slug>.html)
+    // slug na ho to purana id wala dynamic page (fallback)
+    // ==========================================
+    function productUrl(p) {
+      const slug = String((p && p.slug) || '').trim();
+      return slug
+        ? `/products/${encodeURIComponent(slug)}.html`
+        : `/product-detail.html?id=${p.id}`;
+    }
+
+    // ==========================================
     // 1. FETCH PRODUCTS FROM SUPABASE
     // ==========================================
     async function loadProducts() {
       grid.innerHTML = `<div class="empty-state"><i class="fas fa-spinner fa-spin"></i><h3>Loading Products...</h3></div>`;
-      
+
       const { data, error } = await supabaseClient
         .from('products')
         .select('*')
@@ -483,10 +492,8 @@
         return;
       }
 
-      // Clear old categories, keep "All Products"
       catChips.innerHTML = `<button class="active" data-cat="all">All Products</button>`;
-      
-      // Add fetched categories
+
       (data || []).forEach(cat => {
         const btn = document.createElement('button');
         btn.dataset.cat = cat.name;
@@ -514,14 +521,14 @@
 
     function renderCard(p) {
       const images = getMainImages(p);
-      const slug = `product-detail.html?id=${p.id}`;
+      const url = productUrl(p);
       const badgeClass = (p.badge && p.badge.toLowerCase().includes('new')) ? 'badge green' : 'badge';
-      
+
       let featuresList = ["High Precision", "Durable", "Warranty"];
       if (Array.isArray(p.features) && p.features.length > 0) {
         featuresList = p.features;
       }
-      
+
       let priceDisplay = "";
       if (p.stock_status === 'ask-price') {
         priceDisplay = `<span style="color:#f39c12; font-weight:700;">Ask for Price</span>`;
@@ -530,16 +537,16 @@
       }
 
       return `
-    <article class="card" data-href="${slug}" role="link" tabindex="0" aria-label="${esc(p.name)}">
+    <article class="card" data-href="${esc(url)}" role="link" tabindex="0" aria-label="${esc(p.name)}">
       <span class="${badgeClass}">${esc(p.badge || 'Product')}</span>
-      <img class="main-img" id="main-${p.id}" src="${esc(images[0])}" onerror="this.onerror=null; this.src='${PLACEHOLDER}'" onclick="window.location.href='${slug}'" alt="${esc(p.name)}">
+      <img class="main-img" id="main-${p.id}" src="${esc(images[0])}" onerror="this.onerror=null; this.src='${PLACEHOLDER}'" alt="${esc(p.name)}">
       <div class="thumbs">
         ${images.map((im, i) => `<img class="${i === 0 ? 'active' : ''}" src="${esc(im)}" onerror="this.onerror=null; this.src='${PLACEHOLDER}'" onclick="event.stopPropagation(); swapImage(${p.id}, '${esc(im)}', this)" alt="">`).join('')}
       </div>
       <h3>${esc(p.name)}</h3>
-      ${p.capacity && String(p.capacity).trim() !== '' 
-  ? `<div class="cap"><i class="fas fa-weight-hanging"></i> Capacity: ${esc(p.capacity)}</div>` 
-  : ''}
+      ${p.capacity && String(p.capacity).trim() !== ''
+        ? `<div class="cap"><i class="fas fa-weight-hanging"></i> Capacity: ${esc(p.capacity)}</div>`
+        : ''}
       <div class="features">
         ${featuresList.slice(0, 4).map(f => `<span>${esc(f)}</span>`).join('')}
       </div>
@@ -548,7 +555,7 @@
         <button class="ask-btn" onclick="event.stopPropagation(); askForPrice(${p.id})">
           <i class="fas fa-phone"></i> Ask for Price
         </button>
-        <button class="detail-btn" onclick="event.stopPropagation(); window.location.href='${slug}'">
+        <button class="detail-btn" data-go="${esc(url)}">
           <i class="fas fa-eye"></i> View Detail
         </button>
       </div>
@@ -571,9 +578,9 @@
     window.askForPrice = function(id) {
       const p = allProducts.find(x => x.id === id);
       if (!p) return;
-      const capacityLine = (p.capacity && String(p.capacity).trim() !== '') 
-  ? `\nCapacity: ${p.capacity}` 
-  : '';
+      const capacityLine = (p.capacity && String(p.capacity).trim() !== '')
+        ? `\nCapacity: ${p.capacity}`
+        : '';
       const msg = `Hello Scale Planet Team!\n\nI'm interested in this product:\n\n*${p.name}*\nCategory: ${p.category || ''}${capacityLine}\n\nPlease share pricing and availability.`;
       window.open(`https://wa.me/923234005335?text=${encodeURIComponent(msg)}`, '_blank');
     };
@@ -634,11 +641,14 @@
 
     searchInput.addEventListener('keypress', e => { if (e.key === 'Enter') searchProducts(); });
 
-    // Whole card click -> product detail
+    // Card / main image / "View Detail" button -> product page (slug url)
     function openCard(card) {
       if (card && card.dataset.href) window.location.href = card.dataset.href;
     }
     grid.addEventListener('click', function (e) {
+      const goBtn = e.target.closest('.detail-btn[data-go]');
+      if (goBtn) { e.stopPropagation(); window.location.href = goBtn.dataset.go; return; }
+
       const card = e.target.closest('.card[data-href]');
       if (!card) return;
       if (e.target.closest('button, a, .thumbs')) return; // buttons & thumbnails apna kaam karen
@@ -675,7 +685,7 @@
       await loadCategoriesForChips();
       await loadProducts();
     });
-    
+
     document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
     document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
   </script>
