@@ -123,6 +123,8 @@
     .ask-btn:hover { background: var(--primary-deep); transform: translateY(-1px); }
     .detail-btn { border: 1px solid #b4b8c2; background: #757b89; color: #fff; }
     .detail-btn:hover { border-color: #a2a7b3; background: #a2a7b3; color: #fff; transform: translateY(-1px); }
+    .price-box { border-radius: 7px; padding: 10px 6px; background: var(--primary-pale); border: 1px solid var(--primary-soft); color: var(--primary-deep); font-family: var(--font-body); font-size: 12px; font-weight: 800; letter-spacing: 0.3px; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap; }
+    @media (max-width: 768px) { .price-box { font-size: 11px; padding: 9px 4px; } }
     .empty-state { grid-column: 1 / -1; text-align: center; padding: 80px 20px; color: var(--text-muted); }
     .empty-state i { font-size: 48px; color: var(--primary-soft); margin-bottom: 20px; }
     .empty-state h3 { font-family: var(--font-body); font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -529,12 +531,11 @@
         featuresList = p.features;
       }
 
-      let priceDisplay = "";
-      if (p.stock_status === 'ask-price') {
-        priceDisplay = `<span style="color:#f39c12; font-weight:700;">Ask for Price</span>`;
-      } else {
-        priceDisplay = p.price ? `PKR ${Number(p.price).toLocaleString()}` : "Contact Us";
-      }
+      // Price ho to price dikhao (Ask for Price ki jagah), warna Ask for Price button
+      const hasPrice = p.stock_status !== 'ask-price' && Number(p.price) > 0;
+      const priceOrAskHtml = hasPrice
+        ? `<div class="price-box" title="Price">PKR ${Number(p.price).toLocaleString()}</div>`
+        : `<button class="ask-btn" onclick="event.stopPropagation(); askForPrice(${p.id})"><i class="fas fa-phone"></i> Ask for Price</button>`;
 
       return `
     <article class="card" data-href="${esc(url)}" role="link" tabindex="0" aria-label="${esc(p.name)}">
@@ -550,11 +551,8 @@
       <div class="features">
         ${featuresList.slice(0, 4).map(f => `<span>${esc(f)}</span>`).join('')}
       </div>
-      <div class="cap" style="margin-top: 6px; font-weight: 700; color: var(--primary);">${priceDisplay}</div>
       <div class="actions">
-        <button class="ask-btn" onclick="event.stopPropagation(); askForPrice(${p.id})">
-          <i class="fas fa-phone"></i> Ask for Price
-        </button>
+        ${priceOrAskHtml}
         <button class="detail-btn" data-go="${esc(url)}">
           <i class="fas fa-eye"></i> View Detail
         </button>
