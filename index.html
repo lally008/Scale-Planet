@@ -1,3 +1,5 @@
+Here is the updated HTML file for the Scale Planet homepage. It fixes the "Find the Right Scale" functionality and replaces the tower graphic in the Same Day Delivery popup with a placeholder image.
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -390,7 +392,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: relative; z-index: 2; width: 78px; flex-shrink: 0;
   display: flex; align-items: flex-end; justify-content: center;
 }
-.sdd-minar-svg { width: 100%; height: auto; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.3)); }
+.sdd-hero-img {
+  width: 100%; height: auto; object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.3));
+  border-radius: 6px;
+}
 
 /* Body */
 .sdd-body { padding: 18px 20px 20px; background: var(--paper); }
@@ -609,22 +615,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
         <div class="sdd-urdu">آج آرڈر کریں، آج ہی ڈیلیوری پائیں!</div>
       </div>
       <div class="sdd-hero-right">
-        <svg class="sdd-minar-svg" viewBox="0 0 120 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="20" y="200" width="80" height="8" rx="1.5" fill="#e8c76a" opacity="0.95"/>
-          <rect x="28" y="192" width="64" height="9" rx="1.5" fill="#f0d37a"/>
-          <rect x="36" y="184" width="48" height="9" rx="1" fill="#e8c76a"/>
-          <rect x="42" y="177" width="36" height="8" rx="1" fill="#f0d37a"/>
-          <path d="M50 177 L54 60 L66 60 L70 177 Z" fill="#f5dd8a"/>
-          <path d="M54 60 L60 40 L66 60 Z" fill="#f0d37a"/>
-          <ellipse cx="60" cy="40" rx="7" ry="5" fill="#e8c76a"/>
-          <rect x="58.5" y="26" width="3" height="12" fill="#e8c76a"/>
-          <circle cx="60" cy="24" r="3.4" fill="#f0d37a"/>
-          <circle cx="62" cy="23" r="3" fill="#3e4095"/>
-          <rect x="47" y="100" width="26" height="5" rx="1" fill="#e8c76a"/>
-          <rect x="45" y="135" width="30" height="5" rx="1" fill="#e8c76a"/>
-          <rect x="43" y="160" width="34" height="5" rx="1" fill="#e8c76a"/>
-          <path d="M56 155 Q60 148 64 155 L64 160 L56 160 Z" fill="#3e4095" opacity="0.85"/>
-        </svg>
+        <img src="images/placeholder.webp" alt="Same day delivery" class="sdd-hero-img" width="78" height="143">
       </div>
     </div>
     <div class="sdd-body">
@@ -1021,11 +1012,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
 
-<!-- Baqi HTML/CSS same rahega (pichle index.html se), bas Script section update karna hai -->
-
-<!-- ... (Same CSS aur HTML jo aapne diya) ... -->
-
-<!-- SUPABASE SCRIPT SECTION (Ise replace karein) -->
+<!-- SUPABASE SCRIPT SECTION -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const supabaseClient = window.supabase.createClient(
@@ -1227,13 +1214,26 @@ function renderHomeCategories(categories) {
 }
 
 /* ============================================================
-   FIND MY SCALE (Filters)
+   FIND MY SCALE (Filters) — FIXED
    ============================================================ */
 window.findMyScale = function() {
-  const app = document.getElementById('fsApplication').value;
-  const cap = document.getElementById('fsCapacity').value;
-  if (!app || !cap) { showToast('Please select both application and capacity'); return; }
-  window.location.href = `products.html?app=${encodeURIComponent(app)}&capacity=${encodeURIComponent(cap)}`;
+  const appSelect = document.getElementById('fsApplication');
+  const capSelect = document.getElementById('fsCapacity');
+  
+  const app = appSelect ? appSelect.value : '';
+  const cap = capSelect ? capSelect.value : '';
+  
+  if (!app || !cap) { 
+    showToast('Please select both application and capacity'); 
+    return; 
+  }
+  
+  // Build the URL with proper encoding
+  const params = new URLSearchParams();
+  params.set('app', app);
+  params.set('capacity', cap);
+  
+  window.location.href = `products.html?${params.toString()}`;
 };
 
 window.searchProducts = function() {
@@ -1387,3 +1387,4 @@ console.log('✅ Scale Planet homepage connected to Supabase');
 <script src="/search-suggest.js"></script>
 </body>
 </html>
+```
