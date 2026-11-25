@@ -1,32 +1,17 @@
 /* =========================================================
    Scale Planet - Search Suggestions (Autocomplete)
-   Drop-in script: works on every page that has <input id="searchInput">
-   - Uses the page's own PRODUCTS list when it exists (index, products,
-     product-detail); otherwise uses the built-in copy below.
-   - Makes the search button a round, professional icon button.
+   Works on every page that has <input id="searchInput">.
+   Products Supabase se aate hain (ek baar fetch, phir cache).
+   Links: slug ho to /products/<slug>.html, warna /product-detail.html?id=
    ========================================================= */
 (function () {
     'use strict';
 
+    var SUPABASE_URL = 'https://lwsfenkvgrqnjmsxfuqo.supabase.co';
+    var SUPABASE_KEY = 'sb_publishable_K9EjWvaqMevI5z1FPTGUzw_iLFoWI3v';
     var MAX_SUGGESTIONS = 7;
-
-    /* Fallback catalogue (used on pages that don't define PRODUCTS).
-       Keep in sync with the PRODUCTS array on products.html. */
-    var CM = 'https://commons.wikimedia.org/wiki/Special:Redirect/file/';
-    var FALLBACK = [
-        { id: 1, name: 'Digital Platform Weighing Scale', cat: 'Platform Scales', badge: 'Best Seller', capacity: '50KG – 200KG', features: ['1g readability', 'Tare function', 'LCD display', 'Rechargeable battery'], img: 'https://image.made-in-china.com/202f0j00iAEtTJcPVRpf/50kg-100kg-150kg-200kg-Digital-Platform-Electronic-Weighing-Scale-with-RS232.webp' },
-        { id: 2, name: 'Price Computing Scale', cat: 'Counter Scales', badge: 'Popular', capacity: '3KG – 40KG', features: ['Price calculation', 'LCD/LED display', 'Tare', 'kg / g / lb'], img: 'https://image.made-in-china.com/202f0j00GTQkUSCFajcE/Multiple-Specifications-Available-Good-Quality-Electronic-Price-Computing-Scale.webp' },
-        { id: 3, name: 'Livestock / Animal Weighing Scale', cat: 'Animal Scales', badge: 'Heavy Duty', capacity: '1,000KG – 10,000KG', features: ['Guard rails', 'LED indicator', 'RS-232', 'OIML Class III'], img: 'https://image.made-in-china.com/318f0j00etnfHzamHPpJ/livestockanimalsweighingscales-mp4.webp' },
-        { id: 4, name: 'Digital Crane Scale', cat: 'Crane Scales', badge: 'Industrial', capacity: 'Up to 10 Ton', features: ['Hook mounted', 'Digital display', 'Heavy-duty', 'Portable'], img: CM + 'EHP%20Kranwaage%20Typ%20LDN%20LD.png' },
-        { id: 5, name: 'Shear Beam Load Cell', cat: 'Load Cells', badge: '2 Ton', capacity: 'Example: 2 Ton', features: ['Shear beam', 'Strain-gauge sensor', 'Industrial', 'Platform applications'], img: CM + 'Load%20Cell%20Sensor%20Module%20from%20a%20Digital%20Weighing%20Scale%2002.jpg' },
-        { id: 6, name: 'Digital Weighing Indicator', cat: 'Indicators', badge: 'New', capacity: '100KG – 800KG', features: ['Bright LCD', 'Tare', 'Print', 'RS-232 / USB options'], img: 'https://www.jadever.com/js/htmledit/kindeditor/attached/20221012/20221012134030_34681.jpg' },
-        { id: 7, name: 'Analytical Laboratory Balance', cat: 'Lab Scales', badge: 'Precision', capacity: '200g – 320g class', features: ['Draft shield', 'High precision', 'Digital display', 'Tare / calibration'], img: 'https://5.imimg.com/data5/SELLER/Default/2024/9/451385583/ZM/KC/AI/5832544/digital-weighing-machine-500x500.jpg' },
-        { id: 8, name: 'Industrial Counting Scale', cat: 'Counting Scales', badge: 'Warehouse', capacity: '1.5KG – 30KG', features: ['Piece counting', 'Multiple displays', 'Keypad', 'Rechargeable battery'], img: 'https://cdn1.npcdn.net/images/20210601_971a5e.webp?from=jpg&md5id=d9236c0a634ecbcb339a2646250c420c&new_height=1000&new_width=1000&size=max&type=1&w=-62170008925' },
-        { id: 9, name: 'Digital Kitchen Scale', cat: 'Kitchen Scales', badge: 'Compact', capacity: 'Up to 10KG', features: ['LCD display', 'Tare', 'Compact', 'Food weighing'], img: CM + 'Escali%20digital%20kitchen%20scale.jpg' },
-        { id: 10, name: 'Digital Body Weight Scale', cat: 'Health Scales', badge: 'Home', capacity: 'Up to 180KG', features: ['Digital display', 'Tempered glass', 'Auto on/off', 'Low battery indicator'], img: CM + 'Digital%20Body%20Scale.jpg' },
-        { id: 11, name: 'Portable Hanging / Hook Scale', cat: 'Hanging Scales', badge: 'Portable', capacity: '50KG example', features: ['Backlit LCD', 'Stainless hook', 'Tare', 'Battery operated'], img: CM + 'Crane%20weighting%20device.jpg' },
-        { id: 12, name: 'Digital Electronic Weighing Scale', cat: 'Electronic Scales', badge: 'Everyday', capacity: 'Model dependent', features: ['Digital display', 'Load-cell sensing', 'Tare', 'Commercial / lab use'], img: CM + 'Electronic%20Weighing%20Scale.jpg' }
-    ];
+    var CACHE_KEY = 'sp_products_v1';
+    var CACHE_MS = 10 * 60 * 1000; /* 10 minute */
 
     /* ---------- CSS ---------- */
     var css = '\
@@ -62,7 +47,7 @@
         width: 46px; height: 46px; flex-shrink: 0; border-radius: 8px; background: var(--paper-3, #f2f3fb);\
         border: 1px solid var(--line, #e0e2ee); display: flex; align-items: center; justify-content: center; overflow: hidden;\
     }\
-    .ws-sg-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 3px; }\
+    .ws-sg-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 3px; pointer-events: none; }\
     .ws-sg-thumb i { display: none; color: var(--primary, #3e4095); font-size: 16px; }\
     .ws-sg-thumb.noimg i { display: block; }\
     .ws-sg-text { flex: 1; min-width: 0; }\
@@ -103,33 +88,71 @@
         }).join('');
     }
 
-    function catalogue() {
-        var list = null;
+    function productUrl(p) {
+        var slug = String(p.slug || '').trim();
+        return slug ? '/products/' + encodeURIComponent(slug) + '.html'
+                    : '/product-detail.html?id=' + encodeURIComponent(p.id);
+    }
+
+    function normalize(p) {
+        var feats = p.features;
+        if (typeof feats === 'string') feats = feats.split(/[\n,]+/);
+        if (!Array.isArray(feats)) feats = [];
+        return {
+            id: p.id,
+            slug: p.slug || '',
+            name: p.name || '',
+            cat: p.category || '',
+            capacity: p.capacity || '',
+            model: p.model_number || '',
+            badge: p.badge || '',
+            features: feats,
+            img: p.image || (Array.isArray(p.images) && p.images[0]) || ''
+        };
+    }
+
+    /* ---------- Products load (Supabase REST, cache ke saath) ---------- */
+    var PRODUCTS_LIST = null;
+    var loadPromise = null;
+
+    function loadProducts() {
+        if (PRODUCTS_LIST) return Promise.resolve(PRODUCTS_LIST);
+        if (loadPromise) return loadPromise;
+
         try {
-            if (typeof PRODUCTS !== 'undefined' && Array.isArray(PRODUCTS) && PRODUCTS.length) list = PRODUCTS;
-        } catch (e) { list = null; }
-        if (!list) list = FALLBACK;
-        return list.map(function (p) {
-            return {
-                id: p.id,
-                name: p.name || '',
-                cat: p.cat || '',
-                capacity: p.capacity || '',
-                badge: p.badge || '',
-                features: p.features || [],
-                img: (p.images && p.images[0]) || p.img || ''
-            };
-        });
+            var cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
+            if (cached && cached.t && Date.now() - cached.t < CACHE_MS && Array.isArray(cached.d)) {
+                PRODUCTS_LIST = cached.d;
+                return Promise.resolve(PRODUCTS_LIST);
+            }
+        } catch (e) { /* ignore */ }
+
+        loadPromise = fetch(
+            SUPABASE_URL + '/rest/v1/products?select=id,name,slug,category,capacity,model_number,badge,features,image,images&order=name.asc',
+            { headers: { apikey: SUPABASE_KEY } }
+        )
+            .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+            .then(function (rows) {
+                PRODUCTS_LIST = (rows || []).map(normalize);
+                try { sessionStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), d: PRODUCTS_LIST })); } catch (e) { /* ignore */ }
+                return PRODUCTS_LIST;
+            })
+            .catch(function (err) {
+                console.error('Search suggestions: products load nahi hue', err);
+                loadPromise = null;
+                return [];
+            });
+        return loadPromise;
     }
 
     function search(query) {
         var tokens = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
-        if (!tokens.length) return { tokens: tokens, items: [] };
+        if (!tokens.length || !PRODUCTS_LIST) return { tokens: tokens, items: [] };
         var scored = [];
-        catalogue().forEach(function (p, idx) {
+        PRODUCTS_LIST.forEach(function (p, idx) {
             var name = p.name.toLowerCase();
             var cat = p.cat.toLowerCase();
-            var hay = [p.name, p.cat, p.capacity].concat(p.features).join(' ').toLowerCase();
+            var hay = [p.name, p.cat, p.capacity, p.model].concat(p.features).join(' ').toLowerCase();
             var total = 0;
             for (var i = 0; i < tokens.length; i++) {
                 var t = tokens[i];
@@ -164,7 +187,7 @@
         input.setAttribute('aria-autocomplete', 'list');
         input.setAttribute('aria-expanded', 'false');
 
-        var rows = [];      /* clickable rows: product links + "see all" */
+        var rows = [];
         var active = -1;
 
         function hide() {
@@ -187,12 +210,21 @@
             if (!q) return;
             hide();
             if (typeof window.searchProducts === 'function') window.searchProducts();
-            else window.location.href = 'products.html?search=' + encodeURIComponent(q);
+            else window.location.href = '/products.html?search=' + encodeURIComponent(q);
         }
 
         function render() {
             var q = input.value;
             if (!q.trim()) { hide(); return; }
+
+            if (!PRODUCTS_LIST) {
+                box.innerHTML = '<div class="ws-sg-empty"><i class="fas fa-spinner fa-spin"></i>Loading…</div>';
+                rows = [];
+                box.classList.add('show');
+                loadProducts().then(function () { if (input.value.trim()) render(); });
+                return;
+            }
+
             var res = search(q);
             var html = '';
             if (!res.items.length) {
@@ -203,7 +235,7 @@
                     var thumb = p.img
                         ? '<img src="' + esc(p.img) + '" alt="" loading="lazy" onerror="this.style.display=\'none\';this.parentNode.classList.add(\'noimg\')">'
                         : '';
-                    html += '<a class="ws-sg-item" role="option" href="product-detail.html?id=' + encodeURIComponent(p.id) + '">' +
+                    html += '<a class="ws-sg-item" role="option" href="' + esc(productUrl(p)) + '">' +
                         '<span class="ws-sg-thumb' + (p.img ? '' : ' noimg') + '">' + thumb + '<i class="fas fa-weight-hanging"></i></span>' +
                         '<span class="ws-sg-text">' +
                         '<div class="ws-sg-name">' + highlight(p.name, res.tokens) + '</div>' +
@@ -222,9 +254,8 @@
         }
 
         input.addEventListener('input', render);
-        input.addEventListener('focus', render);
+        input.addEventListener('focus', function () { loadProducts(); render(); });
 
-        /* Keyboard (capture phase so Enter on a highlighted row doesn't also fire the page's own handler) */
         input.addEventListener('keydown', function (e) {
             var open = box.classList.contains('show') && rows.length;
             if (e.key === 'ArrowDown' && open) {
@@ -260,6 +291,8 @@
         document.addEventListener('click', function (e) {
             if (!host.contains(e.target)) hide();
         });
+
+        loadProducts(); /* pehle se load kar lo taake pehla search fauran chale */
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
