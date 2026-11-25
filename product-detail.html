@@ -630,19 +630,27 @@ function renderProduct(p) {
     mainImgEl.addEventListener('click', () => openLightbox(mainImgEl.src));
   }
 
-  /* Thumbnail click -> swap */
-  document.querySelectorAll('.gallery-thumb').forEach(thumb => {
-    thumb.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const url = this.dataset.img;
-      if (mainImgEl) {
-        mainImgEl.style.opacity = '0.5';
-        setTimeout(() => { mainImgEl.src = url; mainImgEl.style.opacity = '1'; }, 120);
-      }
-      document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
-      this.classList.add('active');
-    });
-  });
+  /* VIDEO CLICK (kahin bhi click -> video chale) */
+document.addEventListener('click', e => {
+  // YouTube / TikTok / Instagram / Facebook / Vimeo
+  const box = e.target.closest('.video-box[data-embed]');
+  if (box) {
+    if (box.querySelector('iframe')) return;
+    box.innerHTML = `<iframe src="${box.dataset.embed}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>`;
+    box.style.cursor = 'default';
+    return;
+  }
+  // Direct mp4/webm
+  const fileBox = e.target.closest('.video-box[data-file]');
+  if (fileBox) {
+    const vid = fileBox.querySelector('video');
+    const overlay = fileBox.querySelector('.video-play');
+    if (overlay) overlay.remove();
+    vid.controls = true;
+    vid.play().catch(() => {});
+    fileBox.style.cursor = 'default';
+  }
+});
 
   /* Videos (YouTube, TikTok, Instagram, Facebook, Vimeo, file) */
   initVideoBlocks();
