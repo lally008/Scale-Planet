@@ -554,13 +554,13 @@ function renderProduct(p) {
   });
 }
 
-  /* YouTube thumbnail click -> iframe */
-  document.querySelectorAll('.video-box[data-yt]').forEach(box => {
-    box.addEventListener('click', () => {
-      const id = box.dataset.yt;
-      box.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
-    }, { once: true });
-  });
+  // /* YouTube thumbnail click -> iframe */
+  // document.querySelectorAll('.video-box[data-yt]').forEach(box => {
+  //   box.addEventListener('click', () => {
+  //     const id = box.dataset.yt;
+  //     box.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+  //   }, { once: true });
+  // });
 
 /* RELATED PRODUCTS */
 async function showRelated(currentId, category) {
