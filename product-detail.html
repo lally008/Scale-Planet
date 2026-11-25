@@ -546,8 +546,9 @@ function renderProduct(p) {
   } else if (p.image) {
     images = [p.image];
   }
-  while (images.length < 4) images.push(images[0] || PLACEHOLDER);
-  images = images.slice(0, 4);
+  // Sirf asal alag-alag images (duplicate nahi), max 8
+  images = [...new Set(images)].slice(0, 8);
+  if (images.length === 0) images = [PLACEHOLDER];
 
   const mainImg = images[0];
   const badgeClass = (p.badge && p.badge.toLowerCase().includes('new')) ? 'badge green' : 'badge';
@@ -579,13 +580,14 @@ function renderProduct(p) {
         <span class="${badgeClass}">${esc(p.badge || 'Product')}</span>
         <div class="zoom-hint"><i class="fas fa-search-plus"></i> Click to zoom</div>
       </div>
+      ${images.length > 1 ? `
       <div class="gallery-thumbs">
         ${images.map((url, i) => `
           <div class="gallery-thumb ${i===0?'active':''}" data-img="${esc(url)}">
             <img src="${esc(url)}" alt="View ${i+1}" onerror="this.onerror=null; this.src='${PLACEHOLDER}'">
           </div>
         `).join('')}
-      </div>
+      </div>` : ''}
     </div>
 
     <div class="product-info">
