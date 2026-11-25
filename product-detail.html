@@ -107,13 +107,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .description-content { font-size: 12px; color: var(--text-soft); line-height: 1.65; }
 .video-block { margin-bottom: 14px; }
 .video-block h3 { font-size: 12px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
-.video-box { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: var(--radius-lg); overflow: hidden; background: #000; border: 1px solid var(--line); }
-.video-box iframe, .video-box video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.video-thumb { position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; padding: 0; background: #000; }
-.video-thumb img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; opacity: 0.9; transition: opacity 0.2s; }
-.video-thumb:hover img { opacity: 1; }
-.video-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 44px; background: #ff0000; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; box-shadow: 0 6px 20px rgba(0,0,0,0.4); transition: transform 0.2s; }
-.video-thumb:hover .video-play { transform: translate(-50%, -50%) scale(1.1); }
+.video-box { position: relative; display: block; width: 100%; aspect-ratio: 16/9; border-radius: var(--radius-lg); overflow: hidden; background: #000; border: 1px solid var(--line); cursor: pointer; }
+.video-box iframe, .video-box video, .video-box > img.video-img { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-box > img.video-img, .video-box video { object-fit: cover; }
+.video-poster { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #fff; font-size: 12px; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; }
+.video-poster i { font-size: 40px; }
+.video-poster.tiktok { background: linear-gradient(135deg, #010101 40%, #25f4ee 120%); }
+.video-poster.instagram { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+.video-poster.facebook { background: #1877f2; }
+.video-poster.vimeo { background: #1ab7ea; }
+.video-poster.external { background: var(--primary); }
+.video-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 44px; background: rgba(0,0,0,0.65); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; box-shadow: 0 6px 20px rgba(0,0,0,0.4); transition: transform 0.2s, background 0.2s; z-index: 2; pointer-events: none; }
+.video-play.yt { background: #ff0000; }
+.video-box:hover .video-play { transform: translate(-50%, -50%) scale(1.1); }
 .related-section { max-width: 1600px; margin: 0 auto; padding: 30px 20px 60px; border-top: 1px solid var(--line); }
 .related-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 18px; flex-wrap: wrap; }
 .related-head h2 { font-family: var(--font-body); font-size: clamp(16px, 2vw, 20px); font-weight: 800; letter-spacing: 0.3px; color: var(--text); text-transform: uppercase; }
@@ -341,35 +347,120 @@ function esc(v) {
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
 }
 
-function getVideoHtml(url) {
+function parseVideo(url) {
   url = String(url || '').trim();
-  if (!url) return '';
+  if (!url) return null;
+  let m;
 
-  const yt = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-  if (yt) {
-    const id = yt[1];
-    return `<div class="video-block">
-      <h3>Product Video</h3>
-      <div class="video-box" data-yt="${id}">
-        <button type="button" class="video-thumb" aria-label="Play video">
-          <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="Video thumbnail" loading="lazy">
-          <span class="video-play"><i class="fas fa-play"></i></span>
-        </button>
-      </div>
-    </div>`;
+  // YouTube
+  if ((m = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/))) {
+    const vertical = /\/shorts\//.test(url);
+    return { type: 'youtube', embed: `https://www.youtube.com/embed/${m[1]}?autoplay=1&rel=0`,
+      thumb: `https://img.youtube.com/vi/${m[1]}/hqdefault.jpg`,
+      ratio: vertical ? '9/16' : '16/9', maxW: vertical ? '325px' : '' };
   }
-
+  // TikTok (full link)
+  if ((m = url.match(/tiktok\.com\/(?:@[^\/]+\/video|embed\/v2)\/(\d+)/i))) {
+    return { type: 'tiktok', embed: `https://www.tiktok.com/embed/v2/${m[1]}?lang=en-US`,
+      ratio: '9/16', maxW: '325px', label: 'Watch on TikTok', icon: 'fab fa-tiktok', oembed: url };
+  }
+  // TikTok short links (vm.tiktok.com, tiktok.com/t/...) -> embed nahi ho sakte
+  if (/tiktok\.com/i.test(url)) {
+    return { type: 'external', brand: 'tiktok', href: url, label: 'Watch on TikTok', icon: 'fab fa-tiktok' };
+  }
+  // Instagram
+  if ((m = url.match(/instagram\.com\/(?:[^\/]+\/)?(p|reels?|tv)\/([A-Za-z0-9_-]+)/i))) {
+    const kind = m[1].toLowerCase().startsWith('reel') ? 'reel' : m[1].toLowerCase();
+    return { type: 'instagram', embed: `https://www.instagram.com/${kind}/${m[2]}/embed`,
+      ratio: '9/16', maxW: '360px', label: 'Watch on Instagram', icon: 'fab fa-instagram' };
+  }
+  // Facebook
+  if (/facebook\.com|fb\.watch/i.test(url)) {
+    return { type: 'facebook',
+      embed: `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=false&autoplay=true`,
+      ratio: '16/9', maxW: '', label: 'Watch on Facebook', icon: 'fab fa-facebook' };
+  }
+  // Vimeo
+  if ((m = url.match(/vimeo\.com\/(?:video\/)?(\d+)/i))) {
+    return { type: 'vimeo', embed: `https://player.vimeo.com/video/${m[1]}?autoplay=1`,
+      ratio: '16/9', maxW: '', label: 'Watch on Vimeo', icon: 'fab fa-vimeo-v' };
+  }
+  // Direct file
   if (/\.(mp4|webm|ogg)(\?|$)/i.test(url)) {
-    return `<div class="video-block">
-      <h3>Product Video</h3>
-      <div class="video-box"><video controls playsinline preload="metadata"><source src="${esc(url)}"></video></div>
+    return { type: 'file', src: url, ratio: '16/9', maxW: '' };
+  }
+  // Baaki sab
+  return { type: 'external', brand: 'external', href: url, label: 'Watch Video', icon: 'fas fa-play-circle' };
+}
+
+function getVideoHtml(url) {
+  const v = parseVideo(url);
+  if (!v) return '';
+  const style = `aspect-ratio:${v.ratio || '16/9'};${v.maxW ? `max-width:${v.maxW};` : ''}`;
+  let inner = '';
+
+  if (v.type === 'external') {
+    inner = `<a class="video-box" href="${esc(v.href)}" target="_blank" rel="noopener" style="${style}">
+      <div class="video-poster ${v.brand}"><i class="${v.icon}"></i><span>${esc(v.label)}</span></div>
+      <span class="video-play"><i class="fas fa-play"></i></span>
+    </a>`;
+  } else if (v.type === 'file') {
+    inner = `<div class="video-box" data-file="1" style="${style}">
+      <video src="${esc(v.src)}#t=0.5" preload="metadata" playsinline></video>
+      <span class="video-play"><i class="fas fa-play"></i></span>
+    </div>`;
+  } else {
+    const visual = v.thumb
+      ? `<img class="video-img" src="${esc(v.thumb)}" alt="Video thumbnail" loading="lazy">`
+      : `<div class="video-poster ${v.type}"><i class="${v.icon}"></i><span>${esc(v.label)}</span></div>`;
+    inner = `<div class="video-box" data-embed="${esc(v.embed)}" ${v.oembed ? `data-oembed="${esc(v.oembed)}"` : ''} role="button" tabindex="0" aria-label="Play video" style="${style}">
+      ${visual}
+      <span class="video-play ${v.type === 'youtube' ? 'yt' : ''}"><i class="fas fa-play"></i></span>
     </div>`;
   }
 
-  return `<div class="video-block">
-    <h3>Product Video</h3>
-    <a href="${esc(url)}" target="_blank" rel="noopener" class="btn-main btn-outline"><i class="fas fa-play-circle"></i> Watch Video</a>
-  </div>`;
+  return `<div class="video-block"><h3>Product Video</h3>${inner}</div>`;
+}
+
+function initVideoBlocks() {
+  // Embed videos (YouTube, TikTok, Instagram, Facebook, Vimeo): box par kahin bhi click -> play
+  document.querySelectorAll('.video-box[data-embed]').forEach(box => {
+    const play = () => {
+      box.innerHTML = `<iframe src="${box.dataset.embed}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>`;
+      box.style.cursor = 'default';
+    };
+    box.addEventListener('click', play, { once: true });
+    box.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); box.removeEventListener('click', play); }
+    });
+
+    // TikTok thumbnail (agar TikTok allow kare, warna brand card dikhta rahega)
+    if (box.dataset.oembed) {
+      fetch('https://www.tiktok.com/oembed?url=' + encodeURIComponent(box.dataset.oembed))
+        .then(r => r.json())
+        .then(j => {
+          if (!j.thumbnail_url || !box.querySelector('.video-play')) return;
+          const img = document.createElement('img');
+          img.className = 'video-img';
+          img.alt = 'Video thumbnail';
+          img.src = j.thumbnail_url;
+          box.insertBefore(img, box.querySelector('.video-play'));
+        })
+        .catch(() => {});
+    }
+  });
+
+  // Direct video file: click par play
+  document.querySelectorAll('.video-box[data-file]').forEach(box => {
+    box.addEventListener('click', () => {
+      const vid = box.querySelector('video');
+      const overlay = box.querySelector('.video-play');
+      if (overlay) overlay.remove();
+      vid.controls = true;
+      vid.play().catch(() => {});
+      box.style.cursor = 'default';
+    }, { once: true });
+  });
 }
 
 function parseMarkdown(text) {
@@ -531,7 +622,7 @@ function renderProduct(p) {
     </div>
     `;
 
-  /* Main image click -> lightbox */
+    /* Main image click -> lightbox */
   const mainImgEl = document.getElementById('mainImage');
   if (mainImgEl) {
     mainImgEl.style.pointerEvents = 'auto';
@@ -552,15 +643,10 @@ function renderProduct(p) {
       this.classList.add('active');
     });
   });
-}
 
-  // /* YouTube thumbnail click -> iframe */
-  // document.querySelectorAll('.video-box[data-yt]').forEach(box => {
-  //   box.addEventListener('click', () => {
-  //     const id = box.dataset.yt;
-  //     box.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
-  //   }, { once: true });
-  // });
+  /* Videos (YouTube, TikTok, Instagram, Facebook, Vimeo, file) */
+  initVideoBlocks();
+}
 
 /* RELATED PRODUCTS */
 async function showRelated(currentId, category) {
